@@ -1,10 +1,20 @@
 --vim.cmd("colorscheme rose-pine")
 
 vim.opt.guicursor = "a:block-Cursor/lCursor"
-vim.opt.cursorline = false
+vim.opt.cursorline = true
 
 vim.opt.clipboard = "unnamedplus"
+vim.opt.fileencoding = "utf-8"
+vim.opt.isfname:append("@-@")
 
+vim.opt.smoothscroll = true
+vim.opt.scrolloff = 8
+vim.opt.sidescrolloff = 8
+
+vim.g.autoformat = false
+vim.opt.nu = true
+vim.opt.autoindent = true
+vim.opt.breakindent = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 8
@@ -37,17 +47,24 @@ vim.opt.diffopt = {
 
 vim.opt.swapfile = false
 vim.opt.backup = false
+vim.opt.shadafile = vim.fn.stdpath("cache") .. "/nvim/shada/main.shada"
+vim.opt.undodir = vim.fn.stdpath("cache") .. "/nvim/undo"
+vim.opt.undofile = true
+-- Set undodir and enable persistent undo
+vim.opt.undofile = true
+vim.opt.undolevels = 1000
 
 vim.opt.wrap = false
 vim.opt.textwidth = 120
 vim.opt.formatexpr = "v:lua.require'conform'.formatexpr()"
 
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
 vim.opt.incsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.inccommand = "split"
 
+vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.conceallevel = 0
 
@@ -63,6 +80,8 @@ vim.opt.tabline = "%!v:lua.require('tabline').setup()"
 vim.opt.grepprg = "rg --vimgrep"
 vim.opt.grepformat = "%f:%l:%c:%m"
 
+vim.o.cmdheight = 0 --stick lualine to the bottom
+
 -- Wrap long lines at a character in 'breakat'
 -- vim.opt.linebreak = true
 
@@ -74,3 +93,7 @@ vim.opt.grepformat = "%f:%l:%c:%m"
 
 -- Keep indentantion on wrapped lines
 -- vim.opt.breakindent = true
+
+-- avante views can only be fully collapsed with the global statusline
+-- This sets Neovim to use a single statusline for all windows, keeping lualine stuck at the bottom of the screen
+-- vim.opt.laststatus = 3
