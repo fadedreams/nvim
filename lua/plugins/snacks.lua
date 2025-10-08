@@ -122,14 +122,14 @@ return {
                     vim.notify("All diagnostics restored", vim.log.levels.INFO)
                 end
                 -- Map the toggles
-                vim.keymap.set("n", "<leader>iw", toggle_warning_diagnostics, { desc = "Toggle Warning Diagnostics" })
-                vim.keymap.set("n", "<leader>ie", toggle_error_diagnostics, { desc = "Toggle Error Diagnostics" })
-                vim.keymap.set("n", "<leader>ii", toggle_info_diagnostics, { desc = "Toggle Info Diagnostics" })
-                vim.keymap.set("n", "<leader>ih", toggle_hint_diagnostics, { desc = "Toggle Hint Diagnostics" })
-                vim.keymap.set("n", "<leader>ir", reset_diagnostics, { desc = "Reset Diagnostics" })
+                vim.keymap.set("n", "<leader>iw", toggle_warning_diagnostics, { desc = "[T]oggle [W]arning [D]iagnostics" })
+                vim.keymap.set("n", "<leader>ie", toggle_error_diagnostics, { desc = "[T]oggle [E]rror [D]iagnostics" })
+                vim.keymap.set("n", "<leader>ii", toggle_info_diagnostics, { desc = "[T]oggle [I]nfo [D]iagnostics" })
+                vim.keymap.set("n", "<leader>ih", toggle_hint_diagnostics, { desc = "[T]oggle [H]int [D]iagnostics" })
+                vim.keymap.set("n", "<leader>ir", reset_diagnostics, { desc = "[R]eset [D]iagnostics" })
                 -- Other toggle mappings
                 Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>is")
-                Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>iW")
+                Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>iw")
                 Snacks.toggle.diagnostics():map("<leader>id")
                 Snacks.toggle.indent():map("<leader>iI")
             end,
@@ -141,7 +141,7 @@ return {
         quickfile = {enabled = true},
         gitbrowse = {enabled = true},
         dashboard = {enabled = false},
-        notifier = {enabled = true, timeout = 7000},
+        notifier = {enabled = false, timeout = 7000},
         statuscolumn = {enabled = false},
         words = {enabled = false},
         lazygit = {enabled = false},
@@ -205,7 +205,7 @@ return {
             {
                 "<leader>gY",
                 function() snacks.gitbrowse() end,
-                desc = desc("[S]hare [G]it [O]ink"),
+                desc = desc("[S]hare [G]it [O]pen"),
                 mode = {"n", "v"},
             },
             {
@@ -226,9 +226,9 @@ return {
                 snacks.picker.explorer,
                 desc = desc("[O]pen [E]xplorer"),
             },
-            { "<leader>.h", function() snacks.notifier.show_history() end, desc = "Notification history" },
-            { "<leader>ud", function() snacks.notifier.hide() end, desc = "Dismiss all notifications" },
-            { "<leader>b.", function() snacks.scratch() end, desc = "New Scratch" },
+            -- { "<leader>.h", function() snacks.notifier.show_history() end, desc = "[N]otification [H]istory" },
+            -- { "<leader>ud", function() snacks.notifier.hide() end, desc = "[D]ismiss [A]ll [N]otifications" },
+            { "<leader>b.", function() snacks.scratch() end, desc = "[N]ew [S]cratch" },
         }
     end,
 }
