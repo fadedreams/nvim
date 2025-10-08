@@ -8,30 +8,54 @@ local exclude_list_sp = {
 -- Define an exclude list
 -- local exclude_list = { ".git", "node_modules", "dist", ".idea", "build" }
 local exclude_list = {
-	"all.txt",
-	"tree.txt",
-	"LICENSE",
-	".git",
-	"venv",
-	"*.pyc",
-	"*.pyo",
-	-- "*.log",
-	-- "*.bak", -- Python
-	"*.exe",
-	"*.out",
-	"*.o",
-	"*.a", -- Golang
-	"*.rlib", -- Rust
-	"*.phtml",
-	"*.phar", -- PHP
-	"*.tsx", -- Node.js
-	"*.luarocks",
-	"*.rock", -- Lua
-	"*.class",
-	"*.jar",
-	"*.war", -- Java (if applicable)
-	"*.swp",
-	"*.swo", -- Swap files
+  "all.txt",
+  "tree.txt",
+  "LICENSE",
+  ".git",
+  "venv",
+  "*.pyc", -- Python compiled files
+  "*.pyo", -- Python optimized files
+  "*.log", -- Log files (Ruby, Laravel, Django)
+  "*.bak", -- Backup files
+  "*.exe", -- Executables
+  "*.out", -- Compiled output
+  "*.o", -- Object files
+  "*.a", -- Static libraries (Golang, C)
+  "*.rlib", -- Rust libraries
+  "*.phtml", -- PHP templates
+  "*.phar", -- PHP archives
+  "*.tsx", -- TypeScript React
+  "*.luarocks", -- Lua package manager
+  "*.rock", -- Lua Rocks
+  "*.class", -- Java classes
+  "*.jar", -- Java archives
+  "*.war", -- Java web archives
+  "*.swp", -- Vim swap files
+  "*.swo", -- Vim swap files
+  "*.min.js", -- Minified JavaScript
+  "*.min.css", -- Minified CSS
+  "*.map", -- Source maps
+  "*.lock", -- Lock files (package-lock.json, Gemfile.lock)
+  "*.DS_Store", -- macOS system files
+  "*.tmp", -- Temporary files
+  "*.temp", -- Alternative temporary files
+  "*.rb~", -- Ruby backup files
+  "*.erb~", -- Ruby ERB template backups
+  "Gemfile.lock", -- Ruby Bundler lock file
+  "*.rbc", -- Ruby compiled files
+  "*.gem", -- Ruby gem files
+  "*.rs.bk", -- Rust backup files
+  "*.php~", -- PHP backup files
+  "*.blade.php~", -- Laravel Blade template backups
+  "*.phps", -- PHP source files
+  "*.cache", -- Laravel/Django cache files
+  "*.sqlite", -- Django default database
+  "*.sqlite3", -- Django SQLite database
+  "db.sqlite3", -- Django default database
+  "*.py.bak", -- Python backup files
+  "*.go~", -- Go backup files
+  "go.sum", -- Go module checksums
+  "go.mod.bak", -- Go module backup
 }
 
 -- Function to build the exclude options for fd commands
@@ -59,14 +83,39 @@ local combined_opts = build_exclude_opts_rg(exclude_list)
 local exclude_opts_fd = build_exclude_opts_fd(exclude_list)
 
 local exclude_dirs = {
-  "node_modules",
-  ".idea",
-  "venv",
-  ".idea",
-  -- "dist",
-  -- "build",
-  -- "vendor",
-  -- "target", -- common dirs
+  "node_modules", -- JavaScript/Node.js
+  ".idea", -- JetBrains IDEs
+  "venv", -- Python virtual environment
+  ".venv", -- Alternative Python virtual environment
+  "__pycache__", -- Python bytecode cache
+  "_build", -- Lua build directories (e.g., for LuaRocks)
+  "dist", -- Common build output directory
+  "build", -- Common build output directory
+  "vendor", -- Dependency directories (e.g., PHP Composer, Go)
+  "target", -- Rust build directory
+  ".git", -- Git repository directory
+  ".cache", -- Cache directories
+  "coverage", -- Test coverage reports
+  "tmp", -- Temporary directories
+  "temp", -- Alternative temporary directories
+  ".pytest_cache", -- Pytest cache
+  ".tox", -- Python tox testing
+  "out", -- Common output directory
+  "bin", -- Binary output directory
+  "obj", -- Object files directory (e.g., C/C++)
+  ".next", -- Next.js build directory
+  ".nuxt", -- Nuxt.js build directory
+  ".bundle", -- Ruby Bundler
+  "log", -- Ruby/Rails, Laravel, Django logs
+  "public/packs", -- Rails Webpacker
+  "public/assets", -- Rails asset pipeline
+  "storage", -- Laravel storage
+  "cache", -- General cache (Django, PHP)
+  "migrations", -- Django migrations
+  "vendor/bin", -- PHP Composer binaries
+  ".cargo", -- Rust package manager
+  "go/pkg", -- Go package directory
+  "go/bin", -- Go binary directory
 }
 
 -- Construct the fd command with dynamic excludes

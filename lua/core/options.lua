@@ -71,7 +71,31 @@ vim.opt.conceallevel = 0
 vim.g.markdown_recommended_style = 0 -- see https://www.reddit.com/r/neovim/comments/z2lhyz/comment/ixjb7je
 vim.opt.updatetime = 300
 vim.opt.mouse = "a"
-vim.opt.wildignore:append({"*/node_modules/*"})
+vim.opt.wildignore:append({
+  "*/node_modules/*",        -- Node.js dependencies
+  "*.pyc",                  -- Python compiled files
+  "__pycache__/*",          -- Python cache directories
+  "*/venv/*",               -- Python virtual environments
+  "*/.venv/*",              -- Alternative Python virtual environment naming
+  "*/target/*",             -- Rust build output
+  "*/.cargo/registry/*",    -- Rust package registry
+  "*.o",                    -- Go and C/C++ object files
+  -- "*/vendor/*",             -- Go vendored dependencies, also used in PHP (Composer)
+  "*.lock",                 -- Lock files for various package managers (e.g., Cargo.lock, composer.lock, Gemfile.lock)
+  "*.sock",                 -- Unix socket files (common in Ruby/Rails)
+  "*/tmp/*",                -- Temporary directories (common in Ruby/Rails and others)
+  -- "*.gem",                  -- Ruby gem files
+  "*/.bundle/*",            -- Ruby Bundler dependencies
+  "*/vendor/bundle/*",      -- Ruby Bundler vendored dependencies
+  -- "*.php~",                 -- PHP backup files
+  "*/storage/logs/*",       -- Laravel (PHP) log files
+  "*/.idea/*",              -- PHPStorm/IDE files (common in PHP development)
+  "*.luac",                 -- Lua compiled files
+  "*/_build/*",             -- Lua build directories (e.g., for LuaRocks)
+  "*.swp",                  -- Vim/Neovim swap files
+  "*.bak",                  -- Backup files
+  "*.tmp",                  -- Temporary files
+})
 vim.opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 -- vim.opt.showtabline = 0
 vim.opt.tabline = "%!v:lua.require('tabline').setup()"
