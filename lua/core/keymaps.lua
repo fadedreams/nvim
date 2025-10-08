@@ -54,9 +54,9 @@ vim.keymap.set("i", "<c-w>", "<Esc>:w<CR>", { noremap = true })
 -- vim.keymap.set("n", "<a-s>", ":wa<CR>", { noremap = true, silent = true })
 -- vim.keymap.set("i", "<a-s>", "<Esc>:wa<CR>i", { noremap = true, silent = true })
 
---quit
-vim.keymap.set("n", "<c-q>", ":q<CR>", { noremap = true })
-vim.keymap.set("i", "<c-q>", "<Esc>:q<CR>", { noremap = true })
+--quit do not use c-q > visual
+vim.keymap.set("n", "<a-q>", ":q<CR>", { noremap = true })
+vim.keymap.set("i", "<a-q>", "<Esc>:q<CR>", { noremap = true })
 
 --toggler
 vim.keymap.set("n", "<leader>ir", ":set relativenumber!<CR>",

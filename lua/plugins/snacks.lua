@@ -3,14 +3,145 @@ local scratch_path = os.getenv("HOME") .. "/notes/scratch"
 
 return {
     "folke/snacks.nvim",
+    event = "VeryLazy",
+    cmd = "Snacks",
+    priority = 1000,
     lazy = false,
+    init = function()
+        local api = vim.api
+        api.nvim_create_autocmd("User", {
+            pattern = "VeryLazy",
+            group = api.nvim_create_augroup("zenedit_snacks", { clear = true }),
+            callback = function()
+                _G.dd = function(...)
+                    Snacks.debug.inspect(...)
+                end
+                _G.bt = function()
+                    Snacks.debug.backtrace()
+                end
+                vim.print = _G.dd
+                -- Custom function to toggle warning diagnostics
+                local warnings_enabled = true
+                local function toggle_warning_diagnostics()
+                    warnings_enabled = not warnings_enabled
+                    -- Reset diagnostics to avoid conflicts
+                    vim.diagnostic.config({ virtual_text = false, signs = false, underline = false })
+                    if warnings_enabled then
+                        -- Show only warning diagnostics
+                        vim.diagnostic.config({
+                            virtual_text = { severity = vim.diagnostic.severity.WARN },
+                            signs = { severity = vim.diagnostic.severity.WARN },
+                            underline = { severity = vim.diagnostic.severity.WARN },
+                        })
+                    else
+                        -- Hide warning diagnostics, show errors and above
+                        vim.diagnostic.config({
+                            virtual_text = { severity = { min = vim.diagnostic.severity.ERROR } },
+                            signs = { severity = { min = vim.diagnostic.severity.ERROR } },
+                            underline = { severity = { min = vim.diagnostic.severity.ERROR } },
+                        })
+                    end
+                    vim.notify("Warning diagnostics " .. (warnings_enabled and "enabled" or "disabled"), vim.log.levels.INFO)
+                end
+                -- Custom function to toggle error diagnostics
+                local errors_enabled = true
+                local function toggle_error_diagnostics()
+                    errors_enabled = not errors_enabled
+                    -- Reset diagnostics to avoid conflicts
+                    vim.diagnostic.config({ virtual_text = false, signs = false, underline = false })
+                    if errors_enabled then
+                        -- Show only error diagnostics
+                        vim.diagnostic.config({
+                            virtual_text = { severity = vim.diagnostic.severity.ERROR },
+                            signs = { severity = vim.diagnostic.severity.ERROR },
+                            underline = { severity = vim.diagnostic.severity.ERROR },
+                        })
+                    else
+                        -- Hide error diagnostics, show warnings only
+                        vim.diagnostic.config({
+                            virtual_text = { severity = { min = vim.diagnostic.severity.WARN, max = vim.diagnostic.severity.WARN } },
+                            signs = { severity = { min = vim.diagnostic.severity.WARN, max = vim.diagnostic.severity.WARN } },
+                            underline = { severity = { min = vim.diagnostic.severity.WARN, max = vim.diagnostic.severity.WARN } },
+                        })
+                    end
+                    vim.notify("Error diagnostics " .. (errors_enabled and "enabled" or "disabled"), vim.log.levels.INFO)
+                end
+                -- Custom function to toggle info diagnostics
+                local info_enabled = true
+                local function toggle_info_diagnostics()
+                    info_enabled = not info_enabled
+                    -- Reset diagnostics to avoid conflicts
+                    vim.diagnostic.config({ virtual_text = false, signs = false, underline = false })
+                    if info_enabled then
+                        vim.diagnostic.config({
+                            virtual_text = { severity = vim.diagnostic.severity.INFO },
+                            signs = { severity = vim.diagnostic.severity.INFO },
+                            underline = { severity = vim.diagnostic.severity.INFO },
+                        })
+                    else
+                        vim.diagnostic.config({
+                            virtual_text = { severity = { min = vim.diagnostic.severity.WARN } },
+                            signs = { severity = { min = vim.diagnostic.severity.WARN } },
+                            underline = { severity = { min = vim.diagnostic.severity.WARN } },
+                        })
+                    end
+                    vim.notify("Info diagnostics " .. (info_enabled and "enabled" or "disabled"), vim.log.levels.INFO)
+                end
+                -- Custom function to toggle hint diagnostics
+                local hints_enabled = true
+                local function toggle_hint_diagnostics()
+                    hints_enabled = not hints_enabled
+                    -- Reset diagnostics to avoid conflicts
+                    vim.diagnostic.config({ virtual_text = false, signs = false, underline = false })
+                    if hints_enabled then
+                        vim.diagnostic.config({
+                            virtual_text = { severity = vim.diagnostic.severity.HINT },
+                            signs = { severity = vim.diagnostic.severity.HINT },
+                            underline = { severity = vim.diagnostic.severity.HINT },
+                        })
+                    else
+                        vim.diagnostic.config({
+                            virtual_text = { severity = { min = vim.diagnostic.severity.INFO } },
+                            signs = { severity = { min = vim.diagnostic.severity.INFO } },
+                            underline = { severity = { min = vim.diagnostic.severity.INFO } },
+                        })
+                    end
+                    vim.notify("Hint diagnostics " .. (hints_enabled and "enabled" or "disabled"), vim.log.levels.INFO)
+                end
+                -- Custom function to reset diagnostics
+                local function reset_diagnostics()
+                    vim.diagnostic.config({
+                        virtual_text = true,
+                        signs = true,
+                        underline = true,
+                    })
+                    warnings_enabled = true
+                    errors_enabled = true
+                    info_enabled = true
+                    hints_enabled = true
+                    vim.notify("All diagnostics restored", vim.log.levels.INFO)
+                end
+                -- Map the toggles
+                vim.keymap.set("n", "<leader>iw", toggle_warning_diagnostics, { desc = "Toggle Warning Diagnostics" })
+                vim.keymap.set("n", "<leader>ie", toggle_error_diagnostics, { desc = "Toggle Error Diagnostics" })
+                vim.keymap.set("n", "<leader>ii", toggle_info_diagnostics, { desc = "Toggle Info Diagnostics" })
+                vim.keymap.set("n", "<leader>ih", toggle_hint_diagnostics, { desc = "Toggle Hint Diagnostics" })
+                vim.keymap.set("n", "<leader>ir", reset_diagnostics, { desc = "Reset Diagnostics" })
+                -- Other toggle mappings
+                Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>is")
+                Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>iW")
+                Snacks.toggle.diagnostics():map("<leader>id")
+                Snacks.toggle.indent():map("<leader>iI")
+            end,
+        })
+    end,
     ---@type snacks.Config
     opts = {
-        bigfile = {enabled = true},
+        bigfile = {enabled = true, size = 1048576},
         quickfile = {enabled = true},
         gitbrowse = {enabled = true},
         dashboard = {enabled = false},
-        notifier = {enabled = false},
+        notifier = {enabled = true, timeout = 7000},
         statuscolumn = {enabled = false},
         words = {enabled = false},
         lazygit = {enabled = false},
@@ -28,6 +159,7 @@ return {
             root = scratch_path,
             win = {width = 150, height = 40, border = "single"},
         },
+        input = { enabled = false }
     },
     keys = function()
         local snacks = require("snacks")
@@ -94,6 +226,9 @@ return {
                 snacks.picker.explorer,
                 desc = desc("[O]pen [E]xplorer"),
             },
+            { "<leader>.h", function() snacks.notifier.show_history() end, desc = "Notification history" },
+            { "<leader>ud", function() snacks.notifier.hide() end, desc = "Dismiss all notifications" },
+            { "<leader>b.", function() snacks.scratch() end, desc = "New Scratch" },
         }
     end,
 }
