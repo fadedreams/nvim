@@ -47,3 +47,11 @@ end
 vim.keymap.set("n", "<c-'>", ":lua ReopenLastBuffer()<CR>", { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>bx", ":!chmod +x %<CR>", {desc = "Make file executable"})
+
+
+-- keyset('n', '-', function()
+--   local cur_file = vim.fn.expand('%:t')
+--   vim.cmd.Ex()
+--   vim.fn.search('^' .. cur_file .. '$')
+-- end, {desc = 'Open Netrw'})
+-- keyset('n', '<C-c>', vim.cmd.Rex, {desc = 'Open last visited file'})
