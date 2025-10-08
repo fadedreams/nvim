@@ -114,9 +114,9 @@ return {
                 mode = {"n", "v"},
             },
             {
-                "<leader>oe",
+                "<leader>oE",
                 snacks.picker.explorer,
-                desc = desc("[O]pen [E]xplorer"),
+                desc = desc("[O]pen [T]ree"),
             },
             { "<leader>b.", function() snacks.scratch() end, desc = "[N]ew [S]cratch" },
         }

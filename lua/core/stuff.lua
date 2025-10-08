@@ -23,3 +23,10 @@ end, {desc = "Browse on the web"})
 --     vim.cmd.term()
 -- end, {desc = "[O]pen [T]erminal"})
 -- keyset("t", "<C-t>", "<C-\\><C-n>", {desc = "Exit terminal mode"})
+
+vim.keymap.set(
+    "n",
+    "<Leader>oe",
+    ":silent !open %:p:h<CR>",
+    { noremap = true, silent = true, desc = "[O]pen [E]xplorer" }
+)
