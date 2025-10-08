@@ -45,3 +45,5 @@ function ReopenLastBuffer()
 end
 
 vim.keymap.set("n", "<c-'>", ":lua ReopenLastBuffer()<CR>", { noremap = true, silent = true })
+
+vim.keymap.set("n", "<leader>bx", ":!chmod +x %<CR>", {desc = "Make file executable"})

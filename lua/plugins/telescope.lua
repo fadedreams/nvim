@@ -57,7 +57,7 @@ return {
             sort_mru = true,
             mappings = {
               i = {
-                -- ["<c-d>"] = "delete_buffer",
+                ["<c-x>"] = "delete_buffer",
               },
             },
           },

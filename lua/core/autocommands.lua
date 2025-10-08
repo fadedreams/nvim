@@ -1,14 +1,20 @@
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
--- Highlight yanked text
+-- Define custom highlight group for yanked text
+vim.api.nvim_set_hl(0, "HighlightYank", { bg = "#7398e8", fg = "#ffffff" })
+-- Highlight yanked text with custom highlight group
 autocmd("TextYankPost", {
     desc = "Highlight yanked text",
     group = augroup("YankHighlight", {}),
     callback = function()
-        vim.highlight.on_yank()
+        vim.highlight.on_yank({
+            higroup = "HighlightYank",
+            timeout = 150,
+        })
     end,
 })
+
 
 -- Statusline
 local statusline_group = augroup("StatusLine", {})
@@ -37,14 +43,14 @@ autocmd({"WinLeave", "BufLeave"}, {
     end,
 })
 
-autocmd("TermOpen", {
-    group = augroup("custom-term-open", {}),
-    callback = function()
-        vim.opt_local.number = false
-        vim.opt_local.relativenumber = false
-        vim.opt_local.scrolloff = 0
-    end,
-})
+-- autocmd("TermOpen", {
+--     group = augroup("custom-term-open", {}),
+--     callback = function()
+--         vim.opt_local.number = false
+--         vim.opt_local.relativenumber = false
+--         vim.opt_local.scrolloff = 0
+--     end,
+-- })
 
 autocmd("FileType", {
     pattern = "*",
