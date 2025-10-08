@@ -231,4 +231,4 @@ end
 
 -- Map the function to <leader>/ in visual mode
 vim.api.nvim_set_keymap("v", "<leader>/", ":lua visual_search()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>rh", ":nohlsearch<CR>", { noremap = true, silent = true, desc="Clear Highlight, V <leader>/" })
+-- vim.api.nvim_set_keymap("n", "<leader>t", ":nohlsearch<CR>", { noremap = true, silent = true, desc="Clear Highlight, V <leader>/" }) --c-l do it

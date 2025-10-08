@@ -22,7 +22,7 @@ vim.keymap.set("n", "n", "nzzzv", {desc = "Jump to next search term"})
 vim.keymap.set("n", "N", "Nzzzv", {desc = "Jump to previous search term"})
 
 -- Toggle highlighting search
-vim.keymap.set("n", "<leader>th", ":set hlsearch!<CR>", {desc = "Toggle highlighting search"})
+vim.keymap.set("n", "<leader>ih", ":set hlsearch!<CR>", {desc = "Toggle highlighting search"})
 
 -- Move lines
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", {desc = "Move line down"})
@@ -59,11 +59,11 @@ vim.keymap.set("n", "<c-q>", ":q<CR>", { noremap = true })
 vim.keymap.set("i", "<c-q>", "<Esc>:q<CR>", { noremap = true })
 
 --toggler
-vim.keymap.set("n", "<leader>tr", ":set relativenumber!<CR>",
+vim.keymap.set("n", "<leader>ir", ":set relativenumber!<CR>",
   { noremap = true, silent = true,
   desc="Toggle relativenumber" })
 
-vim.keymap.set('n', '<leader>tc', function()
+vim.keymap.set('n', '<leader>ic', function()
     local cc = vim.opt.colorcolumn:get()
     if cc[1] and cc[1] == '80' then
         vim.opt.colorcolumn = ''
@@ -73,7 +73,7 @@ vim.keymap.set('n', '<leader>tc', function()
 end, { desc = 'Toggle Colorcolumn 80' })
 
 
-vim.keymap.set("n", "<leader>tg", function()
+vim.keymap.set("n", "<leader>ig", function()
     local active_bg = vim.o.background
     if active_bg == "dark" then
         vim.cmd("set background=light")

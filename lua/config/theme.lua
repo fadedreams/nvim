@@ -186,6 +186,6 @@ local function select_theme()
 end
 
 -- Set keybinding to select theme with Telescope
-vim.keymap.set("n", "<leader>tt", select_theme, { desc = "Select Theme", noremap = true, silent = true })
+vim.keymap.set("n", "<leader>it", select_theme, { desc = "Select Theme", noremap = true, silent = true })
 
 
