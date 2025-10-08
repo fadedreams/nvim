@@ -18,11 +18,11 @@ end, {desc = "Browse on the web"})
 
 
 -- Open terminal below
--- keyset("n", "<leader>st", function()
+-- keyset("n", "<leader>ot", function()
 --     vim.cmd.new()
 --     vim.cmd.wincmd("J") -- Move to the window below
 --     vim.api.nvim_win_set_height(0, 12)
 --     vim.wo.winfixheight = true
 --     vim.cmd.term()
--- end, {desc = "Open terminal below"})
+-- end, {desc = "[O]pen [T]erminal"})
 -- keyset("t", "<C-t>", "<C-\\><C-n>", {desc = "Exit terminal mode"})

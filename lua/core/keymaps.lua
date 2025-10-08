@@ -1,9 +1,9 @@
 -- Editing
 vim.api.nvim_set_keymap("v", "$", "g_", { noremap = true, silent = true })
 vim.keymap.set("x", "p", "pgvy") -- yanked back into the register.
-vim.api.nvim_set_keymap("n", "<a-p>", ":put!<cr>", { noremap = true, silent = true }) --paste above
+vim.api.nvim_set_keymap("n", "<c-p>", ":put!<cr>", { noremap = true, silent = true }) --paste above
 vim.api.nvim_set_keymap("n", "<leader>p", ":put<cr>", { noremap = true, silent = true }) --paste below
-vim.api.nvim_set_keymap("i", "<a-p>", "<c-r>+", { noremap = true }) --system clipboard
+vim.api.nvim_set_keymap("i", "<c-p>", "<c-r>+", { noremap = true }) --system clipboard
 
 vim.keymap.set("n", "dw", "vb_d") -- Delete a word backwards
 vim.keymap.set("x", "D", '"_d', { desc = "delete forever" })

@@ -21,11 +21,5 @@ vim.keymap.set('n', '<c-Right>', '<C-w>l', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<c-Up>', '<C-w>k', { desc = 'Move focus to the upper window' })
 vim.keymap.set('n', '<c-Down>', '<C-w>j', { desc = 'Move focus to the lower window' })
 
-vim.keymap.set(
-    "n",
-    "<Leader>oe",
-    ":silent !open %:p:h<CR>",
-    { noremap = true, silent = true, desc = "[O]pen [E]xplorer" }
-)
 
 vim.keymap.set("n", "<F11>", ":only<CR>", { noremap = true, silent = true, desc = "Maximize window" })
