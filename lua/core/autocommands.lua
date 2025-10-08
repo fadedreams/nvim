@@ -56,11 +56,11 @@ autocmd("FileType", {
     end,
 })
 
-autocmd("BufWritePost", {
-    pattern = "aerospace.toml",
-    group = augroup("Aerospace", {}),
-    command = "!aerospace reload-config",
-})
+--autocmd("BufWritePost", {
+--    pattern = "aerospace.toml",
+--    group = augroup("Aerospace", {}),
+--    command = "!aerospace reload-config",
+--})
 
 autocmd("BufWritePost", {
     pattern = "*",

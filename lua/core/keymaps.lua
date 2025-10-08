@@ -8,13 +8,13 @@ local keyset = vim.keymap.set
 -- keyset('n', '<C-c>', vim.cmd.Rex, {desc = 'Open last visited file'})
 
 keyset("c", "<C-g>", "<C-f>", {desc = "Edit command in cmdline mode"})
-keyset("n", "<C-s>", "gg<S-v>G", {desc = "Select all"})
+-- keyset("n", "<C-s>", "gg<S-v>G", {desc = "Select all"})
 
 -- Tabs
 keyset("n", "<leader>tN", ":tabnew %<CR>", {desc = "New tab"})
-keyset("n", "<leader>tC", ":tabclose<CR>", {desc = "Close tab"})
-keyset("n", "TP", ":tabprev<CR>", {desc = "Previous tab"})
-keyset("n", "TN", ":tabnext<CR>", {desc = "Next tab"})
+-- keyset("n", "<leader>tC", ":tabclose<CR>", {desc = "Close tab"})
+-- keyset("n", "TP", ":tabprev<CR>", {desc = "Previous tab"})
+-- keyset("n", "TN", ":tabnext<CR>", {desc = "Next tab"})
 
 -- Split window
 keyset("n", "<leader>ss", ":split<Return><C-w>w", {desc = "Split window horizontally"}) -- Horizontal
@@ -47,33 +47,32 @@ keyset("n", "N", "Nzzzv", {desc = "Jump to previous search term"})
 keyset("x", "<leader>pp", '"_dP')
 
 -- Sources current buffer
-keyset("n", "<leader><leader>x", function()
-    vim.cmd("so")
-end, {desc = "Source current buffer"})
-keyset("n", "<leader>X", ":.lua<CR>", {desc = "Source current line"})
-keyset("v", "<leader>X", ":.lua<CR>", {desc = "Source current selection"})
+-- keyset("n", "<leader><leader>x", function()
+--     vim.cmd("so")
+-- end, {desc = "Source current buffer"})
+-- keyset("n", "<leader>X", ":.lua<CR>", {desc = "Source current line"})
+-- keyset("v", "<leader>X", ":.lua<CR>", {desc = "Source current selection"})
 
--- Opens fugitive
+-- TODO: Opens fugitive 
 keyset("n", "<leader>gf", ":top Git<CR>", {desc = "Fugitive: Open git console"})
 
 -- Toggle highlighting search
-keyset("n", "<leader>;h", ":set hlsearch!<CR>", {desc = "Toggle highlighting search"})
+keyset("n", "<leader>th", ":set hlsearch!<CR>", {desc = "Toggle highlighting search"})
 
 -- Save without formatting
 keyset("n", "<leader>wf", ":noautocmd w<CR>", {desc = "Save without formatting"})
 
 -- Open terminal below
-keyset("n", "<leader>st", function()
-    vim.cmd.new()
-    vim.cmd.wincmd("J") -- Move to the window below
-    vim.api.nvim_win_set_height(0, 12)
-    vim.wo.winfixheight = true
-    vim.cmd.term()
-end, {desc = "Open terminal below"})
+-- keyset("n", "<leader>st", function()
+--     vim.cmd.new()
+--     vim.cmd.wincmd("J") -- Move to the window below
+--     vim.api.nvim_win_set_height(0, 12)
+--     vim.wo.winfixheight = true
+--     vim.cmd.term()
+-- end, {desc = "Open terminal below"})
+-- keyset("t", "<C-t>", "<C-\\><C-n>", {desc = "Exit terminal mode"})
 
-keyset("t", "<C-t>", "<C-\\><C-n>", {desc = "Exit terminal mode"})
-
-keyset("n", "<leader>bg", function()
+keyset("n", "<leader>ug", function()
     local active_bg = vim.o.background
     if active_bg == "dark" then
         vim.cmd("set background=light")
@@ -87,7 +86,7 @@ keyset({"i", "s"}, "<Esc>", function()
     return "<Esc>"
 end, {expr = true, desc = "Close snippet session"})
 
-keyset("n", "<leader>cm", ":!chmod +x %<CR>", {desc = "Make file executable"})
+-- keyset("n", "<leader>cm", ":!chmod +x %<CR>", {desc = "Make file executable"})
 
 keyset("n", "gh", "_", {desc = "Go to start of line"})
 keyset("n", "gl", "$", {desc = "Go to end of line"})
@@ -96,7 +95,7 @@ keyset({"n", "v", "i"}, "<C-q><C-x>", function()
     require("fzf-lua").complete_path()
 end, {silent = true, desc = "Fuzzy complete path"})
 
-keyset("n", "<leader>bb", function()
+keyset("n", "<leader>ub", function()
     vim.ui.input({prompt = "Search: "}, function(input)
         if input then
             Utils.browse.query_browser(input)

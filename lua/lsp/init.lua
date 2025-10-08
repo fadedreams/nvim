@@ -188,7 +188,8 @@ autocmd("LspAttach", {
 })
 
 -- Configures the LSP servers with (optionally) their configuration and keybinds
-autocmd({"BufReadPre", "BufNewFile"}, {
+--autocmd({"BufReadPre", "BufNewFile"}, { --avoid race
+autocmd({"BufReadPost", "BufNewFile"}, {
     once = true,
     callback = function()
         local servers = {
