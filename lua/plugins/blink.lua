@@ -1,16 +1,16 @@
 return {
     "saghen/blink.cmp",
-    --version = "1.*",
     build = "cargo build --release",
     event = "InsertEnter",
-    ---@module 'blink.cmp'
-    ---@type blink.cmp.Config
     opts = {
         keymap = {
             preset = "enter",
-            ["<C-y>"] = {"show", "show_documentation", "hide_documentation"},
+            ["<CR>"] = {"accept", "fallback"}, -- Explicitly map <CR> to accept completion
+            ["<C-y>"] = {"accept", "fallback"}, -- Map <C-y> to accept completion
             ["<C-u>"] = {"scroll_documentation_up", "fallback"},
             ["<C-d>"] = {"scroll_documentation_down", "fallback"},
+            ["<C-n>"] = {"select_next", "fallback"}, -- Explicitly map for navigation
+            ["<C-p>"] = {"select_prev", "fallback"}, -- Explicitly map for navigation
         },
         cmdline = {
             enabled = true,
@@ -29,14 +29,8 @@ return {
             },
         },
         sources = {
-            --default = {"lsp", "path", "snippets", "buffer", "lazydev"},
             default = {"lsp", "path", "snippets", "buffer"},
             providers = {
-                --lazydev = {
-                --    name = "LazyDev",
-                --    module = "lazydev.integrations.blink",
-                --    score_offset = 100, -- show at a higher priority than lsp
-                --},
                 lsp = {
                     fallbacks = {"buffer", "path"},
                 },
