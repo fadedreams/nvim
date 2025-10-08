@@ -1,9 +1,6 @@
 
--- TODO: Opens fugitive 
-vim.keymap.set("n", "<leader>gf", ":top Git<CR>", {desc = "Fugitive: Open git console"})
-
 --fzf
-vim.keymap.set({"n", "v", "i"}, "<C-q><C-x>", function()
+vim.keymap.set({"n", "v", "i"}, "<C-y>", function()
     require("fzf-lua").complete_path()
 end, {silent = true, desc = "Fuzzy complete path"})
 
