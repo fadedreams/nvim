@@ -83,7 +83,7 @@ vim.keymap.set("n", "<leader>ig", function()
 end, {desc = "Toggle background"})
 
 --whitespace
-vim.keymap.set("n", "<leader>ws", function()
+vim.keymap.set("n", "<leader>wc", function()
 	if vim.opt.list:get() then
 		vim.opt.list = false
 	else
@@ -99,7 +99,7 @@ vim.keymap.set("n", "<leader>ww", "<cmd>%s/\\r\\n\\?/\\n/g | %s/\\^M//g | %s/\\s
 vim.keymap.set("n", "<leader>wc", "<cmd>set ff=unix <cr>", { desc = "Convert to Unix format" })
 
 -- Save without formatting
-vim.keymap.set("n", "<leader>wf", ":noautocmd w<CR>", {desc = "Save without formatting"})
+vim.keymap.set("n", "<leader>ws", ":noautocmd w<CR>", {desc = "Save without formatting"})
 
 --rsi
 vim.keymap.set("i", "<a-h>", "<Left>", { noremap = true, silent = true })
