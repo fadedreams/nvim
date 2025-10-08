@@ -57,23 +57,23 @@ return {
                         })
                     end)
                 end,
-                desc = desc("Open a scratch buffer"),
+                desc = desc("[O]pen [S]cratch"),
             },
             {
                 "<leader>S",
                 -- function() snacks.scratch.select() end,
                 function() Utils.fzf.scratch_select() end,
-                desc = desc("Select a scratch buffer"),
+                desc = desc("[S]elect [S]cratch"),
             },
             {
                 "<leader>cR",
                 function() snacks.rename.rename_file() end,
-                desc = desc("Rename File"),
+                desc = desc("[R]ename [F]ile"),
             },
             {
                 "<leader>gY",
                 function() snacks.gitbrowse() end,
-                desc = desc("Open line(s) in browser"),
+                desc = desc("[S]hare [G]it [O]ink"),
                 mode = {"n", "v"},
             },
             {
@@ -86,13 +86,13 @@ return {
                         end,
                     })
                 end,
-                desc = desc("Copy line(s) link"),
+                desc = desc("[S]hare [G]it [L]ink"),
                 mode = {"n", "v"},
             },
             {
                 "<leader>oe",
                 snacks.picker.explorer,
-                desc = desc("Open file explorer"),
+                desc = desc("[O]pen [E]xplorer"),
             },
         }
     end,
