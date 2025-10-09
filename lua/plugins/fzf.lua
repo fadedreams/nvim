@@ -62,7 +62,7 @@ return {
 					["ctrl-m"] = "accept", --<CR>
 					["ctrl-a"] = "first", -- Go to the first item in the list
 					["ctrl-e"] = "last", -- Go to the last item in the list
-					["ctrl-l"] = "close",
+					["ctrl-h"] = "close",
 					-- ["ctrl-j"] = "down", -- Move selection down
 					-- ["ctrl-k"] = "up",   -- Move selection up
 				},

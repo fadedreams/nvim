@@ -29,7 +29,7 @@ return {
             i = { -- Insert mode
               ["<C-j>"] = actions.move_selection_next,
               ["<C-k>"] = actions.move_selection_previous,
-              ["<C-;>"] = actions.close, -- Close Telescope in insert mode
+              ["<C-h>"] = actions.close, -- Close Telescope in insert mode
               ["<a-q>"] = actions.send_selected_to_qflist, -- Selected only
               ["<c-q>"] = actions.send_to_qflist, -- All, no auto-open
               ["<CR>"] = actions.select_default,
@@ -42,7 +42,7 @@ return {
             n = { -- Normal mode
               ["<C-j>"] = actions.move_selection_next,
               ["<C-k>"] = actions.move_selection_previous,
-              ["<C-;>"] = actions.close, -- Close Telescope in normal mode
+              ["<C-h>"] = actions.close, -- Close Telescope in normal mode
               ["<a-q>"] = actions.send_selected_to_qflist, -- Selected only
               ["<c-q>"] = actions.send_to_qflist, -- All, no auto-open
               ["m"] = actions.select_default,
