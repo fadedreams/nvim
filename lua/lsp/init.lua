@@ -207,6 +207,7 @@ autocmd({"BufReadPost", "BufNewFile"}, {
             lua_ls = require("lsp.servers.lua_ls"),
             vtsls = require("lsp.servers.vtsls"),
             gopls = require("lsp.servers.gopls"),
+            rust_analyzer = require("lsp.servers.rust_analyzer"),
         }
 
         for server, config in pairs(servers) do

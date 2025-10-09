@@ -43,6 +43,7 @@ return {
                 "vimdoc",
                 "yaml",
                 "toml",
+                "rust",
             },
             highlight = {enable = true},
             indent = {enable = true},

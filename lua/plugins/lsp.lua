@@ -19,6 +19,7 @@ return {
                 "black",
                 "gofumpt",
                 "stylua",
+                "rust-analyzer",
             },
         },
         config = function(_, opts)
@@ -65,6 +66,7 @@ return {
                 "cssmodules_ls",
                 "css_variables",
                 "stylelint_lsp",
+                "rust_analyzer",
             },
             automatic_installation = true,
             automatic_enable = true,
