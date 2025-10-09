@@ -1,6 +1,6 @@
 
 --fzf
-vim.keymap.set({"n", "v", "i"}, "<C-y>", function()
+vim.keymap.set({"n", "v", "i"}, "<C-q><C-x>", function()
     require("fzf-lua").complete_path()
 end, {silent = true, desc = "Fuzzy complete path"})
 

@@ -58,27 +58,22 @@ return{
           map("v", "<leader>hs", function()
             gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
           end, { desc = desc("Stage hunk") })
+
           map("v", "<leader>hr", function()
             gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
           end, { desc = desc("Reset hunk") })
+
           map("n", "<leader>hp", gs.preview_hunk, { desc = desc("Preview hunk") })
+          map("n", "<leader>hi", gs.preview_hunk_inline, { desc = desc("Preview git hunk inline") })
+
+          map("n", "<leader>hd", gs.diffthis, { desc = desc("gitsigns.diffthis") })
+
           map("n", "<leader>hb", function()
             gs.blame_line({ full = true })
           end, { desc = desc("Blame line") })
-          map("n", "<leader>ih", gs.toggle_current_line_blame, { desc = desc("Toggle current line blame") }) -- New keymap to toggle current_line_blame
 
-          vim.keymap.set('n', '<leader>ha', function()
-            local filename = vim.fn.expand('%') -- Capture the current file's name
-            if filename == '' or vim.bo.filetype == 'nofile' then
-              vim.notify('No file associated with the current buffer', vim.log.levels.ERROR)
-              return
-            end
-            vim.cmd('new') -- Open a new buffer
-            vim.cmd('r !git diff HEAD -- ' .. vim.fn.shellescape(filename)) -- Run git diff with the captured filename
-            vim.bo.filetype = 'diff' -- Set filetype for syntax highlighting
-            vim.bo.buftype = 'nofile' -- Prevent saving the buffer
-            vim.bo.bufhidden = 'wipe' -- Auto-delete when closed
-          end, { desc = "Show all changes in file" })
+          map("n", "<leader>ht", gs.toggle_current_line_blame, { desc = desc("Toggle current line blame") }) -- New keymap to toggle current_line_blame
+
 
           -- Text object
           map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>") -- vih, yih, dih
