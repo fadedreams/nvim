@@ -43,6 +43,7 @@ return {
 			python = { "black" },
 			go = { "gofmt" },
 			rust = { "rustfmt" },
+			php = { "phpcbf" },
 			["_"] = { "trim_whitespace" },
 		},
 		format_on_save = function(bufnr)
@@ -82,6 +83,11 @@ return {
 			rustfmt = {
 				prepend_args = function()
 					return {}
+				end,
+			},
+			phpcbf = {
+				prepend_args = function()
+					return { "--standard=PSR12" }
 				end,
 			},
 		},
