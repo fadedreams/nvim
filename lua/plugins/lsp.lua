@@ -21,6 +21,7 @@ return {
 				"stylua",
 				"rust-analyzer",
 				"phpcbf",
+				"phpactor",
 			},
 		},
 		config = function(_, opts)
@@ -68,7 +69,7 @@ return {
 				"css_variables",
 				"stylelint_lsp",
 				"rust_analyzer",
-				"intelephense",
+				"phpactor",
 			},
 			automatic_installation = true,
 			automatic_enable = true,

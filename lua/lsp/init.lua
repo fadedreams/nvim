@@ -216,7 +216,8 @@ autocmd({ "BufReadPost", "BufNewFile" }, {
 			vtsls = require("lsp.servers.vtsls"),
 			gopls = require("lsp.servers.gopls"),
 			rust_analyzer = require("lsp.servers.rust_analyzer"),
-			intelephense = require("lsp.servers.intelephense"),
+			-- intelephense = require("lsp.servers.intelephense"),
+			phpactor = require("lsp.servers.phpactor"),
 		}
 
 		for server, config in pairs(servers) do
