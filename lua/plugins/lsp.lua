@@ -63,7 +63,6 @@ return {
 				"vtsls",
 				"jsonls",
 				"yamlls",
-				"bashls",
 				"gopls",
 				"basedpyright",
 				"copilot",
