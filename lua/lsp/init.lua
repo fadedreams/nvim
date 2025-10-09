@@ -202,7 +202,8 @@ autocmd({ "BufReadPost", "BufNewFile" }, {
 	callback = function()
 		local servers = {
 			stylelint_lsp = {},
-			basedpyright = {},
+			-- basedpyright = {},
+			basedpyright = require("lsp.servers.basedpyright"),
 			tailwindcss = {},
 			copilot_ls = {},
 			css_variables = {},
