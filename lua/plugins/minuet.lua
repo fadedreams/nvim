@@ -1,0 +1,63 @@
+-- echo "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" > ~/.config/openrouter.token
+-- https://openrouter.ai/settings/keys -- if not working try regenerate keys
+-- Minuet virtualtext enable
+return {
+  "milanglacier/minuet-ai.nvim",
+  -- event = "VeryLazy", -- Lazy-load on events to improve startup time
+  enabled = true,
+  event = "BufReadPre",
+  dependencies = { "nvim-lua/plenary.nvim" }, -- Required dependency
+  opts = {
+    provider = "openai_compatible",
+    notify = "debug",
+    n_completions = 1,
+    add_single_line_entry = false,
+    request_timeout = 5, -- Increased for reliability
+    -- throttle = 1500, -- Avoid rate limits
+    throttle = 1000, -- Avoid rate limits
+    debounce = 600, -- Reduce API calls
+    virtualtext = {
+      -- auto_trigger_ft = { "lua" },
+      auto_trigger_ft = { "lua", "python", "javascript", "php", "typescript", "go", "rust", "ruby", "java", "bash" }, -- Added requested filetypes
+      keymap = {
+        accept = "<a-a>",
+        accept_line = "<a-e>",
+        accept_n_lines = "<a-z>",
+        prev = "<a-[>",
+        next = "<a-]>",
+        dismiss = "<a-c>",
+      },
+    },
+    provider_options = {
+      openai_compatible = {
+        api_key = function()
+          local file = io.open(vim.fn.expand("~/.config/openrouter.token"), "r")
+          if file then
+            local api_key = file:read("*all"):gsub("%s+", "")
+            file:close()
+            return api_key
+          else
+            vim.notify("Failed to read Openrouter API key", vim.log.levels.ERROR)
+            return ""
+          end
+        end,
+        end_point = "https://openrouter.ai/api/v1/chat/completions",
+        model = "meta-llama/llama-4-maverick:free", -- Updated to DeepSeek Chat v3.1
+        -- model = "meituan/longcat-flash-chat:free", -- Updated to DeepSeek Chat v3.1
+        -- model = "meta-llama/llama-3.3-70b-instruct:free", -- Updated to DeepSeek Chat v3.1
+        -- model = "alibaba/tongyi-deepresearch-30b-a3b:free", -- Updated to DeepSeek Chat v3.1
+        -- model = "z-ai/glm-4.5-air:free", -- Updated to DeepSeek Chat v3.1
+        -- model = "anthropic/claude-sonnet-4.5",
+        name = "Openrouter",
+        stream = true,
+        optional = {
+          max_tokens = 56,
+          top_p = 0.9,
+          provider = {
+            sort = "throughput", -- Prioritize throughput for faster completion
+          },
+        },
+      },
+    },
+  },
+}
