@@ -57,7 +57,7 @@ return {
                 )
                 vim.keymap.set(
                     "n",
-                    "<C-m>",
+                    "<C-l>",
                     function() harpoon.ui:select_menu_item({tabedit = true}) end,
                     {desc = desc("Open in new tab"), buffer = cx.bufnr}
                 )

@@ -33,7 +33,7 @@ return {
               ["<a-q>"] = actions.send_selected_to_qflist, -- Selected only
               ["<c-q>"] = actions.send_to_qflist, -- All, no auto-open
               ["<CR>"] = actions.select_default,
-              ["<C-m>"] = actions.select_default,
+              ["<C-l>"] = actions.select_default,
               ["<C-a>"] = actions.move_to_top, -- Move to top of list
               ["<C-e>"] = actions.move_to_bottom, -- Move to bottom of list
               ["<C-v>"] = actions.select_vertical, -- Open in vertical split
@@ -45,7 +45,7 @@ return {
               ["<C-h>"] = actions.close, -- Close Telescope in normal mode
               ["<a-q>"] = actions.send_selected_to_qflist, -- Selected only
               ["<c-q>"] = actions.send_to_qflist, -- All, no auto-open
-              ["m"] = actions.select_default,
+              ["l"] = actions.select_default,
               ["<C-v>"] = actions.select_vertical, -- Open in vertical split
               ["<C-s>"] = actions.select_horizontal, -- Open in horizontal split
             },
