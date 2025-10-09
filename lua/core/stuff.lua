@@ -30,3 +30,28 @@ vim.keymap.set(
     ":silent !open %:p:h<CR>",
     { noremap = true, silent = true, desc = "[O]pen [E]xplorer" }
 )
+
+
+-- Save current session to ./session.vim
+vim.keymap.set("n", "<leader>ss", ":mksession! ./session.vim<CR>", {
+	noremap = true,
+	silent = true,
+	desc = "[S]ave [S]ession", -- Shows in which-key
+})
+
+-- Load session from the current working directory
+vim.keymap.set("n", "<leader>ls", ":source ./session.vim<CR>", { noremap = true, silent = true, desc = "[L]oad [S]ession" })
+
+-- delete swap files
+local function delete_swap_files()
+	local cmd = "rm -rf ~/.local/state/nvim/swap/*"
+	vim.fn.system(cmd)
+	print("Swap files deleted.")
+end
+
+-- Uses normal mode (n), is non-recursive (noremap), and silent
+vim.keymap.set("n", "<leader>ds", delete_swap_files, {
+	noremap = true,
+	silent = true,
+	desc = "[D]elete [S]wap", -- Description for which-key
+})

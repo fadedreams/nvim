@@ -120,6 +120,27 @@ return {
         end,
         desc = "Find Buffers",
       },
+      {
+        "<leader>j",
+        function()
+          require("telescope.builtin").buffers({
+            sort_mru = true, -- Sort buffers by most recently used
+            -- sorting_strategy = "ascending",
+            layout_strategy = "horizontal",
+            layout_config = {
+              horizontal = {
+                height = 0.6, -- Smaller height
+                width = 0.6,  -- Smaller width
+                preview_cutoff = 120,
+                prompt_position = "top",
+                preview_width = 0.6
+              }
+            },
+            -- winblend = 10, -- Transparency
+          })
+        end,
+        desc = "Find Buffers",
+      },
     },
   },
   {
