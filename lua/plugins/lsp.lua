@@ -22,6 +22,8 @@ return {
 				"rust-analyzer",
 				"phpcbf",
 				"phpactor",
+				"solargraph",
+				"rubocop",
 			},
 		},
 		config = function(_, opts)
@@ -70,6 +72,7 @@ return {
 				"stylelint_lsp",
 				"rust_analyzer",
 				"phpactor",
+				"solargraph",
 			},
 			automatic_installation = true,
 			automatic_enable = true,

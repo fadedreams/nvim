@@ -44,6 +44,7 @@ return {
 			go = { "gofmt" },
 			rust = { "rustfmt" },
 			php = { "phpcbf" },
+			ruby = { "rubocop" },
 			["_"] = { "trim_whitespace" },
 		},
 		format_on_save = function(bufnr)
@@ -88,6 +89,11 @@ return {
 			phpcbf = {
 				prepend_args = function()
 					return { "--standard=PSR12" }
+				end,
+			},
+			rubocop = {
+				prepend_args = function()
+					return { "--autocorrect" } -- Use --autocorrect for formatting
 				end,
 			},
 		},

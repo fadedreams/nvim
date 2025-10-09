@@ -219,6 +219,7 @@ autocmd({ "BufReadPost", "BufNewFile" }, {
 			rust_analyzer = require("lsp.servers.rust_analyzer"),
 			-- intelephense = require("lsp.servers.intelephense"),
 			phpactor = require("lsp.servers.phpactor"),
+			solargraph = require("lsp.servers.solargraph"),
 		}
 
 		for server, config in pairs(servers) do
