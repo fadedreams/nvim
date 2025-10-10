@@ -1,3 +1,4 @@
+-- brew install jdtls --MasonInstall jdtls fails because ir ips
 return {
 	{
 		"mfussenegger/nvim-jdtls",
