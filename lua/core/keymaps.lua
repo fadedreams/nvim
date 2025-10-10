@@ -83,6 +83,15 @@ vim.keymap.set("n", "<leader>ig", function()
 	end
 end, { desc = "Toggle background" })
 
+-- Map <leader>if to toggle foldcolumn
+vim.keymap.set('n', '<leader>if', function()
+  if vim.opt.foldcolumn:get() == '0' then
+    vim.opt.foldcolumn = '1' -- Show fold column
+  else
+    vim.opt.foldcolumn = '0' -- Hide fold column
+  end
+end, { desc = 'Toggle fold column' })
+
 --whitespace
 vim.keymap.set("n", "<leader>wc", function()
 	if vim.opt.list:get() then
@@ -100,9 +109,15 @@ vim.opt.listchars = { trail = "·", nbsp = "␣" } --^I:tabs
 vim.keymap.set(
 	"n",
 	"<leader>ww",
-	"<cmd>%s/\\r\\n\\?/\\n/g | %s/\\^M//g | %s/\\s\\+$//g",
-	{ desc = "Remove CR, literal ^M, trailing whitespace" }
+	function()
+		vim.cmd("silent! %s/\\r\\n\\?/\\n/g")
+		vim.cmd("silent! %s/\\^M//g")
+		vim.cmd("silent! %s/\\s\\+$//g")
+		vim.cmd("silent! %g/^\\s*$/d")
+	end,
+	{ desc = "Remove CR, ^M, trailing ws, and empty/ws" }
 )
+
 vim.keymap.set("n", "<leader>wc", "<cmd>set ff=unix <cr>", { desc = "Convert to Unix format" })
 
 -- Save without formatting

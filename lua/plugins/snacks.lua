@@ -22,9 +22,9 @@ return {
                 vim.print = _G.dd
                 -- Other toggle mappings
                 Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>is")
-                Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>iw")
+                Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>wW")
                 Snacks.toggle.diagnostics():map("<leader>id")
-                Snacks.toggle.indent():map("<leader>iI")
+                Snacks.toggle.indent():map("<leader>ii")
             end,
         })
     end,
@@ -114,7 +114,7 @@ return {
                 mode = {"n", "v"},
             },
             {
-                "<leader>oE",
+                "<leader>oe",
                 snacks.picker.explorer,
                 desc = desc("[O]pen [T]ree"),
             },

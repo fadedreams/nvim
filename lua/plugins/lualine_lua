@@ -1,0 +1,216 @@
+
+return {
+  {
+    "nvim-lualine/lualine.nvim",
+    opts = function(_, opts)
+      -- Define a custom theme for tokyonight with pure black background
+      local custom_tokyonight = {
+        normal = {
+          a = { bg = "#000000", fg = "#7aa2f7" },
+          b = { bg = "#000000", fg = "#7aa2f7" },
+          c = { bg = "#000000", fg = "#7aa2f7" },
+        },
+        insert = {
+          a = { bg = "#000000", fg = "#0db9d7" },
+          b = { bg = "#000000", fg = "#0db9d7" },
+          c = { bg = "#000000", fg = "#0db9d7" },
+        },
+        visual = {
+          a = { bg = "#000000", fg = "#a487d8" },
+          b = { bg = "#000000", fg = "#a487d8" },
+          c = { bg = "#000000", fg = "#a487d8" },
+        },
+        replace = {
+          a = { bg = "#000000", fg = "#d94a4a" },
+          b = { bg = "#000000", fg = "#d94a4a" },
+          c = { bg = "#000000", fg = "#d94a4a" },
+        },
+        command = {
+          a = { bg = "#000000", fg = "#e0af68" },
+          b = { bg = "#000000", fg = "#e0af68" },
+          c = { bg = "#000000", fg = "#e0af68" },
+        },
+        inactive = {
+          a = { bg = "#000000", fg = "#565f89" },
+          b = { bg = "#000000", fg = "#565f89" },
+          c = { bg = "#000000", fg = "#565f89" },
+        },
+      }
+
+      -- Define a custom theme for non-tokyonight themes with transparent background and mode-specific text colors
+      local custom_non_tokyonight = {
+        normal = {
+          a = { bg = "none", fg = "#82cfff" }, -- Light blue for normal mode
+          b = { bg = "none", fg = "#82cfff" },
+          c = { bg = "none", fg = "#82cfff" },
+        },
+        insert = {
+          a = { bg = "none", fg = "#00d787" }, -- Green for insert mode
+          b = { bg = "none", fg = "#00d787" },
+          c = { bg = "none", fg = "#00d787" },
+        },
+        visual = {
+          a = { bg = "none", fg = "#ff78c4" }, -- Pink for visual mode
+          b = { bg = "none", fg = "#ff78c4" },
+          c = { bg = "none", fg = "#ff78c4" },
+        },
+        replace = {
+          a = { bg = "none", fg = "#ff5555" }, -- Red for replace mode
+          b = { bg = "none", fg = "#ff5555" },
+          c = { bg = "none", fg = "#ff5555" },
+        },
+        command = {
+          a = { bg = "none", fg = "#ffaa00" }, -- Orange for command mode
+          b = { bg = "none", fg = "#ffaa00" },
+          c = { bg = "none", fg = "#ffaa00" },
+        },
+        inactive = {
+          a = { bg = "none", fg = "#6b7280" }, -- Gray for inactive mode
+          b = { bg = "none", fg = "#6b7280" },
+          c = { bg = "none", fg = "#6b7280" },
+        },
+      }
+
+      -- Function to get the file path relative to CWD
+      local function get_relative_filepath()
+        local full_path = vim.fn.expand("%:p") -- Get full path of current file
+        local cwd = vim.fn.getcwd() -- Get current working directory
+        if full_path == "" or vim.bo.buftype ~= "" then
+          return "" -- Return empty string for non-file buffers
+        end
+        -- Get path relative to CWD; if not under CWD, show full path
+        local relative_path = vim.fn.fnamemodify(full_path, ":.")
+        if relative_path == full_path then
+          return vim.fn.fnamemodify(full_path, ":~") -- Use ~ for home directory if not relative
+        end
+        return relative_path
+      end
+
+      -- Function to update lualine theme based on the .theme file
+      local function update_lualine_theme()
+        local theme_file = vim.fn.stdpath("config") .. "/.theme"
+        local selected_theme = "tokyonight-night" -- Default fallback
+        if vim.fn.filereadable(theme_file) == 1 then
+          local file = io.open(theme_file, "r")
+          if file then
+            selected_theme = file:read("*a"):gsub("%s+", "") -- Trim whitespace
+            file:close()
+          end
+        end
+        if selected_theme == "tokyonight-night" then
+          opts.options.theme = custom_tokyonight
+        else
+          opts.options.theme = custom_non_tokyonight
+        end
+        require("lualine").setup(opts)
+      end
+
+      -- Apply initial theme and sections
+      opts.options = {
+        theme = "auto", -- Default to auto, will be overridden by update_lualine_theme
+      }
+      opts.sections = {
+        lualine_a = {},
+        lualine_c = {
+          {
+            get_relative_filepath,
+            cond = function() return vim.bo.buftype == "" end, -- Only show for normal buffers
+          },
+        },
+        lualine_x = {},
+        lualine_z = {
+          {
+            function()
+              local char_count = vim.api.nvim_buf_get_offset(0, vim.api.nvim_buf_line_count(0))
+              return string.format("%d", char_count)
+            end,
+            cond = function() return vim.bo.buftype == "" end, -- Only show for normal buffers
+          },
+          { "encoding", fmt = function(enc) return string.format(" %s", enc) end }, -- Built-in encoding component
+          { "fileformat", fmt = function(fmt) return string.format(" %s", fmt:upper()) end }, -- Built-in fileformat component
+        },
+      }
+
+      -- Initialize lualine with the correct theme on startup
+      update_lualine_theme()
+
+      -- Watch for colorscheme changes
+      vim.api.nvim_create_autocmd("ColorScheme", {
+        pattern = "*",
+        callback = function()
+          -- Reapply lualine theme on colorscheme change
+          update_lualine_theme()
+        end,
+      })
+    end,
+  },
+}
+-- return {
+--   {
+--     "nvim-lualine/lualine.nvim",
+--
+--
+--     opts = function(_, opts)
+--
+--       -- opts.sections = {
+--       --   -- lualine_a = {}, -- Hide mode
+--       --   -- lualine_b = {}, -- Hide left-side components
+--       --   -- lualine_c = {}, -- Hide custom sections
+--       --   lualine_x = {}, -- Hide right-side components
+--       --   -- lualine_y = {}, -- Hide e.g., "Y 12"
+--       --   -- lualine_z = {}, -- Hide encoding, fileformat, etc.
+--       -- }
+--       opts.sections.lualine_a = {}
+--       opts.sections.lualine_x = {}
+--       opts.sections.lualine_z = {
+--         {
+--           function()
+--             local char_count = vim.api.nvim_buf_get_offset(0, vim.api.nvim_buf_line_count(0))
+--             return string.format("%d", char_count)
+--           end,
+--           cond = function() return vim.bo.buftype == "" end, -- Only show for normal buffers
+--         },
+--         { "encoding", fmt = function(enc) return string.format(" %s", enc) end }, -- Built-in encoding component
+--         { "fileformat", fmt = function(fmt) return string.format(" %s", fmt:upper()) end }, -- Built-in fileformat component
+--       }
+--     end,
+--   },
+-- }
+
+
+
+-- return {
+--   {
+--     "nvim-lualine/lualine.nvim",
+--
+--
+--     opts = function(_, opts)
+--
+--       -- opts.sections = {
+--       --   -- lualine_a = {}, -- Hide mode
+--       --   -- lualine_b = {}, -- Hide left-side components
+--       --   -- lualine_c = {}, -- Hide custom sections
+--       --   lualine_x = {}, -- Hide right-side components
+--       --   -- lualine_y = {}, -- Hide e.g., "Y 12"
+--       --   -- lualine_z = {}, -- Hide encoding, fileformat, etc.
+--       -- }
+--       opts.sections.lualine_a = {}
+--       opts.sections.lualine_x = {}
+--       opts.sections.lualine_z = {
+--         {
+--           function()
+--             local char_count = vim.api.nvim_buf_get_offset(0, vim.api.nvim_buf_line_count(0))
+--             return string.format("%d", char_count)
+--           end,
+--           cond = function() return vim.bo.buftype == "" end, -- Only show for normal buffers
+--         },
+--         { "encoding", fmt = function(enc) return string.format(" %s", enc) end }, -- Built-in encoding component
+--         { "fileformat", fmt = function(fmt) return string.format(" %s", fmt:upper()) end }, -- Built-in fileformat component
+--       }
+--     end,
+--   },
+-- }
+
+
+
+

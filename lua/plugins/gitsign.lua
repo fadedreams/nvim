@@ -13,6 +13,10 @@ return{
           changedelete = { text = '~' },
           untracked = { text = '┆' },
         },
+      signs_staged = {},  -- Fully disable staged sign definitions (optional, but recommended)
+      signs_staged_enable = false,  -- Disable staged signs (as before)
+      count_chars = {},  -- Disable counts in folded regions (this hides fold signs)
+
         current_line_blame = true,
         current_line_blame_opts = { delay = 500 },
         preview_config = {

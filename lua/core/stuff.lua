@@ -26,21 +26,21 @@ end, {desc = "Browse on the web"})
 
 vim.keymap.set(
     "n",
-    "<Leader>oe",
+    "<Leader>ue",
     ":silent !open %:p:h<CR>",
-    { noremap = true, silent = true, desc = "[O]pen [E]xplorer" }
+    { noremap = true, silent = true, desc = "[U]til [E]xplorer" }
 )
 
 
 -- Save current session to ./session.vim
-vim.keymap.set("n", "<leader>ss", ":mksession! ./session.vim<CR>", {
-	noremap = true,
-	silent = true,
-	desc = "[S]ave [S]ession", -- Shows in which-key
-})
+-- vim.keymap.set("n", "<leader>ss", ":mksession! ./session.vim<CR>", {
+-- 	noremap = true,
+-- 	silent = true,
+-- 	desc = "[S]ave [S]ession", -- Shows in which-key
+-- })
 
 -- Load session from the current working directory
-vim.keymap.set("n", "<leader>ls", ":source ./session.vim<CR>", { noremap = true, silent = true, desc = "[L]oad [S]ession" })
+-- vim.keymap.set("n", "<leader>ls", ":source ./session.vim<CR>", { noremap = true, silent = true, desc = "[L]oad [S]ession" })
 
 -- delete swap files
 local function delete_swap_files()

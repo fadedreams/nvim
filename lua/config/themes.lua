@@ -1,5 +1,11 @@
+-- Ensure the config directory exists
+local theme_dir = vim.fn.stdpath("config")
+if vim.fn.isdirectory(theme_dir) == 0 then
+  vim.fn.mkdir(theme_dir, "p")
+end
+
 -- Load saved theme if it exists
-local theme_file = vim.fn.stdpath("config") .. "/.theme"
+local theme_file = theme_dir .. "/.theme"
 if vim.fn.filereadable(theme_file) == 1 then
   local file = io.open(theme_file, "r")
   if file then
@@ -14,13 +20,17 @@ end
 -- Function to select a theme using Telescope and save the choice
 local function select_theme()
   local themes = {
-    "default",
+    -- "default",
     "tokyonight-night",
+    "gruvbox-material",
+    "melange",
+    "oldworld",
     "tokyonight-day",
     "tokyonight-moon",
     "tokyonight-storm",
     "cyberdream",
-    "cyberdream-light",
+    "ayu-dark",
+    "ayu-mirage",
     "rose-pine-main",
     "rose-pine-moon",
     "rose-pine-dawn",
@@ -30,26 +40,22 @@ local function select_theme()
     "bamboo",
     "bamboo-vulgaris",
     "bamboo-multiplex",
-    "melange",
     "miasma",
-    "onenord",
     "kanagawa-dragon",
-    "kanagawa-wave",
-    "kanagawa-lotus",
+    -- "kanagawa-wave",
     "vscode",
+    "vague",
+    "zenbones",
+    "zenwritten",
     "nightfly",
-    "everblush",
-    "github_dark_default",
-    "github_dark",
-    "github_dark_dimmed",
-    "github_dark_colorblind",
-    "github_dark_high_contrast",
-    "github_dark_tritanopia",
-    "ayu-dark",
-    "ayu-mirage",
-    "oldworld",
-    "gruvbox-material",
-    "embarkl",
+    "cyberdream-light",
+    "kanagawa-lotus",
+    -- "github_dark_default",
+    -- "github_dark",
+    -- "github_dark_dimmed",
+    -- "github_dark_colorblind",
+    -- "github_dark_high_contrast",
+    -- "github_dark_tritanopia",
   }
   require("telescope.pickers").new({}, {
     prompt_title = "Select Theme",
@@ -70,8 +76,13 @@ local function select_theme()
         local selection = require("telescope.actions.state").get_selected_entry()
         actions.close(prompt_bufnr)
         if selection then
-          -- Save the selected theme to a file first
-          local file = io.open(vim.fn.stdpath("config") .. "/.theme", "w")
+          -- Ensure the config directory exists
+          local theme_dir = vim.fn.stdpath("config")
+          if vim.fn.isdirectory(theme_dir) == 0 then
+            vim.fn.mkdir(theme_dir, "p")
+          end
+          -- Save the selected theme to a file
+          local file = io.open(theme_dir .. "/.theme", "w")
           if file then
             file:write(selection.value)
             file:flush() -- Ensure the file is written immediately
@@ -113,7 +124,6 @@ local function select_theme()
                   colors.bg_dark = "#000000"
                 end
                 if selected_theme == "tokyonight-day" then
-                  -- print("inside day") -- Debug output
                   -- colors.bg = "#292522"
                   -- colors.bg_dark = "#292522"
                 end
@@ -186,6 +196,4 @@ local function select_theme()
 end
 
 -- Set keybinding to select theme with Telescope
-vim.keymap.set("n", "<leader>it", select_theme, { desc = "Select Theme", noremap = true, silent = true })
-
-
+vim.keymap.set("n", "<leader>i9", select_theme, { desc = "Select Theme", noremap = true, silent = true })

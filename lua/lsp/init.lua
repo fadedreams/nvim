@@ -29,7 +29,7 @@ local function on_attach(client, bufnr)
 	end, "Go to definition (split)")
 	keyset("n", "<leader>Gd", function()
 		vim.cmd(":belowright split | lua vim.lsp.buf.definition()")
-	end, "Go to definitio (vsplit)")
+	end, "Go to definition (vsplit)")
 	keyset("n", "gi", Utils.cmd_center(vim.lsp.buf.implementation), "Go to Implementation")
 	keyset("n", "[d", Utils.cmd_center(vim.diagnostic.goto_prev), "Previous diagnostic")
 	keyset("n", "]d", Utils.cmd_center(vim.diagnostic.goto_next), "Next diagnostic")
@@ -50,7 +50,7 @@ local function on_attach(client, bufnr)
 		"Next diagnostic (error)"
 	)
 	keyset("n", "gk", vim.diagnostic.open_float, "Open diagnostics")
-	keyset("n", "gK", function()
+	keyset("n", "iv", function()
 		virtual_lines_enabled = not virtual_lines_enabled
 		if virtual_lines_enabled then
 			vim.diagnostic.config({ virtual_lines = true, virtual_text = false })
@@ -63,7 +63,7 @@ local function on_attach(client, bufnr)
 		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }))
 	end, "Toggle inlay hints")
 
-	keyset("n", "<leader>fa", function()
+	keyset("n", "<leader>bf", function()
 		if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
 			return
 		end
@@ -137,7 +137,7 @@ local function on_attach(client, bufnr)
 				enable_document_highlight()
 			end
 		end
-		keyset("n", "<leader>ma", toggle_document_highlight, "Toggle document highlights")
+		keyset("n", "<leader>ih", toggle_document_highlight, "Toggle document highlights")
 	end
 end
 
