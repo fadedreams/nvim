@@ -180,30 +180,30 @@ return {
       --   desc = "File Browser",
       -- }
       {
-"<leader>v",
-function()
-require("telescope").extensions.file_browser.file_browser({
-path = vim.fn.expand("%:p:h"), -- Use the current file's directory as path
-select_buffer = true,          -- Set select_buffer to true
-hidden = true,                 -- Show hidden files and folders
-respect_gitignore = false,     -- Do not respect .gitignore (show ignored files)
-layout_strategy = "vertical",
-layout_config = {
-vertical = {
-height = 0.9,
-width = 0.6,
-preview_cutoff = 40,
-prompt_position = "top",
-mirror = true,
-preview_height = 0.6
-}
-}
-})
-end,
-noremap = true,
-silent = true,
-desc = "File Browser",
-}
+        "<leader>v",
+        function()
+          require("telescope").extensions.file_browser.file_browser({
+            path = vim.fn.expand("%:p:h"), -- Use the current file's directory as path
+            select_buffer = true,          -- Set select_buffer to true
+            hidden = true,                 -- Show hidden files and folders
+            respect_gitignore = false,     -- Do not respect .gitignore (show ignored files)
+            layout_strategy = "vertical",
+            layout_config = {
+              vertical = {
+                height = 0.9,
+                width = 0.6,
+                preview_cutoff = 40,
+                prompt_position = "top",
+                mirror = true,
+                preview_height = 0.6
+              }
+            }
+          })
+        end,
+        noremap = true,
+        silent = true,
+        desc = "File Browser",
+      }
 
     },
   }
