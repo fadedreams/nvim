@@ -1,8 +1,8 @@
 vim.keymap.set("n", "<Leader>bb", "<C-^>", { noremap = true, silent = true, desc = "Toggle last buffer" })
 -- vim.keymap.set("n", "<leader>bdo", ":%bd|e#|bd#<CR>", { noremap = true, silent = true, desc = "delete other buffers" })
 -- vim.keymap.set("n", "<leader>bda", ":%bd<CR>", { noremap = true, silent = true, desc = "delete all buffers" })
-vim.keymap.set('n', '<c-h>', '<cmd>bd<CR>', { desc = 'kill' })
-vim.keymap.set("i", "<c-h>", "<Esc>:bdelete<CR>", { desc = 'kill' })
+vim.keymap.set('n', '<c-;>', '<cmd>bd<CR>', { desc = 'kill' })
+vim.keymap.set("i", "<c-;>", "<Esc>:bdelete<CR>", { desc = 'kill' })
 vim.keymap.set('n', '<leader>bd', '<cmd>bd<CR>', { desc = 'Close buffer and window' })
 
 vim.keymap.set('n', '<leader>bn', '<cmd>ene<CR>', { desc = 'New buffer and window' })

@@ -4,6 +4,8 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       local actions = require("telescope.actions")
+
+
       require("telescope").setup({
         defaults = {
           -- Default Telescope settings (if needed)
@@ -29,7 +31,7 @@ return {
             i = { -- Insert mode
               ["<C-j>"] = actions.move_selection_next,
               ["<C-k>"] = actions.move_selection_previous,
-              ["<C-h>"] = actions.close, -- Close Telescope in insert mode
+              ["<C-;>"] = actions.close, -- Close Telescope in insert mode
               ["<a-q>"] = actions.send_selected_to_qflist, -- Selected only
               ["<c-q>"] = actions.send_to_qflist, -- All, no auto-open
               ["<CR>"] = actions.select_default,
@@ -38,11 +40,12 @@ return {
               ["<C-e>"] = actions.move_to_bottom, -- Move to bottom of list
               ["<C-v>"] = actions.select_vertical, -- Open in vertical split
               ["<C-s>"] = actions.select_horizontal, -- Open in horizontal split
+
             },
             n = { -- Normal mode
               ["<C-j>"] = actions.move_selection_next,
               ["<C-k>"] = actions.move_selection_previous,
-              ["<C-h>"] = actions.close, -- Close Telescope in normal mode
+              ["<C-;>"] = actions.close, -- Close Telescope in normal mode
               ["<a-q>"] = actions.send_selected_to_qflist, -- Selected only
               ["<c-q>"] = actions.send_to_qflist, -- All, no auto-open
               ["l"] = actions.select_default,

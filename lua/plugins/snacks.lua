@@ -113,11 +113,11 @@ return {
                 desc = desc("[S]hare [G]it [L]ink"),
                 mode = {"n", "v"},
             },
-            {
-                "<leader>oe",
-                snacks.picker.explorer,
-                desc = desc("[O]pen [T]ree"),
-            },
+            -- {
+            --     "<leader>ue",
+            --     snacks.picker.explorer,
+            --     desc = desc("[U]til [T]ree"),
+            -- },
             { "<leader>b.", function() snacks.scratch() end, desc = "[N]ew [S]cratch" },
         }
     end,
