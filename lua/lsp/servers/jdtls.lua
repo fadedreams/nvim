@@ -50,7 +50,7 @@ return {
 	},
 	keys = {
 		{
-			"<leader>jo",
+			"<leader>ljo",
 			function()
 				vim.lsp.buf.code_action({
 					apply = true,
@@ -63,14 +63,14 @@ return {
 			desc = desc("Organize imports"),
 		},
 		{
-			"<leader>jf",
+			"<leader>ljf",
 			function()
 				vim.lsp.buf.format({ async = true })
 			end,
 			desc = desc("Format document"),
 		},
 		{
-			"<leader>jc",
+			"<leader>ljc",
 			function()
 				vim.lsp.buf.code_action({
 					context = {
@@ -81,7 +81,7 @@ return {
 			desc = desc("List all code actions"),
 		},
 		{
-			"<leader>jr",
+			"<leader>ljr",
 			function()
 				vim.lsp.buf.execute_command({
 					command = "java.debug.run",

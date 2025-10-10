@@ -220,8 +220,8 @@ autocmd({ "BufReadPost", "BufNewFile" }, {
 			-- intelephense = require("lsp.servers.intelephense"),
 			phpactor = require("lsp.servers.phpactor"),
 			solargraph = require("lsp.servers.solargraph"),
-			clangd = require("lsp.servers.clangd"),
-			jdtls = require("lsp.servers.jdtls"),
+			-- clangd = require("lsp.servers.clangd"),
+			-- jdtls = require("lsp.servers.jdtls"),
 		}
 
 		for server, config in pairs(servers) do
