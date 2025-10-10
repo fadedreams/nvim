@@ -47,6 +47,7 @@ return {
 			ruby = { "rubocop" },
 			cpp = { "clang-format" },
 			c = { "clang-format" },
+			java = { "google-java-format" },
 			["_"] = { "trim_whitespace" },
 		},
 		format_on_save = function(bufnr)
@@ -96,6 +97,11 @@ return {
 			rubocop = {
 				prepend_args = function()
 					return { "--autocorrect" } -- Use --autocorrect for formatting
+				end,
+			},
+			["google-java-format"] = {
+				prepend_args = function()
+					return { "--aosp" } -- Use AOSP style for Java formatting
 				end,
 			},
 		},

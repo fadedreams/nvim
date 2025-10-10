@@ -221,6 +221,7 @@ autocmd({ "BufReadPost", "BufNewFile" }, {
 			phpactor = require("lsp.servers.phpactor"),
 			solargraph = require("lsp.servers.solargraph"),
 			clangd = require("lsp.servers.clangd"),
+			jdtls = require("lsp.servers.jdtls"),
 		}
 
 		for server, config in pairs(servers) do

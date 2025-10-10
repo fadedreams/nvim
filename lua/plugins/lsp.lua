@@ -25,6 +25,8 @@ return {
 				"solargraph",
 				"rubocop",
 				"clangd",
+				"jdtls",
+				"google-java-format",
 			},
 			-- PATH = "prepend", -- Use system-installed clangd if available
 		},
@@ -75,7 +77,7 @@ return {
 				"phpactor",
 				"solargraph",
 				"clangd",
-				"clang-format",
+				"jdtls",
 			},
 			automatic_installation = true,
 			automatic_enable = true,

@@ -4,6 +4,7 @@ vim.filetype.add({
 		rs = "rust",
 		php = "php",
 		rb = "ruby",
+		java = "java",
 	},
 	filename = {
 		[".eslintrc.json"] = "jsonc",
