@@ -1,18 +1,19 @@
-local grep_opts = {
-	"rg",
-	"--vimgrep",
-	"--hidden",
-	"--follow",
-	"--glob",
-	'"!**/.git/*"',
-	"--column",
-	"--line-number",
-	"--no-heading",
-	"--color=always",
-	"--smart-case",
-	"--max-columns=4096",
-	"-e",
-}
+
+-- local grep_opts = {
+-- 	"rg",
+-- 	"--vimgrep",
+-- 	"--hidden",
+-- 	"--follow",
+-- 	"--glob",
+-- 	'"!**/.git/*"',
+-- 	"--column",
+-- 	"--line-number",
+-- 	"--no-heading",
+-- 	"--color=always",
+-- 	"--smart-case",
+-- 	"--max-columns=4096",
+-- 	"-e",
+-- }
 
 return {
 	"ibhagwan/fzf-lua",
@@ -22,6 +23,7 @@ return {
 	-- optional for icon support
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function()
+		local action = require("fzf-lua.actions")
 		require("fzf-lua").setup({
 			fzf_colors = true,
 			defaults = {
@@ -55,14 +57,14 @@ return {
 			},
 			keymap = {
 				fzf = {
-					["ctrl-q"] = "select-all+accept", -- Ensure <C-q> sends to quickfix
-					["alt-q"] = "accept",
+					["ctrl-q"] = action.file_sel_to_qf, -- Send selected files to quickfix
 					["ctrl-j"] = "down",
 					["ctrl-k"] = "up",
-					["ctrl-m"] = "accept", --<CR>
+					-- ["ctrl-m"] = "accept", --<CR>
 					["ctrl-a"] = "first", -- Go to the first item in the list
 					["ctrl-e"] = "last", -- Go to the last item in the list
-					["ctrl-l"] = "close",
+					["ctrl-h"] = "close",
+					["ctrl-l"] = "accept",
 					-- ["ctrl-j"] = "down", -- Move selection down
 					-- ["ctrl-k"] = "up",   -- Move selection up
 				},
@@ -81,6 +83,7 @@ return {
 			},
 			actions = {
 				files = {
+					["ctrl-q"] = action.file_sel_to_qf, -- Added to support quickfix action
 					["ctrl-v"] = require("fzf-lua").actions.file_vsplit, -- Open file in vertical split
 					["ctrl-s"] = require("fzf-lua").actions.file_split, -- Open file in horizontal split
 					["default"] = require("fzf-lua").actions.file_edit, -- Default action (e.g., open in current buffer)
@@ -91,7 +94,6 @@ return {
 	keys = {
 		-- Disable the keymap to grep files
 		{ "<leader>ss", false },
-
 		-- {
 		--   "<leader>fs",
 		--   function()
@@ -111,7 +113,6 @@ return {
 		--   end,
 		--   desc = "Document Symbols (Functions and Classes)",
 		-- },
-
 		-- {
 		--   "<leader>fb",
 		--   function()
