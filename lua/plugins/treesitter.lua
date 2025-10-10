@@ -45,6 +45,8 @@ return {
 				"toml",
 				"rust",
 				"ruby",
+        "cpp",
+        "c",
 			},
 			highlight = { enable = true },
 			indent = { enable = true },

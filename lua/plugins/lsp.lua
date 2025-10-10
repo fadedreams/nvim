@@ -24,7 +24,9 @@ return {
 				"phpactor",
 				"solargraph",
 				"rubocop",
+				"clangd",
 			},
+			-- PATH = "prepend", -- Use system-installed clangd if available
 		},
 		config = function(_, opts)
 			require("mason").setup(opts)
@@ -72,6 +74,8 @@ return {
 				"rust_analyzer",
 				"phpactor",
 				"solargraph",
+				"clangd",
+				"clang-format",
 			},
 			automatic_installation = true,
 			automatic_enable = true,

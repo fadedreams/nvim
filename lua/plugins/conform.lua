@@ -45,6 +45,8 @@ return {
 			rust = { "rustfmt" },
 			php = { "phpcbf" },
 			ruby = { "rubocop" },
+			cpp = { "clang-format" },
+			c = { "clang-format" },
 			["_"] = { "trim_whitespace" },
 		},
 		format_on_save = function(bufnr)
