@@ -78,8 +78,17 @@ return {
 			},
 			buffers = {
 				actions = {
-					["ctrl-d"] = { fn = require("fzf-lua").actions.buf_del, reload = true }, -- Custom delete key
+					["ctrl-x"] = { fn = require("fzf-lua").actions.buf_del, reload = true }, -- Custom delete key
 				},
+        winopts = {
+          width = 0.40,
+          height = 0.5,
+          -- backdrop = 100,
+          preview = {
+            layout = "vertical",
+            vertical = "down:45%",
+          },
+        },
 			},
 			actions = {
 				files = {
@@ -94,6 +103,7 @@ return {
 	keys = {
 		-- Disable the keymap to grep files
 		{ "<leader>ss", false },
+		{ "<leader>,", false },
 		-- {
 		--   "<leader>fs",
 		--   function()

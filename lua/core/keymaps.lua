@@ -50,6 +50,10 @@ end, { expr = true, desc = "Close snippet session" })
 vim.keymap.set("n", "<a-w>", ":w<CR>", { noremap = true })
 vim.keymap.set("i", "<a-w>", "<Esc>:w<CR>", { noremap = true })
 
+--quit all
+-- vim.keymap.set("n", "<a-q>", ":qa<CR>", { noremap = true })
+-- vim.keymap.set("i", "<a-q>", "<Esc>:qa<CR>", { noremap = true })
+
 -- save all
 -- vim.keymap.set("n", "<a-s>", ":wa<CR>", { noremap = true, silent = true })
 -- vim.keymap.set("i", "<a-s>", "<Esc>:wa<CR>i", { noremap = true, silent = true })
