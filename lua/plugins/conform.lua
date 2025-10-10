@@ -50,20 +50,20 @@ return {
 			java = { "google-java-format" },
 			["_"] = { "trim_whitespace" },
 		},
-		format_on_save = function(bufnr)
-			-- Disable autoformat for files in a certain path
-			local bufname = vim.api.nvim_buf_get_name(bufnr)
-			if bufname:match("/node_modules/") then
-				return
-			end
-
-			if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-				return
-			end
-
-			---@type conform.FormatOpts
-			return { timeout_ms = 500, lsp_format = Utils.lsp.get_lsp_format(bufnr) }
-		end,
+		-- format_on_save = function(bufnr)
+		-- 	-- Disable autoformat for files in a certain path
+		-- 	local bufname = vim.api.nvim_buf_get_name(bufnr)
+		-- 	if bufname:match("/node_modules/") then
+		-- 		return
+		-- 	end
+		--
+		-- 	if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+		-- 		return
+		-- 	end
+		--
+		-- 	---@type conform.FormatOpts
+		-- 	return { timeout_ms = 500, lsp_format = Utils.lsp.get_lsp_format(bufnr) }
+		-- end,
 		log_level = vim.log.levels.DEBUG,
 		formatters = {
 			prettier = {

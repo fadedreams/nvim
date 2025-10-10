@@ -9,6 +9,10 @@ return {
 			{ "<leader>f", group = "File" }, -- Group for File-related keymaps
 			{ "<leader>b", group = "Buffer" }, -- Group for Buffer-related keymaps
 			{ "<leader>l", group = "Lngs" },
+			{ "<leader>lh", group = "PHP" },
+			{ "<leader>lp", group = "Py" },
+			{ "<leader>lc", group = "Cpp" },
+			{ "<leader>lj", group = "Java" },
 			{ "<leader>u", group = "Utils" },
 		})
 	end,
