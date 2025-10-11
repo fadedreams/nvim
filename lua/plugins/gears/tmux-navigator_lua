@@ -1,0 +1,25 @@
+-- cp tmux conf from dp or https://github.com/christoomey/vim-tmux-navigator
+return{
+  "christoomey/vim-tmux-navigator",
+  cmd = {
+    "TmuxNavigateLeft",
+    "TmuxNavigateDown",
+    "TmuxNavigateUp",
+    "TmuxNavigateRight",
+    "TmuxNavigatePrevious",
+    "TmuxNavigatorProcessList",
+  },
+  keys = {
+    { "<C-Left>", "<cmd>TmuxNavigateLeft<cr>", desc = "Navigate to left tmux pane" },
+    { "<C-Down>", "<cmd>TmuxNavigateDown<cr>", desc = "Navigate to down tmux pane" },
+    { "<C-Up>", "<cmd>TmuxNavigateUp<cr>", desc = "Navigate to up tmux pane" },
+    { "<C-Right>", "<cmd>TmuxNavigateRight<cr>", desc = "Navigate to right tmux pane" },
+    -- { "<C-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>", desc = "Navigate to previous tmux pane" },
+    -- { "<C-Up>", "<cmd><C-U>TmuxNavigatePrevious<cr>", desc = "Navigate to previous tmux pane" },
+    -- { "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
+    -- { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
+    -- { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
+    -- { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
+    -- { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+  },
+}

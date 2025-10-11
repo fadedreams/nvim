@@ -32,14 +32,14 @@ return {
           colors.bg_dark = "#000000"
         end
         if selected_theme == "tokyonight-day" then
-          -- print("inside day") -- Debug output
+          print("inside day") -- Debug output
           colors.bg = "#d3d5db"
           colors.bg_dark = "#d3d5db"
         end
       end,
       on_highlights = function(highlights, colors)
-        highlights.StatusLine = { fg = "#ffffff", bg = "#000000", bold = true }
-        highlights.StatusLineNC = { fg = "#ffffff", bg = "#444444" }
+        highlights.StatusLine = { fg = "#7aa2f7", bg = "#000000", bold = true }
+        -- highlights.StatusLineNC = { fg = "#7aa2f7", bg = "#444444" }
         highlights.LineNr = { fg = "#323e63" }
         highlights.LineNrAbove = { fg = "#323e63" }
         highlights.LineNrBelow = { fg = "#323e63" }

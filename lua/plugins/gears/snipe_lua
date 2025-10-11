@@ -1,0 +1,57 @@
+return {
+  "leath-dub/snipe.nvim",
+  lazy = false,
+  config = function()
+    local snipe = require("snipe")
+    snipe.setup({
+      ui = {
+        position = "cursor",
+        preselect_current = true,
+        text_align = "file-first",
+        show_path = true, 
+        use_default_preview = true,
+      },
+      hints = {
+        dictionary = "adfghwecpghio",
+      },
+      navigate = {
+        under_cursor = "<c-m>", -- Select item under cursor
+        cancel_snipe = { "<Tab>", "<esc>", "q", "<c-;>" },
+        open_split = "s",
+        open_vsplit = "v",
+      },
+      sort = "last",
+    })
+  end,
+  keys = {
+    {
+      "<c-s>",
+      function()
+        local snipe = require("snipe")
+        -- Check if the current buffer is a Snipe buffer (by filetype or other property)
+        local current_buf = vim.api.nvim_get_current_buf()
+        local is_snipe_buffer = vim.g.snipe_buffer and vim.api.nvim_buf_is_valid(vim.g.snipe_buffer)
+        and vim.api.nvim_buf_get_option(vim.g.snipe_buffer, "filetype") == "snipe"
+
+        if is_snipe_buffer then
+          -- Close the Snipe buffer
+          vim.api.nvim_buf_delete(vim.g.snipe_buffer, { force = true })
+          vim.g.snipe_buffer = nil
+        else
+          -- Open the Snipe menu
+          snipe.open_buffer_menu()
+          -- Delay to ensure Snipe has set up its buffer
+          vim.schedule(function()
+            local new_buf = vim.api.nvim_get_current_buf()
+            -- Only update if the new buffer is a Snipe buffer (check filetype or other property)
+            if vim.api.nvim_buf_is_valid(new_buf) and vim.api.nvim_buf_get_option(new_buf, "filetype") == "snipe" then
+              vim.g.snipe_buffer = new_buf
+            end
+          end)
+        end
+      end,
+      desc = "Toggle Snipe buffer menu",
+      mode = { "n" },
+    }
+  },
+}

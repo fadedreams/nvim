@@ -67,11 +67,29 @@ local function filepath()
     return string.format("%%<%s/", fpath)
 end
 
+-- local function filename()
+--     local fname = vim.fn.expand("%:t")
+--     if fname == "" then
+--         return ""
+--     end
+--     return fname .. " "
+-- end
 local function filename()
-    local fname = vim.fn.expand("%:t")
-    if fname == "" then
+    local fname = vim.fn.fnamemodify(vim.fn.expand("%:p"), ":~:.")
+    if fname == "" or fname == "." then
         return ""
     end
+    if string.find(fname, "oil://") then
+        fname = string.gsub(fname, "oil://", "")
+    end
+    fname = fname:gsub(vim.env.HOME, "~", 1)
+
+    local is_wide = vim.api.nvim_win_get_width(0) > 80
+
+    if not is_wide then
+        fname = vim.fn.pathshorten(fname)
+    end
+
     return fname .. " "
 end
 

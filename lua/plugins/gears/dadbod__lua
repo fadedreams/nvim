@@ -1,0 +1,82 @@
+-- sudo apt install sqlite3
+-- TODO: pr
+return
+  {
+    'kristijanhusak/vim-dadbod-ui',
+    -- lazy = true, -- Enable lazy loading
+    -- event = "VeryLazy",  -- Optional: Lazy-load on events to improve startup time
+    dependencies = {
+      { 'tpope/vim-dadbod',                     lazy = true },
+      { 'kristijanhusak/vim-dadbod-completion', lazy = true },
+    },
+    cmd = {
+      'DBUI',
+      'DBUIToggle',
+      'DBUIAddConnection',
+      'DBUIFindBuffer',
+    },
+    init = function()
+      -- Your DBUI configuration
+      vim.g.db_ui_use_nerd_fonts = 1
+      vim.g.db_ui_disable_progress_bar = 1
+
+      vim.keymap.set("n", "<leader>dbb", function()
+        vim.cmd('DBUIToggle')
+      end, { desc = "Toggle DBUI" })
+
+      -- Predefined connections
+      vim.g.dbs = {
+        { name = "sqlite_db", url = "sqlite:/path/to/your/sqlite.db" },
+        { name = "postgres_db", url = "postgresql://user:password@localhost:5432/dbname" },
+        { name = "mysql_db", url = "mysql://user:password@localhost:3306/dbname" },
+        { name = "mongodb_db", url = "mongodb://user:password@localhost:27017/dbname" },
+        { name = "mssql_db", url = "mssql://user:password@localhost:1433/dbname" },
+        { name = "oracle_db", url = "oracle://user:password@localhost:1521/sid" },
+        { name = "redis_db", url = "redis://localhost:6379/0" },
+      }
+
+      -- Function to prompt for choosing and editing a connection
+      local function edit_db_connection()
+        local connections = {}
+        for i, db in ipairs(vim.g.dbs) do
+          table.insert(connections, db.name .. " (" .. db.url .. ")")
+        end
+
+        vim.ui.select(connections, {
+          prompt = "Select a connection to edit:",
+        }, function(choice)
+            if not choice then return end
+
+            local index = nil
+            for i, db in ipairs(vim.g.dbs) do
+              if choice == db.name .. " (" .. db.url .. ")" then
+                index = i
+                break
+              end
+            end
+
+            if index then
+              vim.ui.input({
+                prompt = "Edit name (current: " .. vim.g.dbs[index].name .. "): ",
+                default = vim.g.dbs[index].name,
+              }, function(new_name)
+                  if not new_name then return end
+
+                  vim.ui.input({
+                    prompt = "Edit URL (current: " .. vim.g.dbs[index].url .. "): ",
+                    default = vim.g.dbs[index].url,
+                  }, function(new_url)
+                      if not new_url then return end
+
+                      vim.g.dbs[index] = { name = new_name, url = new_url }
+                      print("Connection updated: " .. new_name .. " (" .. new_url .. ")")
+                    end)
+                end)
+            end
+          end)
+      end
+
+      vim.keymap.set("n", "<leader>dbc", edit_db_connection, { desc = "Choose and edit DB connection" })
+    end,
+  }
+

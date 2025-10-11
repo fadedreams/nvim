@@ -1,0 +1,135 @@
+-- config:
+-- sudo apt install python3-neovim -y
+-- openrouter apikey
+-- echo "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" > ~/.config/openrouter.token
+
+-- curl https://openrouter.ai/api/v1/chat/completions \
+--   -H "Content-Type: application/json" \
+--   -H "Authorization: Bearer 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" \
+--   -d '{
+--   "model": "deepseek/deepseek-chat-v3.1:free",
+--   "messages": [
+--     {
+--       "role": "user",
+--       "content": "2+2"
+--     }
+--   ]
+--
+-- }'
+return {
+    "madox2/vim-ai",
+    -- lazy = true, -- Enable lazy loading
+    event = "VeryLazy",  -- Optional: Lazy-load on events to improve startup time
+    config = function()
+      -- Configure vim-ai to use OpenRouter with DeepSeek
+      vim.g.vim_ai_chat = {
+        provider = "openai",
+        options = {
+          model = "deepseek/deepseek-chat-v3.1:free",
+          endpoint_url = "https://openrouter.ai/api/v1/chat/completions",
+          token_file_path = vim.fn.expand("~/.config/openrouter.token"),
+          auth_type = "bearer",
+          request_timeout = 20,
+          stream = 1,
+          temperature = 0.7,
+          max_completion_tokens = 4096,
+          initial_prompt = [[
+            >>> system
+            You are a helpful AI assistant. Provide concise and accurate responses.
+            If you attach a code block, add syntax type after ``` for highlighting.
+          ]],
+        },
+        ui = {
+          open_chat_command = "preset_below",
+          scratch_buffer_keep_open = 0,
+          paste_mode = 1,
+        },
+      }
+
+      vim.g.vim_ai_complete = {
+        provider = "openai",
+        options = {
+          model = "deepseek/deepseek-chat-v3.1:free",
+          endpoint_url = "https://openrouter.ai/api/v1/chat/completions",
+          token_file_path = vim.fn.expand("~/.config/openrouter.token"),
+          auth_type = "bearer",
+          request_timeout = 20,
+          stream = 1,
+          temperature = 0.1,
+          max_completion_tokens = 4096,
+          initial_prompt = [[
+            >>> system
+            You are a general assistant. Answer shortly and concisely.
+            Do not provide explanations unless requested.
+            If answering in code, do not wrap in markdown code blocks.
+          ]],
+        },
+        ui = {
+          paste_mode = 1,
+        },
+      }
+
+      vim.g.vim_ai_edit = {
+        provider = "openai",
+        options = {
+          model = "deepseek/deepseek-chat-v3.1:free",
+          endpoint_url = "https://openrouter.ai/api/v1/chat/completions",
+          token_file_path = vim.fn.expand("~/.config/openrouter.token"),
+          auth_type = "bearer",
+          request_timeout = 20,
+          stream = 1,
+          temperature = 0.1,
+          max_completion_tokens = 4096,
+          initial_prompt = [[
+            >>> system
+            You are a general assistant. Answer shortly and concisely.
+            Do not provide explanations unless requested.
+            If answering in code, do not wrap in markdown code blocks.
+          ]],
+        },
+        ui = {
+          paste_mode = 1,
+        },
+      }
+
+      -- Optional: Define Custom Roles
+      --   vi ~/.config/vim-ai-roles.ini
+      -- [grammar]
+      -- prompt = fix spelling and grammar
+      -- options.temperature = 0.4
+      --
+      -- [deepseek]
+      -- options.model = deepseek/deepseek-chat-v3.1:free
+      -- options.endpoint_url = https://openrouter.ai/api/v1/chat/completions
+      -- options.token_file_path = ~/.config/openrouter.token
+      -- Optional: Custom keybindings
+      -- Then, set the roles file in your config:
+      -- vim.g.vim_ai_roles_config_file = vim.fn.expand("~/.config/vim-ai-roles.ini")
+      -- :AIEdit /grammar
+      -- :AIChat /deepseek
+
+      vim.keymap.set("n", "<leader>aa", ":AIChat ", { desc = "Open AI Chat" })
+      vim.keymap.set({"n", "v"}, "<leader>ae", ":AIEdit ", { desc = "AI Edit" })
+      vim.keymap.set({"n", "v"}, "<leader>ar", ":AIRedo", { desc = "AI Redo" })
+
+      -- vim.api.nvim_set_keymap(
+      --   "n",
+      --   "<leader>ac",
+      --   "",
+      --   {
+      --     noremap = true,
+      --     silent = true,
+      --     callback = function()
+      --       vim.ui.input({
+      --         prompt = "Remote file: ",
+      --         default = ":RemoteOpen rsync://root@109.248.161.147//root/t.txt",
+      --       }, function(input)
+      --           if input then
+      --             vim.cmd(input)
+      --           end
+      --         end)
+      --     end,
+      --   }
+      -- )
+    end,
+}

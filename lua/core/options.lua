@@ -73,7 +73,7 @@ vim.g.markdown_recommended_style = 0 -- see https://www.reddit.com/r/neovim/comm
 vim.opt.updatetime = 300
 vim.opt.mouse = "a"
 vim.opt.wildignore:append({
-  "*/node_modules/*",        -- Node.js dependencies
+  -- "*/node_modules/*",        -- Node.js dependencies
   "*.pyc",                  -- Python compiled files
   "__pycache__/*",          -- Python cache directories
   "*/venv/*",               -- Python virtual environments
