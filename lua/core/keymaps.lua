@@ -82,7 +82,7 @@ vim.keymap.set("n", "<leader>ib", function()
     local active_bg = vim.o.background
     if active_bg == "dark" then
         vim.o.background = "light"
-        vim.cmd("highlight Normal guibg=#a0a5a9")
+        -- vim.cmd("highlight Normal guibg=#363e43")
     else
         vim.o.background = "dark"
         -- vim.cmd("highlight Normal guibg=NONE") -- Reset to default dark background
@@ -97,6 +97,10 @@ vim.keymap.set('n', '<leader>if', function()
     vim.opt.foldcolumn = '0' -- Hide fold column
   end
 end, { desc = 'Toggle fold column' })
+
+vim.keymap.set('n', '<leader>ip', function()
+    require("nvim-highlight-colors").toggle()
+end, { noremap = true, silent = true, desc = "Toggle nvim-highlight-colors" })
 
 --whitespace
 vim.keymap.set("n", "<leader>wc", function()

@@ -12,7 +12,30 @@ if vim.fn.filereadable(theme_file) == 1 then
     local saved_theme = file:read("*a"):gsub("%s+", "") -- Trim whitespace
     file:close()
     if saved_theme ~= "" then
-      pcall(vim.cmd, "colorscheme " .. saved_theme) -- Use pcall to avoid errors on invalid themes
+      -- Initialize theme-specific settings before applying
+      if saved_theme:match("^tokyonight") then
+        require("tokyonight").setup({
+          style = saved_theme:gsub("tokyonight%-", ""),
+          transparent = false,
+          styles = {
+            comments = { italic = false },
+            keywords = { italic = false },
+            sidebars = "transparent",
+            floats = "transparent",
+          },
+        })
+      elseif saved_theme:match("^rose%-pine") then
+        local variant_map = {
+          ["rose-pine-main"] = "main",
+          ["rose-pine-moon"] = "moon",
+          ["rose-pine-dawn"] = "dawn",
+        }
+        require("rose-pine").setup({
+          variant = variant_map[saved_theme] or "main",
+          styles = { transparency = false, italic = false },
+        })
+      end
+      pcall(vim.cmd, "colorscheme " .. saved_theme)
     end
   end
 end
@@ -20,9 +43,9 @@ end
 -- Function to select a theme using Telescope and save the choice
 local function select_theme()
   local themes = {
-    -- "default",
     "tokyonight-night",
     "gruvbox-material",
+    "miasma",
     "melange",
     "oldworld",
     "tokyonight-day",
@@ -40,9 +63,7 @@ local function select_theme()
     "bamboo",
     "bamboo-vulgaris",
     "bamboo-multiplex",
-    "miasma",
     "kanagawa-dragon",
-    -- "kanagawa-wave",
     "vscode",
     "vague",
     "zenbones",
@@ -50,12 +71,6 @@ local function select_theme()
     "nightfly",
     "cyberdream-light",
     "kanagawa-lotus",
-    -- "github_dark_default",
-    -- "github_dark",
-    -- "github_dark_dimmed",
-    -- "github_dark_colorblind",
-    -- "github_dark_high_contrast",
-    -- "github_dark_tritanopia",
   }
   require("telescope.pickers").new({}, {
     prompt_title = "Select Theme",
@@ -64,7 +79,7 @@ local function select_theme()
       entry_maker = function(entry)
         return {
           value = entry,
-          display = entry:gsub("^%l", string.upper), -- Capitalize first letter for display
+          display = entry:gsub("^%l", string.upper), -- Capitalize first letter
           ordinal = entry,
         }
       end,
@@ -76,61 +91,44 @@ local function select_theme()
         local selection = require("telescope.actions.state").get_selected_entry()
         actions.close(prompt_bufnr)
         if selection then
-          -- Ensure the config directory exists
-          local theme_dir = vim.fn.stdpath("config")
-          if vim.fn.isdirectory(theme_dir) == 0 then
-            vim.fn.mkdir(theme_dir, "p")
-          end
           -- Save the selected theme to a file
           local file = io.open(theme_dir .. "/.theme", "w")
           if file then
             file:write(selection.value)
-            file:flush() -- Ensure the file is written immediately
+            file:flush()
             file:close()
           else
             vim.notify("Failed to save theme", vim.log.levels.ERROR)
             return
           end
-          -- Clear existing highlights
-          vim.cmd("highlight clear")
-          
+
+          -- Initialize theme-specific settings
           if selection.value:match("^tokyonight") then
-            -- Reinitialize TokyoNight to trigger on_colors
             require("tokyonight").setup({
-              style = selection.value:gsub("tokyonight%-", ""), -- Extract "night" or "day"
+              style = selection.value:gsub("tokyonight%-", ""),
               transparent = false,
               styles = {
                 comments = { italic = false },
                 keywords = { italic = false },
-                functions = {},
-                variables = {},
                 sidebars = "transparent",
                 floats = "transparent",
               },
               on_colors = function(colors)
-                -- Read the .theme file to confirm the theme
-                local theme_file = vim.fn.stdpath("config") .. "/.theme"
-                local selected_theme = "night" -- Default fallback
-                if vim.fn.filereadable(theme_file) == 1 then
-                  local f = io.open(theme_file, "r")
-                  if f then
-                    selected_theme = f:read("*a"):gsub("%s+", "")
-                    f:close()
-                  end
-                end
-                print("Applying theme: " .. selected_theme) -- Debug output
-                if selected_theme == "tokyonight-night" then
+                if selection.value == "tokyonight-night" then
                   colors.bg = "#000000"
                   colors.bg_dark = "#000000"
-                end
-                if selected_theme == "tokyonight-day" then
-                  -- colors.bg = "#292522"
-                  -- colors.bg_dark = "#292522"
+                elseif selection.value == "tokyonight-day" then
+                  colors.bg = "#e1e2e7"
+                  colors.bg_dark = "#e1e2e7"
                 end
               end,
               on_highlights = function(highlights, colors)
-                highlights.StatusLine = { fg = "#7aa2f7", bg = "#000000", bold = true }
-                highlights.StatusLineNC = { fg = "#7aa2f7", bg = "#444444" }
+                if selection.value == "tokyonight-day" then
+                  highlights.StatusLine = { fg = "#677dc5", bg = "#e1e2e7", bold = true }
+                elseif selection.value == "tokyonight-night" then
+                  highlights.StatusLine = { fg = "#7aa2f7", bg = "#000000", bold = true }
+                  highlights.StatusLineNC = { fg = "#7aa2f7", bg = "#444444" }
+                end
                 highlights.LineNr = { fg = "#323e63" }
                 highlights.LineNrAbove = { fg = "#323e63" }
                 highlights.LineNrBelow = { fg = "#323e63" }
@@ -138,43 +136,30 @@ local function select_theme()
               end,
             })
           elseif selection.value:match("^rose%-pine") then
-            -- Reinitialize Rose Pine with the selected variant and disable transparency for background
             local variant_map = {
               ["rose-pine-main"] = "main",
               ["rose-pine-moon"] = "moon",
               ["rose-pine-dawn"] = "dawn",
             }
-            local rp_variant = variant_map[selection.value] or "main"
             require("rose-pine").setup({
-              variant = rp_variant,
-              styles = {
-                transparency = false,  -- Set to false to apply background color
-                italic = false,
-              },
-              -- Add any other customizations here if needed
+              variant = variant_map[selection.value] or "main",
+              styles = { transparency = false, italic = false },
             })
           elseif selection.value == "vscode" then
-            -- Reinitialize vscode with desired options
             require("vscode").setup({
-              transparent = false,  -- Adjust as needed
+              transparent = false,
               italic_comments = false,
               disable_nvimtree_bg = true,
-              -- For light mode: add style = 'light' or vim.o.background = 'light' here
             })
           elseif selection.value:match("^cyberdream") then
-            -- Reinitialize cyberdream with desired options
-            local cd_variant = "default"
-            if selection.value == "cyberdream-light" then
-              cd_variant = "light"
-            end
+            local cd_variant = selection.value == "cyberdream-light" and "light" or "default"
             require("cyberdream").setup({
-              variant = cd_variant,  -- "default" for dark, "light" for light
-              transparent = false,  -- Set to false to apply background color
+              variant = cd_variant,
+              transparent = false,
               italic_comments = false,
-              -- Add any other customizations here if needed (e.g., hide_fillchars = true, borderless_pickers = true)
             })
           end
-          
+
           -- Apply the selected theme
           local status, err = pcall(vim.cmd, "colorscheme " .. selection.value)
           if not status then

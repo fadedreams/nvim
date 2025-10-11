@@ -6,12 +6,10 @@ return {
     opts = {
       style = "night", -- Default style
       light_style = "day",
-      transparent = true,
+      transparent = false, -- Set to false to ensure background is applied
       styles = {
         comments = { italic = false },
         keywords = { italic = false },
-        -- functions = {},
-        -- variables = {},
         sidebars = "transparent",
         floats = "transparent",
       },
@@ -26,20 +24,31 @@ return {
             file:close()
           end
         end
-        -- print("TokyoNight on_colors: " .. selected_theme) -- Debug output
         if selected_theme == "tokyonight-night" then
           colors.bg = "#000000"
           colors.bg_dark = "#000000"
-        end
-        if selected_theme == "tokyonight-day" then
-          print("inside day") -- Debug output
-          colors.bg = "#d3d5db"
-          colors.bg_dark = "#d3d5db"
+        elseif selected_theme == "tokyonight-day" then
+          colors.bg = "#e1e2e7" -- Light background for tokyonight-day
+          colors.bg_dark = "#e1e2e7"
         end
       end,
       on_highlights = function(highlights, colors)
-        highlights.StatusLine = { fg = "#7aa2f7", bg = "#000000", bold = true }
-        -- highlights.StatusLineNC = { fg = "#7aa2f7", bg = "#444444" }
+        -- Read the theme again to ensure consistency
+        local theme_file = vim.fn.stdpath("config") .. "/.theme"
+        local selected_theme = "night" -- Default fallback
+        if vim.fn.filereadable(theme_file) == 1 then
+          local file = io.open(theme_file, "r")
+          if file then
+            selected_theme = file:read("*a"):gsub("%s+", "")
+            file:close()
+          end
+        end
+        if selected_theme == "tokyonight-day" then
+          highlights.StatusLine = { fg = "#677dc5", bg = "#e1e2e7", bold = true }
+        elseif selected_theme == "tokyonight-night" then
+          highlights.StatusLine = { fg = "#7aa2f7", bg = "#000000", bold = true }
+          highlights.StatusLineNC = { fg = "#7aa2f7", bg = "#444444" }
+        end
         highlights.LineNr = { fg = "#323e63" }
         highlights.LineNrAbove = { fg = "#323e63" }
         highlights.LineNrBelow = { fg = "#323e63" }
