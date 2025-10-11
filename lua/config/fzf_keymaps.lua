@@ -63,14 +63,14 @@ local exclude_dirs = {
 	"venv", -- Python virtual environment
 	".venv", -- Alternative Python virtual environment
 	"__pycache__", -- Python bytecode cache
-	"_build", -- Lua build directories (e.g., for LuaRocks)
-	"dist", -- Common build output directory
-	"build", -- Common build output directory
-	"vendor", -- Dependency directories (e.g., PHP Composer, Go)
-	"target", -- Rust build directory
+	-- "_build", -- Lua build directories (e.g., for LuaRocks)
+	-- "dist", -- Common build output directory
+	-- "build", -- Common build output directory
+	-- "vendor", -- Dependency directories (e.g., PHP Composer, Go)
+	-- "target", -- Rust build directory
 	".git", -- Git repository directory
 	".cache", -- Cache directories
-	"coverage", -- Test coverage reports
+	-- "coverage", -- Test coverage reports
 	"tmp", -- Temporary directories
 	"temp", -- Alternative temporary directories
 	".pytest_cache", -- Pytest cache
@@ -82,15 +82,15 @@ local exclude_dirs = {
 	".nuxt", -- Nuxt.js build directory
 	".bundle", -- Ruby Bundler
 	"log", -- Ruby/Rails, Laravel, Django logs
-	"public/packs", -- Rails Webpacker
-	"public/assets", -- Rails asset pipeline
-	"storage", -- Laravel storage
-	"cache", -- General cache (Django, PHP)
-	"migrations", -- Django migrations
+	-- "public/packs", -- Rails Webpacker
+	-- "public/assets", -- Rails asset pipeline
+	-- "storage", -- Laravel storage
+	-- "cache", -- General cache (Django, PHP)
+	-- "migrations", -- Django migrations
 	"vendor/bin", -- PHP Composer binaries
 	".cargo", -- Rust package manager
-	"go/pkg", -- Go package directory
-	"go/bin", -- Go binary directory
+	-- "go/pkg", -- Go package directory
+	-- "go/bin", -- Go binary directory
 }
 
 -- Function to build the exclude options for fd commands

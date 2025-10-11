@@ -78,18 +78,18 @@ vim.opt.wildignore:append({
   "__pycache__/*",          -- Python cache directories
   "*/venv/*",               -- Python virtual environments
   "*/.venv/*",              -- Alternative Python virtual environment naming
-  "*/target/*",             -- Rust build output
-  "*/.cargo/registry/*",    -- Rust package registry
+  -- "*/target/*",             -- Rust build output
+  -- "*/.cargo/registry/*",    -- Rust package registry
   "*.o",                    -- Go and C/C++ object files
   -- "*/vendor/*",             -- Go vendored dependencies, also used in PHP (Composer)
   "*.lock",                 -- Lock files for various package managers (e.g., Cargo.lock, composer.lock, Gemfile.lock)
   "*.sock",                 -- Unix socket files (common in Ruby/Rails)
-  "*/tmp/*",                -- Temporary directories (common in Ruby/Rails and others)
+  -- "*/tmp/*",                -- Temporary directories (common in Ruby/Rails and others)
   -- "*.gem",                  -- Ruby gem files
   "*/.bundle/*",            -- Ruby Bundler dependencies
-  "*/vendor/bundle/*",      -- Ruby Bundler vendored dependencies
+  -- "*/vendor/bundle/*",      -- Ruby Bundler vendored dependencies
   -- "*.php~",                 -- PHP backup files
-  "*/storage/logs/*",       -- Laravel (PHP) log files
+  -- "*/storage/logs/*",       -- Laravel (PHP) log files
   "*/.idea/*",              -- PHPStorm/IDE files (common in PHP development)
   "*.luac",                 -- Lua compiled files
   "*/_build/*",             -- Lua build directories (e.g., for LuaRocks)
