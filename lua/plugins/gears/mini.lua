@@ -93,33 +93,36 @@ return {
     end,
   },
   {
-    "echasnovski/mini.diff",
-    version = "*",
-    event = "VeryLazy",
+    "echasnovski/mini.diff", -- Inline and better diff over the default
     config = function()
-      require("mini.diff").setup({
-        view = {
-          -- style = "sign", -- Options: 'sign', 'number', or 'both'
-          -- signs = { add = "+", change = "~", delete = "-" }, -- Custom signs for diff
-        },
-      })
-      vim.keymap.set("n", "<leader>df", MiniDiff.toggle_overlay)
-    end,
-  },
-  {
-    "nvim-mini/mini.icons",
-    event = "VeryLazy",  -- Optional: Lazy-load on events to improve startup time
-    version = false, -- Use the main branch (development version)
-    -- version = "*", -- Uncomment to use the stable branch
-    config = function()
-      require("mini.icons").setup({
-        -- Optional: Customize configuration (defaults shown in the document)
-        style = "glyph", -- Use 'ascii' if your terminal/font doesn't support glyph icons
-        -- Add custom configurations if needed, e.g.:
-        -- filetype = { python = { icon = "🐍", color = "#3572A5" } },
+      local diff = require("mini.diff")
+      diff.setup({
+        -- Disabled by default
+        source = diff.gen_source.none(),
       })
     end,
   },
+  -- {
+  --   {
+  --     "echasnovski/mini.diff",
+  --     version = false, -- Use the latest version
+  --     config = function()
+  --       require("mini.diff").setup({
+  --         -- Optional: Customize mini.diff settings here
+  --         view = {
+  --           style = "sign", -- Use sign column for diff indicators
+  --           signs = { add = "+", change = "~", delete = "-" },
+  --         },
+  --       })
+  --
+  --       -- Keybinding to toggle mini.diff
+  --       vim.keymap.set("n", "<leader>df", function()
+  --         require("mini.diff").toggle()
+  --         vim.notify("Toggled mini.diff " .. (require("mini.diff").enabled and "on" or "off"))
+  --       end, { desc = "Toggle mini.diff" })
+  --     end,
+  --   },
+  -- },
   -- {
   --   "echasnovski/mini.notify",
   --   event = "VeryLazy", -- Load lazily on most events

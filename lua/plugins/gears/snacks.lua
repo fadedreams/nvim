@@ -30,7 +30,8 @@ return {
     end,
     ---@type snacks.Config
     opts = {
-        bigfile = {enabled = true, size = 1048576},
+        -- bigfile = {enabled = true, size = 1048576},
+        bigfile = {enabled = true, size = 2097152},
         quickfile = {enabled = true},
         gitbrowse = {enabled = true},
         dashboard = {enabled = false},

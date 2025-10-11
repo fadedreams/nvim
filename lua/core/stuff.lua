@@ -4,6 +4,11 @@ vim.keymap.set({"n", "v", "i"}, "<C-q><C-x>", function()
     require("fzf-lua").complete_path()
 end, {silent = true, desc = "Fuzzy complete path"})
 
+-- vim.keymap.set('n', '<leader>df', function()
+--   local file = vim.fn.input('Enter file to diff: ', 'file2.txt')
+--   vim.cmd('vert diffsplit ' .. vim.fn.fnameescape(file))
+-- end, { desc = 'Vertical diff split with input file' })
+
 --browser
 vim.keymap.set("n", "<leader>ub", function()
     vim.ui.input({prompt = "Search: "}, function(input)

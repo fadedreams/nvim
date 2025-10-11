@@ -69,14 +69,14 @@ return {
     },
     keys = {
       {
-        '<leader>C',
+        '<leader>K',
         function()
           require('mini.files').open(vim.api.nvim_buf_get_name(0), true)
         end,
         desc = '[e]xplorer (directory of open file)',
       },
       {
-        '<leader>c',
+        '<leader>k',
         function()
           require('mini.files').open(vim.loop.cwd(), true)
         end,
@@ -202,10 +202,10 @@ return {
           map_split(buf_id, '<C-s>', 'belowright horizontal')
           map_split(buf_id, '<C-v>', 'belowright vertical')
           -- New yank keymaps
-          vim.keymap.set('n', '<localleader>r', function()
+          vim.keymap.set('n', '<localleader>y', function()
             yank_path(':p:.', minifiles.get_fs_entry().path)
           end, { buffer = buf_id, desc = 'Yank relative path' })
-          vim.keymap.set('n', '<localleader>p', function()
+          vim.keymap.set('n', '<localleader>Y', function()
             yank_path(':p', minifiles.get_fs_entry().path)
           end, { buffer = buf_id, desc = 'Yank absolute path' })
           vim.keymap.set('n', '<localleader>n', function()

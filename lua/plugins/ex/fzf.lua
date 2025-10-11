@@ -103,7 +103,23 @@ return {
 	keys = {
 		-- Disable the keymap to grep files
 		{ "<leader>ss", false },
-		{ "<leader>,", false },
+		-- { "<leader>,", false },
+    {
+      "<leader>dff",
+      function()
+        require('fzf-lua').files({
+          cmd = 'fd --type f --hidden',
+          actions = {
+            ['default'] = function(selected)
+              if selected[1] then
+                vim.cmd('vert diffsplit ' .. vim.fn.fnameescape(selected[1]))
+              end
+            end,
+          },
+        })
+      end,
+      desc = "Vertical diff split with file selected via fzf-lua",
+    },
 		-- {
 		--   "<leader>fs",
 		--   function()

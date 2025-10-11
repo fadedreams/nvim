@@ -176,7 +176,13 @@ local function lineinfo()
 end
 
 local M = {}
-
+local function charcount()
+    if vim.bo.filetype == "alpha" then
+        return ""
+    end
+    local chars = vim.fn.wordcount().chars
+    return string.format("%d", chars)
+end
 ---@param type "active" | "inactive" | "help" | "oil"
 function M.setup(type)
     if type == "active" then
@@ -190,6 +196,7 @@ function M.setup(type)
             lsp(),
             filetype(),
             lineinfo(),
+            charcount(),
         })
     end
 

@@ -206,6 +206,49 @@ return {
         noremap = true,
         silent = true,
         desc = "File Browser",
+      },
+      {
+        "<leader>dfv",
+        function()
+          require("telescope").extensions.file_browser.file_browser({
+            path = vim.fn.expand("%:p:h"), -- Start in current file's directory
+            select_buffer = true,          -- Pre-select current buffer
+            hidden = true,                 -- Show hidden files
+            respect_gitignore = false,     -- Ignore .gitignore
+            layout_strategy = "vertical",
+            layout_config = {
+              vertical = {
+                height = 0.9,
+                width = 0.6,
+                preview_cutoff = 40,
+                prompt_position = "top",
+                mirror = true,
+                preview_height = 0.6
+              }
+            },
+            attach_mappings = function(_, map)
+              -- Override default action to run :vert diffsplit on selected file
+              map('i', '<CR>', function(prompt_bufnr)
+                local selection = require("telescope.actions.state").get_selected_entry()
+                require("telescope.actions").close(prompt_bufnr)
+                if selection then
+                  vim.cmd('vert diffsplit ' .. vim.fn.fnameescape(selection.path))
+                end
+              end)
+              map('n', 'l', function(prompt_bufnr)
+                local selection = require("telescope.actions.state").get_selected_entry()
+                require("telescope.actions").close(prompt_bufnr)
+                if selection then
+                  vim.cmd('vert diffsplit ' .. vim.fn.fnameescape(selection.path))
+                end
+              end)
+              return true
+            end,
+          })
+        end,
+        noremap = true,
+        silent = true,
+        desc = "Vertical diff split with Telescope file browser",
       }
 
     },
