@@ -129,8 +129,8 @@ local function select_theme()
                 end
               end,
               on_highlights = function(highlights, colors)
-                -- highlights.StatusLine = { fg = "#7aa2f7", bg = "#000000", bold = true }
-                -- highlights.StatusLineNC = { fg = "#7aa2f7", bg = "#444444" }
+                highlights.StatusLine = { fg = "#7aa2f7", bg = "#000000", bold = true }
+                highlights.StatusLineNC = { fg = "#7aa2f7", bg = "#444444" }
                 highlights.LineNr = { fg = "#323e63" }
                 highlights.LineNrAbove = { fg = "#323e63" }
                 highlights.LineNrBelow = { fg = "#323e63" }

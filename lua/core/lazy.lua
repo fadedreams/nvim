@@ -20,12 +20,11 @@ require("lazy").setup({
 		{import = "plugins.colorscheme"},
     {import = "plugins.ui"},
 
-    {import = "plugins.editor"},
     {import = "plugins.ex"},
-    {import = "plugins.ai"},
 		{import = "plugins.gears"},
 		{import = "plugins.git"},
     {import = "plugins.lsp"},
+    {import = "plugins.ai"},
 
 
 	},
