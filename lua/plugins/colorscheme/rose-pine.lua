@@ -9,6 +9,10 @@ return {
           transparency = false, -- Set to false to apply background color
           italic = false,
         },
+        -- highlight_groups = {
+        --     TreesitterContext = { bg = 'NONE' },
+        --     TreesitterContextLineNumber = { bg = 'NONE' },
+        -- },
       })
     end,
   },

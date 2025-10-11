@@ -91,13 +91,13 @@ local exclude_dirs = {
 	".next", -- Next.js build directory
 	".nuxt", -- Nuxt.js build directory
 	".bundle", -- Ruby Bundler
-	"log", -- Ruby/Rails, Laravel, Django logs
+	-- "log", -- Ruby/Rails, Laravel, Django logs
 	-- "public/packs", -- Rails Webpacker
 	-- "public/assets", -- Rails asset pipeline
 	-- "storage", -- Laravel storage
 	-- "cache", -- General cache (Django, PHP)
 	-- "migrations", -- Django migrations
-	"vendor/bin", -- PHP Composer binaries
+	-- "vendor/bin", -- PHP Composer binaries
 	".cargo", -- Rust package manager
 	-- "go/pkg", -- Go package directory
 	-- "go/bin", -- Go binary directory

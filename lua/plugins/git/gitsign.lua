@@ -76,7 +76,7 @@ return{
             gs.blame_line({ full = true })
           end, { desc = desc("Blame line") })
 
-          map("n", "<leader>ht", gs.toggle_current_line_blame, { desc = desc("Toggle current line blame") }) -- New keymap to toggle current_line_blame
+          map("n", "<leader>gb", gs.toggle_current_line_blame, { desc = desc("Toggle [G]it [B]lame") }) -- New keymap to toggle current_line_blame
 
 
           -- Text object
