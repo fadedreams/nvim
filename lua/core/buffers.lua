@@ -8,8 +8,9 @@ vim.keymap.set('n', '<leader>bd', '<cmd>bd<CR>', { desc = 'Close buffer and wind
 vim.keymap.set('n', '<leader>bn', '<cmd>ene<CR>', { desc = 'New buffer and window' })
 vim.keymap.set('n', '<leader>bv', '<cmd>vnew<CR>', { desc = 'New buffer in vsplit' })
 
-vim.keymap.set('n', '[b', '<cmd>:bprevious<CR>', { desc = 'Previous buffer' })
-vim.keymap.set('n', ']b', '<cmd>:bnext<CR>', { desc = 'Next buffer' })
+vim.keymap.set('n', '<C-[>', '<cmd>:bprevious<CR>', { desc = 'Previous buffer' })
+vim.keymap.set('n', '<C-]>', '<cmd>:bnext<CR>', { desc = 'Next buffer' })
+vim.keymap.set('n', '<C-\\>', ':bd<CR>', { noremap = true, silent = true })
 
 -- vim.keymap.set("n", "<c-k>", ":bnext<CR>", { noremap = true, silent = true })
 -- vim.keymap.set("n", "<c-j>", ":bprevious<CR>", { noremap = true, silent = true })

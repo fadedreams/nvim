@@ -1,3 +1,4 @@
+
 -- Credit goes where credit is due. This is a modified version of:
 -- https://nuxsh.is-a.dev/blog/custom-nvim-statusline.html
 local modes = {
@@ -24,13 +25,10 @@ local modes = {
     ["nt"] = "[Terminal]",
 }
 
--- Define highlight groups for each mode with specified colors
-vim.api.nvim_set_hl(0, "StatusLineAccent", { fg = "#7aa2f7", bg = "#1a1b26" }) -- Normal
-vim.api.nvim_set_hl(0, "StatusLineInsertAccent", { fg = "#0db9d7", bg = "#1a1b26" }) -- Insert
-vim.api.nvim_set_hl(0, "StatusLineVisualAccent", { fg = "#a487d8", bg = "#1a1b26" }) -- Visual
-vim.api.nvim_set_hl(0, "StatusLineReplaceAccent", { fg = "#d94a4a", bg = "#1a1b26" }) -- Replace
-vim.api.nvim_set_hl(0, "StatusLineCmdLineAccent", { fg = "#e0af68", bg = "#1a1b26" }) -- Command
-vim.api.nvim_set_hl(0, "StatusLineInactiveAccent", { fg = "#565f89", bg = "#1a1b26" }) -- Inactive
+local function mode()
+    local current_mode = vim.api.nvim_get_mode().mode
+    return string.format("%s", modes[current_mode])
+end
 
 local function update_mode_colors()
     local current_mode = vim.api.nvim_get_mode().mode
@@ -46,9 +44,7 @@ local function update_mode_colors()
     elseif current_mode == "c" then
         mode_color = "%#StatusLineCmdLineAccent#"
     elseif current_mode == "t" or current_mode == "nt" then
-        mode_color = "%#StatusLineInactiveAccent#"
-    else
-        mode_color = "%#StatusLineInactiveAccent#"
+        mode_color = "%#StatusLineTerminalAccent#"
     end
     return mode_color
 end
@@ -72,6 +68,13 @@ local function filepath()
     return string.format("%%<%s/", fpath)
 end
 
+-- local function filename()
+--     local fname = vim.fn.expand("%:t")
+--     if fname == "" then
+--         return ""
+--     end
+--     return fname .. " "
+-- end
 local function filename()
     local fname = vim.fn.fnamemodify(vim.fn.expand("%:p"), ":~:.")
     if fname == "" or fname == "." then
@@ -181,12 +184,11 @@ local function charcount()
     local chars = vim.fn.wordcount().chars
     return string.format("%d", chars)
 end
-
 ---@param type "active" | "inactive" | "help" | "oil"
 function M.setup(type)
     if type == "active" then
         return table.concat({
-            update_mode_colors(),
+            "%#Statusline#",
             filename(),
             modified(),
             vcs(),
@@ -201,7 +203,7 @@ function M.setup(type)
 
     if type == "inactive" then
         return table.concat({
-            "%#StatusLineInactiveAccent#",
+            "%#Statusline#",
             filename(),
             modified(),
         })
@@ -209,7 +211,7 @@ function M.setup(type)
 
     if type == "help" then
         return table.concat({
-            update_mode_colors(),
+            "%#Statusline#",
             filename(),
             "%#Statusline#",
             "%=%#StatusLineExtra#",
@@ -220,8 +222,7 @@ function M.setup(type)
 
     if type == "oil" then
         return table.concat({
-            update_mode_colors(),
-            "  ",
+            "%#Statusline#  ",
             filepath(),
         })
     end

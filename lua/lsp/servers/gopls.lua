@@ -22,57 +22,59 @@
 --   desc = 'Run goimports on save in Golang files',
 -- })
 
-return {
-	settings = {
-		gopls = {
-			analyses = {
-				fillstruct = false,
-				unusedparams = true, -- Enable unused parameters analysis
-				shadow = true, -- Enable shadow variable analysis
-				unusedwrite = true, -- Enable unused write analysis
-				useany = true, -- Enable use of interface{} analysis
-			},
-			staticcheck = true, -- Enable staticcheck for additional diagnostics
-			completeFunctionCalls = true, -- Complete function calls with parameter names (changed from false to true for more features)
-			gofumpt = true,
-			completeUnimported = true,
-			usePlaceholders = true, -- Use placeholders in completion snippets
-			matcher = "Fuzzy", -- Use fuzzy matching for completions
-			experimentalPostfixCompletions = true, -- Enable postfix completions
-			hints = { -- Enable inlay hints
-				assignVariableTypes = true,
-				compositeLiteralFields = true,
-				compositeLiteralTypes = true,
-				constantValues = true,
-				functionTypeParameters = true,
-				parameterNames = true,
-				rangeVariableTypes = true,
-			},
-			codelens = { -- Enable various code lenses
-				generate = true,
-				gc_details = true,
-				regenerate_cgo = true,
-				tidy = true,
-				upgrade_dependency = true,
-				vendor = true,
-			},
-			diagnosticsDelay = "500ms", -- Delay diagnostics to reduce CPU usage
-		},
-	},
-}
 
 -- https://github.com/golang/tools/blob/master/gopls/doc/settings.md
 -- --original g
+return {
+    settings = {
+        gopls = {
+            analyses = {
+                fillstruct = false,
+            },
+            -- staticcheck = true, -- https://github.com/golang/tools/blob/master/gopls/doc/settings.md#staticcheck-bool
+            completeFunctionCalls = false,
+            gofumpt = true,
+            completeUnimported = true,
+        },
+    },
+}
+
 -- return {
---     settings = {
---         gopls = {
---             analyses = {
---                 fillstruct = false,
---             },
---             -- staticcheck = true, -- https://github.com/golang/tools/blob/master/gopls/doc/settings.md#staticcheck-bool
---             completeFunctionCalls = false,
---             gofumpt = true,
---             completeUnimported = true,
---         },
---     },
+-- 	settings = {
+-- 		gopls = {
+-- 			analyses = {
+-- 				fillstruct = false,
+-- 				unusedparams = true, -- Enable unused parameters analysis
+-- 				shadow = true, -- Enable shadow variable analysis
+-- 				unusedwrite = true, -- Enable unused write analysis
+-- 				useany = true, -- Enable use of interface{} analysis
+-- 			},
+-- 			staticcheck = true, -- Enable staticcheck for additional diagnostics
+-- 			completeFunctionCalls = true, -- Complete function calls with parameter names (changed from false to true for more features)
+-- 			gofumpt = true,
+-- 			completeUnimported = true,
+-- 			usePlaceholders = true, -- Use placeholders in completion snippets
+-- 			matcher = "Fuzzy", -- Use fuzzy matching for completions
+-- 			experimentalPostfixCompletions = true, -- Enable postfix completions
+-- 			hints = { -- Enable inlay hints
+-- 				assignVariableTypes = true,
+-- 				compositeLiteralFields = true,
+-- 				compositeLiteralTypes = true,
+-- 				constantValues = true,
+-- 				functionTypeParameters = true,
+-- 				parameterNames = true,
+-- 				rangeVariableTypes = true,
+-- 			},
+-- 			codelens = { -- Enable various code lenses
+-- 				generate = true,
+-- 				gc_details = true,
+-- 				regenerate_cgo = true,
+-- 				tidy = true,
+-- 				upgrade_dependency = true,
+-- 				vendor = true,
+-- 			},
+-- 			diagnosticsDelay = "500ms", -- Delay diagnostics to reduce CPU usage
+-- 		},
+-- 	},
 -- }
+

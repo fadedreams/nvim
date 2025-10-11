@@ -1,31 +1,31 @@
 return {
+  -- {
+  --   "nvim-mini/mini.pairs",
+  --   version = false,
+  --   event = { "VeryLazy", "InsertEnter" }, -- Load on InsertEnter for faster activation
+  --   opts = {
+  --     modes = { insert = true, command = true, terminal = false },
+  --     mappings = {
+  --       ['{'] = { action = 'open', pair = '{}', neigh_pattern = '[^\\].', register = { cr = false } }, -- Explicitly enable { }
+  --     },
+  --     skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
+  --     skip_ts = { "string" },
+  --     skip_unbalanced = true,
+  --     markdown = true,
+  --   },
+  --   config = function()
+  --     require('mini.pairs').setup()
+  --     vim.keymap.set("i", '"', '"', { noremap = true })
+  --     vim.keymap.set("i", "'", "'", { noremap = true })
+  --   end,
+  -- },
   {
-    "echasnovski/mini.pairs",
-    version = false,
-    event = { "VeryLazy", "InsertEnter" }, -- Load on InsertEnter for faster activation
-    opts = {
-      modes = { insert = true, command = true, terminal = false },
-      mappings = {
-        ['{'] = { action = 'open', pair = '{}', neigh_pattern = '[^\\].', register = { cr = false } }, -- Explicitly enable { }
-      },
-      skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
-      skip_ts = { "string" },
-      skip_unbalanced = true,
-      markdown = true,
-    },
-    config = function()
-      require('mini.pairs').setup()
-      vim.keymap.set("i", '"', '"', { noremap = true })
-      vim.keymap.set("i", "'", "'", { noremap = true })
-    end,
-  },
-  {
-    "echasnovski/mini.ai",
+    "nvim-mini/mini.ai",
     event = "BufRead",
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       "nvim-treesitter/nvim-treesitter-textobjects",
-      "echasnovski/mini.extra",
+      "nvim-mini/mini.extra",
     },
     opts = function()
       local ai = require("mini.ai")
@@ -59,7 +59,7 @@ return {
     end,
   },
   {
-    "echasnovski/mini.indentscope",
+    "nvim-mini/mini.indentscope",
     event = { "VeryLazy", "BufReadPre", "BufNewFile" }, -- Load on buffer read or new file
     opts = {
       symbol = "│", -- Customize the indent line symbol
@@ -93,7 +93,7 @@ return {
     end,
   },
   {
-    "echasnovski/mini.diff", -- Inline and better diff over the default
+    "nvim-mini/mini.diff", -- Inline and better diff over the default
     config = function()
       local diff = require("mini.diff")
       diff.setup({
@@ -104,7 +104,7 @@ return {
   },
   -- {
   --   {
-  --     "echasnovski/mini.diff",
+  --     "nvim-mini/mini.diff",
   --     version = false, -- Use the latest version
   --     config = function()
   --       require("mini.diff").setup({
@@ -124,7 +124,7 @@ return {
   --   },
   -- },
   -- {
-  --   "echasnovski/mini.notify",
+  --   "nvim-mini/mini.notify",
   --   event = "VeryLazy", -- Load lazily on most events
   --   config = function()
   --     require("mini.notify").setup({

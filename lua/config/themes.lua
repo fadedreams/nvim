@@ -44,10 +44,13 @@ end
 local function select_theme()
   local themes = {
     "tokyonight-night",
+    "nvcode",
     "gruvbox-material",
     "melange",
+    "forest_stream",
     "miasma",
     "oldworld",
+    "rusty",
     "tokyonight-day",
     "dawnfox",
     "catppuccin-latte",
@@ -75,6 +78,8 @@ local function select_theme()
     "nightfly",
     "cyberdream-light",
     "kanagawa-lotus",
+    "sunset_cloud", --boo
+    -- "radioactive_waste", --boo
   }
   require("telescope.pickers").new({}, {
     prompt_title = "Select Theme",
