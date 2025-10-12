@@ -41,10 +41,10 @@ vim.keymap.set("v", ">", ">gv")
 
 -- Esc
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
-vim.keymap.set({ "i", "s" }, "<Esc>", function()
-	vim.snippet.stop()
-	return "<Esc>"
-end, { expr = true, desc = "Close snippet session" })
+-- vim.keymap.set({ "i", "s" }, "<Esc>", function()
+-- 	vim.snippet.stop()
+-- 	return "<Esc>"
+-- end, { expr = true, desc = "Close snippet session" })
 
 --save
 vim.keymap.set("n", "<a-w>", ":w<CR>", { noremap = true })
@@ -145,7 +145,7 @@ vim.keymap.set("i", "<c-a>", "<Home>")
 vim.keymap.set("i", "<c-e>", "<End>")
 
 vim.keymap.set("i", "<a-u>", "<C-u>", { desc = "Delete to start of line" }) -- Ctrl-u to delete to start of line
-vim.keymap.set("i", "<a-k>", "<C-o>d$", { desc = "Delete to end of line" })
+-- vim.keymap.set("i", "<a-k>", "<C-o>d$", { desc = "Delete to end of line" })
 vim.keymap.set("i", "<a-d>", "<C-o>db", { desc = "Delete word backward" })
 vim.keymap.set("i", "<a-x>", "<Del>", { desc = "Delete character under cursor" })
 

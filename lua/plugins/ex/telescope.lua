@@ -208,7 +208,7 @@ return {
         desc = "File Browser",
       },
       {
-        "<leader>dfv",
+        "<leader>dt",
         function()
           require("telescope").extensions.file_browser.file_browser({
             path = vim.fn.expand("%:p:h"), -- Start in current file's directory
@@ -248,7 +248,7 @@ return {
         end,
         noremap = true,
         silent = true,
-        desc = "Vertical diff split with Telescope file browser",
+        desc = "[D]iff [T]elescope",
       }
 
     },

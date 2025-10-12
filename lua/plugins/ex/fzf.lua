@@ -215,7 +215,7 @@ return {
 		{ "<leader>ss", false },
 		-- { "<leader>,", false },
     {
-      "<leader>dff",
+      "<leader>df",
       function()
         require('fzf-lua').files({
           cmd = 'fd --type f --hidden --ignore-case ' .. combined_opts,
@@ -228,7 +228,7 @@ return {
           },
         })
       end,
-      desc = "Vertical diff split with file selected via fzf-lua",
+      desc = "[D]iff [S]plit",
     },
 		-- {
 		--   "<leader>fs",

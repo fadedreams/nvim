@@ -46,6 +46,7 @@ return {
         if selected_theme == "tokyonight-day" then
           highlights.StatusLine = { fg = "#677dc5", bg = "#e1e2e7", bold = true }
         elseif selected_theme == "tokyonight-night" then
+          print(selected_theme)
           highlights.StatusLine = { fg = "#7aa2f7", bg = "#000000", bold = true }
           highlights.StatusLineNC = { fg = "#7aa2f7", bg = "#444444" }
         end

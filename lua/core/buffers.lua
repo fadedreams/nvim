@@ -1,4 +1,4 @@
-vim.keymap.set("n", "<Leader>bb", "<C-^>", { noremap = true, silent = true, desc = "Toggle last buffer" })
+-- vim.keymap.set("n", "<Leader>bb", "<C-^>", { noremap = true, silent = true, desc = "Toggle last buffer" })
 -- vim.keymap.set("n", "<leader>bdo", ":%bd|e#|bd#<CR>", { noremap = true, silent = true, desc = "delete other buffers" })
 -- vim.keymap.set("n", "<leader>bda", ":%bd<CR>", { noremap = true, silent = true, desc = "delete all buffers" })
 vim.keymap.set('n', '<c-;>', '<cmd>bd<CR>', { desc = 'kill' })
@@ -8,9 +8,13 @@ vim.keymap.set('n', '<leader>bd', '<cmd>bd<CR>', { desc = 'Close buffer and wind
 vim.keymap.set('n', '<leader>bn', '<cmd>ene<CR>', { desc = 'New buffer and window' })
 vim.keymap.set('n', '<leader>bv', '<cmd>vnew<CR>', { desc = 'New buffer in vsplit' })
 
-vim.keymap.set('n', '<C-[>', '<cmd>:bprevious<CR>', { desc = 'Previous buffer' })
-vim.keymap.set('n', '<C-]>', '<cmd>:bnext<CR>', { desc = 'Next buffer' })
-vim.keymap.set('n', '<C-\\>', ':bd<CR>', { noremap = true, silent = true })
+-- vim.keymap.set('n', '<C-[>', '<cmd>:bprevious<CR>', { desc = 'Previous buffer' })
+-- vim.keymap.set('n', '<C-]>', '<cmd>:bnext<CR>', { desc = 'Next buffer' })
+vim.keymap.set('n', '<C-h>', ':bprevious<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-l>', ':bnext<CR>', { noremap = true, silent = true })
+vim.keymap.set("i", "<C-h>", "<Esc>:bnext<CR>", { noremap = true, silent = true })
+vim.keymap.set("i", "<C-l>", "<Esc>:bprevious<CR>", { noremap = true, silent = true })
+-- vim.keymap.set('n', '<C-\\>', ':bd<CR>', { noremap = true, silent = true })
 
 -- vim.keymap.set("n", "<c-k>", ":bnext<CR>", { noremap = true, silent = true })
 -- vim.keymap.set("n", "<c-j>", ":bprevious<CR>", { noremap = true, silent = true })
