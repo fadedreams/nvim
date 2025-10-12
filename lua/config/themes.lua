@@ -23,6 +23,27 @@ if vim.fn.filereadable(theme_file) == 1 then
             sidebars = "transparent",
             floats = "transparent",
           },
+          on_colors = function(colors)
+            if saved_theme == "tokyonight-night" then
+              colors.bg = "#000000"
+              colors.bg_dark = "#000000"
+            elseif saved_theme == "tokyonight-day" then
+              colors.bg = "#e1e2e7"
+              colors.bg_dark = "#e1e2e7"
+            end
+          end,
+          on_highlights = function(highlights, colors)
+            if saved_theme == "tokyonight-night" then
+              highlights.StatusLine = { fg = "#7aa2f7", bg = "#000000", bold = true }
+              highlights.StatusLineNC = { fg = "#7aa2f7", bg = "#444444" }
+            elseif saved_theme == "tokyonight-day" then
+              highlights.StatusLine = { fg = "#677dc5", bg = "#e1e2e7", bold = true }
+            end
+            highlights.LineNr = { fg = "#323e63" }
+            highlights.LineNrAbove = { fg = "#323e63" }
+            highlights.LineNrBelow = { fg = "#323e63" }
+            highlights.CursorLineNr = { fg = "#1572a3", bold = true }
+          end,
         })
       elseif saved_theme:match("^rose%-pine") then
         local variant_map = {
@@ -39,7 +60,6 @@ if vim.fn.filereadable(theme_file) == 1 then
     end
   end
 end
-
 -- Function to select a theme using Telescope and save the choice
 local function select_theme()
   local themes = {
@@ -110,7 +130,6 @@ local function select_theme()
             vim.notify("Failed to save theme", vim.log.levels.ERROR)
             return
           end
-
           -- Initialize theme-specific settings
           if selection.value:match("^tokyonight") then
             require("tokyonight").setup({
@@ -168,7 +187,6 @@ local function select_theme()
               italic_comments = false,
             })
           end
-
           -- Apply the selected theme
           local status, err = pcall(vim.cmd, "colorscheme " .. selection.value)
           if not status then
@@ -188,6 +206,5 @@ local function select_theme()
     },
   }):find()
 end
-
 -- Set keybinding to select theme with Telescope
 vim.keymap.set("n", "<leader>i9", select_theme, { desc = "Select Theme", noremap = true, silent = true })
