@@ -1,6 +1,6 @@
 return {
     "vague2k/vague.nvim",
-    --lazy = true,
+    lazy = true,
     event = "VeryLazy", 
     ---@type VagueColorscheme.Config
     opts = {

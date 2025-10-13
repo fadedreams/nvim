@@ -1,4 +1,11 @@
 
+-- vim.keymap.set('n', '<leader>ut', '<cmd>silent !tmux neww tmux-sessionizer<CR>', { noremap = true, silent = true })
+-- vim.keymap.set('n', '<leader>ut', ':silent !tmux -b ~/.local/bin/tmux-sessionizer<CR>', { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>ut", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+-- vim.keymap.set("n", "<leader>9", "<cmd>silent !tmux neww tmux-sessionizer -s 0<CR>")
+-- vim.keymap.set("n", "<leader>8", "<cmd>silent !tmux neww tmux-sessionizer -s 1<CR>")
+-- vim.keymap.set("n", "<leader>7", "<cmd>silent !tmux neww tmux-sessionizer -s 2<CR>")
+-- vim.keymap.set("n", "<leader>6", "<cmd>silent !tmux neww tmux-sessionizer -s 3<CR>")
 --fzf
 vim.keymap.set({"n", "v", "i"}, "<C-q><C-x>", function()
     require("fzf-lua").complete_path()

@@ -1,7 +1,7 @@
 return {
   {
     "rose-pine/neovim",
-    lazy = false, -- Load immediately
+    lazy = true, -- Load immediately
     config = function()
       require("rose-pine").setup({
         variant = "main", -- Default variant

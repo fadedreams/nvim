@@ -1,7 +1,7 @@
 return {
   {
     "scottmckendry/cyberdream.nvim",
-    lazy = false, -- Load immediately to ensure theme is available
+    lazy = true, -- Load immediately to ensure theme is available
     priority = 1000, -- High priority to ensure theme loads first
     config = function()
       require("cyberdream").setup({

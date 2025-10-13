@@ -27,14 +27,19 @@ if vim.fn.filereadable(theme_file) == 1 then
             if saved_theme == "tokyonight-night" then
               colors.bg = "#000000"
               colors.bg_dark = "#000000"
+            elseif saved_theme == "tokyonight-moon" then
+              colors.bg = "#151617" -- Set background color for tokyonight-moon
+              colors.bg_dark = "#151617" -- Set background color for tokyonight-moon
             elseif saved_theme == "tokyonight-day" then
               colors.bg = "#e1e2e7"
-              colors.bg_dark = "#e1e2e7"
             end
           end,
           on_highlights = function(highlights, colors)
             if saved_theme == "tokyonight-night" then
               highlights.StatusLine = { fg = "#7aa2f7", bg = "#000000", bold = true }
+              highlights.StatusLineNC = { fg = "#7aa2f7", bg = "#444444" }
+            elseif saved_theme == "tokyonight-moon" then
+              highlights.StatusLine = { fg = "#7aa2f7", bg = "#151617", bold = true }
               highlights.StatusLineNC = { fg = "#7aa2f7", bg = "#444444" }
             elseif saved_theme == "tokyonight-day" then
               highlights.StatusLine = { fg = "#677dc5", bg = "#e1e2e7", bold = true }
@@ -148,6 +153,9 @@ local function select_theme()
                 elseif selection.value == "tokyonight-day" then
                   colors.bg = "#e1e2e7"
                   colors.bg_dark = "#e1e2e7"
+                elseif selection.value == "tokyonight-moon" then
+                  colors.bg = "#151617" -- Set background color for tokyonight-moon
+                  colors.bg_dark = "#151617" -- Set background color for tokyonight-moon
                 end
               end,
               on_highlights = function(highlights, colors)
@@ -155,6 +163,9 @@ local function select_theme()
                   highlights.StatusLine = { fg = "#677dc5", bg = "#e1e2e7", bold = true }
                 elseif selection.value == "tokyonight-night" then
                   highlights.StatusLine = { fg = "#7aa2f7", bg = "#000000", bold = true }
+                  highlights.StatusLineNC = { fg = "#7aa2f7", bg = "#444444" }
+                elseif selection.value == "tokyonight-moon" then
+                  highlights.StatusLine = { fg = "#7aa2f7", bg = "#151617", bold = true }
                   highlights.StatusLineNC = { fg = "#7aa2f7", bg = "#444444" }
                 end
                 highlights.LineNr = { fg = "#323e63" }

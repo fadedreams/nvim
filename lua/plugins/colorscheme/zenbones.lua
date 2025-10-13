@@ -31,7 +31,7 @@ return {
     "mcchrish/zenbones.nvim",
     dependencies = {"rktjmp/lush.nvim"},
     event = "VeryLazy", 
-    --lazy = true,
+    lazy = true,
     config = function()
         vim.g.zenbones_italic_comments = false
         vim.g.rosebones_italic_comments = false

@@ -1,5 +1,5 @@
 return{
   "rockerBOO/boo-colorscheme-nvim",
-  lazy = false,
+  lazy = true,
   priority = 1000,
 }

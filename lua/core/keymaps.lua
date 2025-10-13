@@ -82,7 +82,7 @@ vim.keymap.set("n", "<leader>ib", function()
     local active_bg = vim.o.background
     if active_bg == "dark" then
         vim.o.background = "light"
-        -- vim.cmd("highlight Normal guibg=#7f8fa8")
+        vim.cmd("highlight Normal guibg=#2f3438")
     else
         vim.o.background = "dark"
         -- vim.cmd("highlight Normal guibg=NONE") -- Reset to default dark background

@@ -1,5 +1,5 @@
 return{
   "christianchiarulli/nvcode-color-schemes.vim",
-  lazy = false,
+  lazy = true,
   priority = 1000,
 }
