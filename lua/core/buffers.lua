@@ -4,7 +4,6 @@
 vim.keymap.set('n', '<c-;>', '<cmd>bd<CR>', { desc = 'kill' })
 vim.keymap.set("i", "<c-;>", "<Esc>:bdelete<CR>", { desc = 'kill' })
 vim.keymap.set('n', '<leader>bb', '<cmd>bd<CR>', { desc = '[D]elete Buffer' })
-vim.keymap.set('n', '<C-\\>', '<cmd>bd<CR>', { desc = '[D]elete Buffer' })
 vim.keymap.set('n', '<leader>bn', '<cmd>ene<CR>', { desc = '[N]ew [B]uffer' })
 vim.keymap.set('n', '<leader>bv', '<cmd>vnew<CR>', { desc = '[N]ew [B]uffer [V]split' })
 vim.keymap.set('n', '<leader>bs', '<cmd>new<CR>', { desc = '[N]ew [B]uffer [H]orizontal' })
