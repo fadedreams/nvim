@@ -23,7 +23,7 @@ vim.keymap.set("n", "<leader>ub", function()
             Utils.browse.query_browser(input)
         end
     end)
-end, {desc = "Browse on the web"})
+end, {desc = "[B]rowse web"})
 
 
 -- Open terminal below

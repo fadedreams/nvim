@@ -43,6 +43,7 @@ return {
       ui_select = { enable = false }, -- Disable ui_select for simplicity
     },
     keys = {
+      --TODO: namue
       { "<leader>ss", ":Namu symbols<cr>", desc = "Jump to LSP symbol", silent = true },
       { "<leader>sw", ":Namu workspace<cr>", desc = "LSP Symbols - Workspace", silent = true },
       { "<leader>sd", ":Namu workspace<cr>", desc = "LSP Symbols - Workspace", silent = true },
