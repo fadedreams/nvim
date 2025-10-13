@@ -11,6 +11,7 @@ return {
 			{ "<leader>l", group = "Lngs" },
 			{ "<leader>lh", group = "PHP" },
 			{ "<leader>lp", group = "Py" },
+			{ "<leader>lr", group = "Rust" },
 			{ "<leader>lc", group = "Cpp" },
 			{ "<leader>lj", group = "Java" },
 			{ "<leader>u", group = "Utils" },

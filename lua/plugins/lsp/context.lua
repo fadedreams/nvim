@@ -8,7 +8,6 @@ return{
       trim_scope = 'outer',  -- Trim from outer context
       mode = 'cursor',  -- Use cursor line for context
     })
-    --TODO: change k
       vim.keymap.set("n", "<c-k>", function()
         require("treesitter-context").go_to_context(vim.v.count1)
       end, { silent = true, desc = "Go to parent context" })

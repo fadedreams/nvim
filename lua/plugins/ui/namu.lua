@@ -44,9 +44,8 @@ return {
     },
     keys = {
       --TODO: namue
-      { "<leader>ss", ":Namu symbols<cr>", desc = "Jump to LSP symbol", silent = true },
-      { "<leader>sw", ":Namu workspace<cr>", desc = "LSP Symbols - Workspace", silent = true },
-      { "<leader>sd", ":Namu workspace<cr>", desc = "LSP Symbols - Workspace", silent = true },
+      { "<leader>ss", ":Namu symbols<cr>", desc = "[N]amu Jump to LSP symbol", silent = true },
+      { "<leader>sw", ":Namu workspace<cr>", desc = "[N]amu LSP Symbols - Workspace", silent = true },
     },
   },
 }

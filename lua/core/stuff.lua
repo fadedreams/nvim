@@ -1,7 +1,7 @@
 
 -- vim.keymap.set('n', '<leader>ut', '<cmd>silent !tmux neww tmux-sessionizer<CR>', { noremap = true, silent = true })
 -- vim.keymap.set('n', '<leader>ut', ':silent !tmux -b ~/.local/bin/tmux-sessionizer<CR>', { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>ut", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+vim.keymap.set("n", "<leader>uu", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 -- vim.keymap.set("n", "<leader>9", "<cmd>silent !tmux neww tmux-sessionizer -s 0<CR>")
 -- vim.keymap.set("n", "<leader>8", "<cmd>silent !tmux neww tmux-sessionizer -s 1<CR>")
 -- vim.keymap.set("n", "<leader>7", "<cmd>silent !tmux neww tmux-sessionizer -s 2<CR>")
@@ -62,7 +62,7 @@ local function delete_swap_files()
 end
 
 -- Uses normal mode (n), is non-recursive (noremap), and silent
-vim.keymap.set("n", "<leader>ds", delete_swap_files, {
+vim.keymap.set("n", "<leader>ud", delete_swap_files, {
 	noremap = true,
 	silent = true,
 	desc = "[D]elete [S]wap", -- Description for which-key

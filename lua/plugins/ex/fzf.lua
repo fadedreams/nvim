@@ -186,7 +186,6 @@ return {
 					-- ["ctrl-k"] = "up",   -- Move selection up
 				},
 				builtin = {
-					--TODO: test
 					["<C-d>"] = "preview-page-down",
 					["<C-u>"] = "preview-page-up",
 					["<S-down>"] = "preview-page-down",

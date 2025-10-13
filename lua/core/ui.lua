@@ -5,8 +5,8 @@
 -- vim.api.nvim_set_hl(0, "StatusLineNC", {bg = "NONE"})
 
 -- Split window
-vim.keymap.set("n", "<leader>ss", ":split<Return><C-w>w", {desc = "Split window horizontally"}) -- Horizontal
-vim.keymap.set("n", "<leader>sv", ":vsplit<Return><C-w>w", {desc = "Split window vertically"})  -- Vertical
+vim.keymap.set("n", "<leader>ws", ":split<Return><C-w>w", {desc = "[W]indow [H]orizontally"}) -- Horizontal
+vim.keymap.set("n", "<leader>wv", ":vsplit<Return><C-w>w", {desc = "[W]indow [V]ertically"})  -- Vertical
 
 
 -- Resize splits

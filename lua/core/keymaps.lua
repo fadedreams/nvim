@@ -131,7 +131,7 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>wc", "<cmd>set ff=unix <cr>", { desc = "Convert to Unix format" })
 
 -- Save without formatting
-vim.keymap.set("n", "<leader>ws", ":noautocmd w<CR>", { desc = "Save without formatting" })
+vim.keymap.set("n", "<leader>wf", ":noautocmd w<CR>", { desc = "Save without formatting" })
 
 --rsi
 vim.keymap.set("i", "<a-h>", "<Left>", { noremap = true, silent = true })

@@ -131,9 +131,9 @@ end
 -- Map the function to <leader>sc (sc for search clipboard)
 vim.keymap.set(
 	"n",
-	"<leader>sy",
+	"<leader>ys",
 	":lua search_clipboard_text()<CR>",
-	{ noremap = true, silent = true, desc = "Search system clipboard text" }
+	{ noremap = true, silent = true, desc = "[Y]ank [S]earch" }
 )
 
 

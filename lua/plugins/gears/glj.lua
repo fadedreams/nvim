@@ -6,7 +6,6 @@ return {
         event = "VeryLazy",
         config = function()
             require("timber").setup({
-                
             })
         end,
     },
