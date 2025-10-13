@@ -138,7 +138,7 @@ vim.keymap.set(
 
 
 -- Search and replace the word under cursor in whole buffer
-vim.keymap.set("n", "<leader>rs", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], {
+vim.keymap.set("n", "<leader>rr", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], {
 	desc = "Replace word under cursor", -- Description for which-key
 	noremap = true,
 	silent = true,
@@ -187,7 +187,7 @@ function visual_search_replace()
 end
 
 -- Map the function to a keybinding in visual mode
-vim.api.nvim_set_keymap("v", "<leader>rr", ":lua visual_search_replace()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<weader>rs", ":lua visual_search_replace()<CR>", { noremap = true, silent = true })
 
 -- visual_search
 function visual_search()

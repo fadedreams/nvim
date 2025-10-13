@@ -23,7 +23,7 @@ return {
 	},
 	keys = {
 		{
-			"<leader>ro",
+			"<leader>lro",
 			function()
 				vim.lsp.buf.code_action({
 					apply = true,
@@ -36,7 +36,7 @@ return {
 			desc = desc("Organize imports"),
 		},
 		{
-			"<leader>rf",
+			"<leader>lrf",
 			function()
 				vim.lsp.buf.code_action({
 					apply = true,
@@ -49,7 +49,7 @@ return {
 			desc = desc("Fix all"),
 		},
 		{
-			"<leader>rr",
+			"<leader>lrr",
 			function()
 				vim.lsp.buf.code_action({
 					apply = true,
@@ -62,7 +62,7 @@ return {
 			desc = desc("Run quickfix"),
 		},
 		{
-			"<leader>rc",
+			"<leader>lrc",
 			function()
 				vim.lsp.buf.execute_command({ command = "rust-analyzer.runSingle", arguments = {} })
 			end,
