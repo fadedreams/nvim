@@ -10,8 +10,8 @@ vim.keymap.set("x", "D", '"_d', { desc = "delete forever" })
 vim.keymap.set("n", "x", '"_x', { noremap = true }) -- delete
 
 -- Navigation
-vim.keymap.set("n", "gh", "_", { desc = "Go to start of line" })
-vim.keymap.set("n", "gl", "$", { desc = "Go to end of line" })
+-- vim.keymap.set("n", "gh", "_", { desc = "Go to start of line" })
+-- vim.keymap.set("n", "gl", "$", { desc = "Go to end of line" })
 
 -- Jumping pages keeps cursor in the middle
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Jump page down" })

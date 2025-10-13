@@ -188,20 +188,29 @@ vim.keymap.set("n", "<leader>fg", function()
 	})
 end, { noremap = true, silent = true, desc = "Grep with query" })
 
+vim.keymap.set("n", "<leader>qs", function()
+	fzf.grep_quickfix({ rg_opts = "--hidden --no-ignore --ignore-case " .. combined_opts }) -- Use combined_opts
+end, { noremap = true, silent = true, desc = "Quickfix" })
+
+-- vim.keymap.set("n", "<leader>qS", function()
+-- 	fzf.grep_quickfix({ rg_opts = "--hidden --no-ignore " .. combined_opts }) -- Use combined_opts
+-- end, { noremap = true, silent = true, desc = "Quickfix Case sensitive" })
+
 vim.keymap.set("n", "<leader>n", function()
 	fzf.live_grep({ rg_opts = "--hidden --no-ignore --ignore-case " .. combined_opts }) -- Use combined_opts
-end, { noremap = true, silent = true, desc = "Ignore case" })
+end, { noremap = true, silent = true, desc = "Live grep" })
+
 
 vim.keymap.set("n", "<leader>fn", function()
 	fzf.live_grep({ rg_opts = "--hidden --no-ignore " .. combined_opts }) -- Use combined_opts
-end, { noremap = true, silent = true, desc = "Case sensitive" })
+end, { noremap = true, silent = true, desc = "Live grep Case sensitive" })
 
-vim.keymap.set("n", "<leader>bn", function()
+vim.keymap.set("n", "<leader>N", function()
 	fzf.lgrep_curbuf({
 		prompt = "Buffer Grep> ",
 		rg_opts = "--column --line-number --no-heading --color=always --smart-case",
 	})
-end, { noremap = true, silent = true, desc = "Live grep current buffer" })
+end, { noremap = true, silent = true, desc = "Live grep Current buffer" })
 
 local function get_visual_selection()
 	local selection = table.concat(vim.fn.getregion(vim.fn.getpos("v"), vim.fn.getpos(".")), "\n")
@@ -212,6 +221,10 @@ end
 vim.keymap.set("n", "<leader>m", function()
 	fzf.resume()
 end, { noremap = true, silent = true, desc = "Resume previous live grep search" })
+
+
+vim.keymap.set("n", "<F2>", fzf.spell_suggest, { desc = "Spell suggestions" })
+vim.keymap.set("n", "<leader>i8", fzf.colorschemes, { desc = "Colorschemes" })
 
 vim.keymap.set("n", "<leader>fh", fzf.search_history, { desc = "Search history" })
 vim.keymap.set("n", "<leader>'", fzf.registers, { desc = "Registers" })
@@ -244,9 +257,9 @@ vim.keymap.set("n", "<leader>f1", function()
 		search = word,
 		rg_opts = "--line-number --hidden " .. combined_opts, -- Use combined_opts
 		cwd = vim.loop.cwd(),
-		prompt = "Case sensitive",
+		prompt = "",
 	})
-end, { noremap = true, silent = true, desc = "Search text" })
+end, { noremap = true, silent = true, desc = "Case sensitive" })
 
 vim.keymap.set("n", "<leader>1", function()
 	local word = vim.fn.expand("<cword>")

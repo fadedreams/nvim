@@ -157,6 +157,8 @@ return {
 				-- git_icons = true,
 				hidden = true,
 				follow = true,
+
+
 				-- Or, you could use the default fzf command like this:
 				-- cmd = "fzf --hidden --preview 'cat {}' --border --layout=horizontal"
 			},
@@ -168,13 +170,18 @@ return {
 			keymap = {
 				fzf = {
 					["ctrl-q"] = action.file_sel_to_qf, -- Send selected files to quickfix
+					["ctrl-Q"] = action.file_sel_to_ll, -- Send selected files to quickfix
+
 					["ctrl-j"] = "down",
 					["ctrl-k"] = "up",
 					-- ["ctrl-m"] = "accept", --<CR>
 					["ctrl-a"] = "first", -- Go to the first item in the list
 					["ctrl-e"] = "last", -- Go to the last item in the list
-					["ctrl-h"] = "close",
+
+					-- ["ctrl-h"] = "close",
 					["ctrl-l"] = "accept",
+
+          ["alt-a"]       = "toggle-all",
 					-- ["ctrl-j"] = "down", -- Move selection down
 					-- ["ctrl-k"] = "up",   -- Move selection up
 				},
@@ -184,6 +191,7 @@ return {
 					["<C-u>"] = "preview-page-up",
 					["<S-down>"] = "preview-page-down",
 					["<S-up>"] = "preview-page-up",
+
 				},
 			},
 			buffers = {

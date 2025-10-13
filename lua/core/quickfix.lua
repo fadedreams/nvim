@@ -13,15 +13,14 @@ vim.keymap.set("n", "q", ":cclose<CR>", { noremap = true, silent = true, desc = 
 vim.keymap.set("n", "<leader>qf", ":cfirst<CR>", { noremap = true, silent = true, desc = "cfirst" }) -- First item
 vim.keymap.set("n", "<leader>ql", ":clast<CR>", { noremap = true, silent = true, desc = "clast" }) -- Last item
 -- vim.keymap.set('n', '<leader>qr', ':crewind<CR>', { noremap = true, silent = true, desc="crewind"  }) -- Rewind to first item
-vim.keymap.set("n", "<leader>qo", ":colder<CR>", { noremap = true, silent = true, desc = "colder" }) -- Older quickfix list
-vim.keymap.set("n", "<leader>qn", ":cnewer<CR>", { noremap = true, silent = true, desc = "cnewer" }) -- Newer quickfix list
+-- vim.keymap.set("n", "<leader>qo", ":colder<CR>", { noremap = true, silent = true, desc = "colder" }) -- Older quickfix list
+-- vim.keymap.set("n", "<leader>qn", ":cnewer<CR>", { noremap = true, silent = true, desc = "cnewer" }) -- Newer quickfix list
 vim.keymap.set("n", "<leader>qc", ":cexpr []<CR>", { noremap = true, silent = true, desc = "Clear quickfix list" }) -- Clear quickfix list
 vim.keymap.set("n", "<leader>qi", ":cfile ", { noremap = true, silent = true, desc = "cfile" }) -- Load from file
 vim.keymap.set("n", "<leader>qb", ":cbuffer<CR>", { noremap = true, silent = true, desc = "cbuffer" }) -- Load from buffer
 vim.keymap.set("n", "<leader>qc", ":cc ", { noremap = true, silent = true, desc = "Go to specific item" }) -- Go to specific item
 vim.keymap.set("n", "<leader>qd", ":cfdo ", { noremap = true, silent = true, desc = "Batch command" }) -- Batch command
-vim.keymap.set("n", "<leader>qs", ":cdo ", { noremap = true, silent = true, desc = "cdo" }) -- Batch command
-vim.keymap.set("n", "<leader>qC", ":cexpr []<CR>", { noremap = true, silent = true, desc = "Clear quickfix list" })
+vim.keymap.set("n", "<leader>qC", ":cdo ", { noremap = true, silent = true, desc = "cdo" }) -- Batch command -- conflict with search fzf(leader>qs)
 
 -- Keybindings for setting makeprg for different languages/tools
 -- vim.keymap.set('n', '<leader>qtp', ":set makeprg=pytest\\ --tb=line<CR>", { noremap = true, silent = true }) -- Python (pytest)
