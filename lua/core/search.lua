@@ -187,7 +187,7 @@ function visual_search_replace()
 end
 
 -- Map the function to a keybinding in visual mode
-vim.api.nvim_set_keymap("v", "<weader>rs", ":lua visual_search_replace()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<leader>rr", ":lua visual_search_replace()<CR>", { noremap = true, silent = true })
 
 -- visual_search
 function visual_search()
