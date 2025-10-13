@@ -17,6 +17,7 @@ return {
         return vim.startswith(name, ".DS_Store")
       end,
     },
+
     keymaps = {
       ["<C-h>"] = false, -- Split
       ["<C-l>"] = false, -- refresh

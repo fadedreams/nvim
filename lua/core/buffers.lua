@@ -3,7 +3,7 @@
 -- vim.keymap.set("n", "<leader>bda", ":%bd<CR>", { noremap = true, silent = true, desc = "delete all buffers" })
 vim.keymap.set('n', '<c-;>', '<cmd>bd<CR>', { desc = 'kill' })
 vim.keymap.set("i", "<c-;>", "<Esc>:bdelete<CR>", { desc = 'kill' })
-vim.keymap.set('n', '<leader>bd', '<cmd>bd<CR>', { desc = 'Close buffer and window' })
+vim.keymap.set('n', '<leader>bb', '<cmd>bd<CR>', { desc = 'Close buffer and window' })
 
 vim.keymap.set('n', '<leader>bn', '<cmd>ene<CR>', { desc = 'New buffer and window' })
 vim.keymap.set('n', '<leader>bv', '<cmd>vnew<CR>', { desc = 'New buffer in vsplit' })
@@ -50,6 +50,7 @@ function ReopenLastBuffer()
 end
 
 vim.keymap.set("n", "<c-'>", ":lua ReopenLastBuffer()<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>bl", ":lua ReopenLastBuffer()<CR>", { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>bx", ":!chmod +x %<CR>", {desc = "Make file executable"})
 

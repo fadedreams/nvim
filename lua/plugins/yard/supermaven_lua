@@ -1,0 +1,38 @@
+return  {
+    "supermaven-inc/supermaven-nvim",
+    config = function()
+        require("supermaven-nvim").setup({
+            keymaps = {
+                accept_suggestion = "<a-a>",
+                clear_suggestion = "<a-c>",
+                accept_word = "<a-c>",
+                -- clear_word = "<a-x>",
+                -- next_word = "<a-k>",
+                -- prev_word = "<a-j>",
+                next_suggestion = "<a-]>",
+                prev_suggestion = "<a-[>",
+                -- next_word_end = "<a-f>",
+                -- prev_word_end = "<a-b>",
+                -- next_word_start = "<a-a>",
+                -- prev_word_start = "<a-d>",
+                -- select_word = "<a-s>",
+                -- select_word_end = "<a-e>",
+                -- select_word_start = "<a-s>",
+                -- toggle_ignore = "<a-x>",
+                -- toggle_ignore_all = "<a-o>",
+                -- toggle_ignore_filetype = "<a-t>",
+            },
+            -- ignore_filetypes = { cpp = true }, -- or { "cpp", }
+            color = {
+                suggestion_color = "#ffffff",
+                cterm = 244,
+            },
+            log_level = "info", -- set to "off" to disable logging completely
+            disable_inline_completion = false, -- disables inline completion for use with cmp
+            disable_keymaps = false, -- disables built in keymaps for more manual control
+            condition = function()
+                return false
+            end -- condition to check for stopping supermaven, `true` means to stop supermaven when the condition is true.
+        })
+    end,
+}

@@ -59,7 +59,7 @@ return {
         local snacks = require("snacks")
         return {
             {
-                "<leader>.",
+                "<leader>>",
                 function()
                     vim.ui.input({
                         prompt = "Enter scratch buffer title: ",
@@ -119,7 +119,7 @@ return {
             --     snacks.picker.explorer,
             --     desc = desc("[U]til [T]ree"),
             -- },
-            { "<leader>b.", function() snacks.scratch() end, desc = "[N]ew [S]cratch" },
+            { "<leader>.", function() snacks.scratch() end, desc = "[N]ew [S]cratch" },
             { "<C-\\>", function() snacks.scratch() end, desc = "[N]ew [S]cratch" },
         }
     end,

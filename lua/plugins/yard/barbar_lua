@@ -1,0 +1,20 @@
+return {
+  "romgrk/barbar.nvim",
+  keys = {
+    -- Alt + Shift + arrows to swap buffers
+    { "<a-j>", "<Cmd>BufferMovePrevious<CR>", desc = "Move buffer left", mode = "n" },
+    { "<a-k>", "<Cmd>BufferMoveNext<CR>", desc = "Move buffer right", mode = "n" },
+    -- Or use Ctrl for a different feel (uncomment to enable)
+    -- { "<C-Left>", "<Cmd>BufferMovePrevious<CR>", desc = "Move buffer left", mode = "n" },
+    -- { "<C-Right>", "<Cmd>BufferMoveNext<CR>", desc = "Move buffer right", mode = "n" },
+    -- Alt + arrows for buffer navigation
+    { "<C-j>", "<Cmd>BufferPrevious<CR>", desc = "Previous buffer", mode = "n" },
+    { "<C-k>", "<Cmd>BufferNext<CR>", desc = "Next buffer", mode = "n" },
+    -- { "<C-h>", "<Cmd>BufferClose<CR>", desc = "Close buffer", mode = "n" },
+    -- Toggle barbar visibility
+    { "<leader>tb", function()
+      vim.opt.showtabline = vim.opt.showtabline:get() == 0 and 2 or 0
+    end,
+      desc = "Toggle barbar", mode = "n" },
+  },
+}

@@ -3,7 +3,7 @@ require("core.options")     -- Global options (after base, before keymaps/plugin
 require("core.lazy")        -- Plugin manager setup (after options, as some opts like rtp are set here; plugins load lazily)
 require("core.autocommands") -- Autocommands (early, but after options/lazy; handles highlights, statusline, etc.)
 require("core.keymaps")     -- Core keymaps (after base/options for leader/opts; before specialized ones)
--- require("core.buffers")     -- Buffer management keymaps/functions (builds on core keymaps)
+require("core.buffers")     -- Buffer management keymaps/functions (builds on core keymaps)
 require("core.ui")          -- UI keymaps and highlights (after options)
 require("core.stuff")       -- Miscellaneous keymaps (e.g., git, fzf; after core)
 require("core.yank")        -- Yank functions and keymaps (after core keymaps)
