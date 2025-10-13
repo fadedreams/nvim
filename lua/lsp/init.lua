@@ -21,6 +21,7 @@ local function on_attach(client, bufnr)
 	keyset("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, "Workspace Add Folder")
 	keyset("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, "Workspace Remove Folder")
 	keyset("n", "K", vim.lsp.buf.hover, "Hover Documentation")
+
 	-- keyset("n", "gr", vim.lsp.buf.references, "Go to references")
 	keyset("n", "gd", Utils.cmd_center(vim.lsp.buf.definition), "Go to Definition")
 	keyset("n", "gD", Utils.cmd_center(vim.lsp.buf.declaration), "Go to Declaration")
@@ -31,6 +32,7 @@ local function on_attach(client, bufnr)
 		vim.cmd(":belowright split | lua vim.lsp.buf.definition()")
 	end, "Go to definition (vsplit)")
 	keyset("n", "gi", Utils.cmd_center(vim.lsp.buf.implementation), "Go to Implementation")
+
 	keyset("n", "[d", Utils.cmd_center(vim.diagnostic.goto_prev), "Previous diagnostic")
 	keyset("n", "]d", Utils.cmd_center(vim.diagnostic.goto_next), "Next diagnostic")
 	keyset(
@@ -50,7 +52,7 @@ local function on_attach(client, bufnr)
 		"Next diagnostic (error)"
 	)
 	keyset("n", "gk", vim.diagnostic.open_float, "Open diagnostics")
-	keyset("n", "iv", function()
+	keyset("n", "gK", function()
 		virtual_lines_enabled = not virtual_lines_enabled
 		if virtual_lines_enabled then
 			vim.diagnostic.config({ virtual_lines = true, virtual_text = false })
@@ -59,7 +61,7 @@ local function on_attach(client, bufnr)
 		end
 	end, "Toggle virtual lines")
 
-	keyset("n", "<leader>ih", function()
+	keyset("n", "<leader>il", function()
 		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }))
 	end, "Toggle inlay hints")
 
@@ -68,9 +70,9 @@ local function on_attach(client, bufnr)
 			return
 		end
 		require("conform").format({ lsp_format = Utils.lsp.get_lsp_format(bufnr), async = true })
-	end, "Format current buffer with LSP")
+	end, "[F]ormat [L]SP")
 
-	keyset("n", "<leader>lc", function()
+	keyset("n", "<leader>uc", function()
 		Utils.fzf.inspect_lsp_client()
 	end, "Inspect LSP Client configuration")
 
