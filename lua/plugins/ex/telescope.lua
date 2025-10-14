@@ -4,14 +4,59 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       local actions = require("telescope.actions")
+      local action_state = require("telescope.actions.state")
 
+      -- Custom action to delete all buffers except selected ones
+      local function delete_all_except_selected(prompt_bufnr)
+        local picker = action_state.get_current_picker(prompt_bufnr)
+        if not picker then
+          vim.notify("Error: No active picker found", vim.log.levels.ERROR)
+          return
+        end
+
+        local selected_entries = picker:get_multi_selection()
+        -- If no entries are selected, use the current highlighted entry
+        if #selected_entries == 0 then
+          local current_entry = action_state.get_selected_entry()
+          if current_entry then
+            selected_entries = { current_entry }
+          else
+            vim.notify("Error: No buffer selected", vim.log.levels.ERROR)
+            actions.close(prompt_bufnr)
+            return
+          end
+        end
+
+        -- Get list of buffer numbers to keep
+        local keep_bufnrs = {}
+        for _, entry in ipairs(selected_entries) do
+          if entry.bufnr and vim.api.nvim_buf_is_valid(entry.bufnr) then
+            table.insert(keep_bufnrs, entry.bufnr)
+          end
+        end
+
+        -- Get all open buffers
+        local all_buffers = vim.api.nvim_list_bufs()
+        for _, bufnr in ipairs(all_buffers) do
+          -- Check if buffer is valid and not in the keep list
+          if vim.api.nvim_buf_is_valid(bufnr) and not vim.tbl_contains(keep_bufnrs, bufnr) then
+            -- Only delete loaded buffers that are not modified
+            if vim.api.nvim_buf_is_loaded(bufnr) and not vim.api.nvim_buf_get_option(bufnr, "modified") then
+              pcall(vim.api.nvim_buf_delete, bufnr, { force = false })
+            elseif vim.api.nvim_buf_get_option(bufnr, "modified") then
+              vim.notify("Skipping modified buffer: " .. vim.api.nvim_buf_get_name(bufnr), vim.log.levels.WARN)
+            end
+          end
+        end
+
+        -- Close Telescope
+        actions.close(prompt_bufnr)
+      end
 
       require("telescope").setup({
         defaults = {
-          -- Default Telescope settings (if needed)
           layout_strategy = "horizontal",
-          sorting_strategy = "ascending", --show results on top
-          -- path_display = { shorten = { len = 3, exclude = { 1, -1, -2 } } },
+          sorting_strategy = "ascending",
           layout_config = {
             horizontal = {
               height = 0.9,
@@ -28,29 +73,28 @@ return {
             }
           },
           mappings = {
-            i = { -- Insert mode
+            i = {
               ["<C-j>"] = actions.move_selection_next,
               ["<C-k>"] = actions.move_selection_previous,
-              ["<C-;>"] = actions.close, -- Close Telescope in insert mode
-              ["<a-q>"] = actions.send_selected_to_qflist, -- Selected only
-              ["<c-q>"] = actions.send_to_qflist, -- All, no auto-open
+              ["<C-;>"] = actions.close,
+              ["<a-q>"] = actions.send_selected_to_qflist,
+              ["<c-q>"] = actions.send_to_qflist,
               ["<CR>"] = actions.select_default,
               ["<C-l>"] = actions.select_default,
-              ["<C-a>"] = actions.move_to_top, -- Move to top of list
-              ["<C-e>"] = actions.move_to_bottom, -- Move to bottom of list
-              ["<C-v>"] = actions.select_vertical, -- Open in vertical split
-              ["<C-s>"] = actions.select_horizontal, -- Open in horizontal split
-
+              ["<C-a>"] = actions.move_to_top,
+              ["<C-e>"] = actions.move_to_bottom,
+              ["<C-v>"] = actions.select_vertical,
+              ["<C-s>"] = actions.select_horizontal,
             },
-            n = { -- Normal mode
+            n = {
               ["<C-j>"] = actions.move_selection_next,
               ["<C-k>"] = actions.move_selection_previous,
-              ["<C-;>"] = actions.close, -- Close Telescope in normal mode
-              ["<a-q>"] = actions.send_selected_to_qflist, -- Selected only
-              ["<c-q>"] = actions.send_to_qflist, -- All, no auto-open
+              ["<C-;>"] = actions.close,
+              ["<a-q>"] = actions.send_selected_to_qflist,
+              ["<c-q>"] = actions.send_to_qflist,
               ["l"] = actions.select_default,
-              ["<C-v>"] = actions.select_vertical, -- Open in vertical split
-              ["<C-s>"] = actions.select_horizontal, -- Open in horizontal split
+              ["<C-v>"] = actions.select_vertical,
+              ["<C-s>"] = actions.select_horizontal,
             },
           },
         },
@@ -61,6 +105,10 @@ return {
             mappings = {
               i = {
                 ["<c-x>"] = "delete_buffer",
+                ["<C-d>"] = delete_all_except_selected, -- New keymap to delete all except selected
+              },
+              n = {
+                ["<C-d>"] = delete_all_except_selected, -- Normal mode keymap
               },
             },
           },
@@ -75,8 +123,8 @@ return {
             layout_strategy = "horizontal",
             layout_config = {
               horizontal = {
-                height = 0.90, -- Near-fullscreen
-                width = 0.90,  -- Near-fullscreen
+                height = 0.90,
+                width = 0.90,
                 preview_cutoff = 120,
                 prompt_position = "top",
                 preview_width = 0.6
@@ -88,37 +136,21 @@ return {
         silent = true,
         desc = "Find Functions (LSP)",
       },
-      -- {
-      -- "<leader>ft",
-      -- "<cmd>TodoTelescope layout_config={height=0.9,width=0.9}<cr>",
-      -- noremap = true,
-      -- silent = true,
-      -- desc = "TODO",
-      -- },
-      -- {
-      --   "<leader>fb",
-      --   function()
-      --     require("telescope.builtin").buffers()
-      --   end,
-      --   desc = "Find Buffers",
-      -- },
       {
         "<c-j>",
         function()
           require("telescope.builtin").buffers({
-            sort_mru = true, -- Sort buffers by most recently used
-            -- sorting_strategy = "ascending",
+            sort_mru = true,
             layout_strategy = "horizontal",
             layout_config = {
               horizontal = {
-                height = 0.6, -- Smaller height
-                width = 0.6,  -- Smaller width
+                height = 0.6,
+                width = 0.6,
                 preview_cutoff = 120,
                 prompt_position = "top",
                 preview_width = 0.6
               }
             },
-            -- winblend = 10, -- Transparency
           })
         end,
         desc = "Find Buffers",
@@ -127,19 +159,17 @@ return {
         "<leader>j",
         function()
           require("telescope.builtin").buffers({
-            sort_mru = true, -- Sort buffers by most recently used
-            -- sorting_strategy = "ascending",
+            sort_mru = true,
             layout_strategy = "horizontal",
             layout_config = {
               horizontal = {
-                height = 0.6, -- Smaller height
-                width = 0.6,  -- Smaller width
+                height = 0.6,
+                width = 0.6,
                 preview_cutoff = 120,
                 prompt_position = "top",
                 preview_width = 0.6
               }
             },
-            -- winblend = 10, -- Transparency
           })
         end,
         desc = "Find Buffers",
@@ -157,39 +187,14 @@ return {
       require("telescope").load_extension("file_browser")
     end,
     keys = {
-
-      -- {
-      --   "<leader>v",
-      --   function()
-      --     require("telescope").extensions.file_browser.file_browser({
-      --       path = vim.fn.expand("%:p:h"), -- Use the current file's directory as path
-      --       select_buffer = true,          -- Set select_buffer to true
-      --       hidden = true,                 -- Show hidden files and folders
-      --       respect_gitignore = false,     -- Do not respect .gitignore (show ignored files)
-      --       layout_strategy = "horizontal",
-      --       layout_config = {
-      --         horizontal = {
-      --           height = 0.9,
-      --           width = 0.9,
-      --           preview_cutoff = 120,
-      --           prompt_position = "top",
-      --           preview_width = 0.6
-      --         }
-      --       }
-      --     })
-      --   end,
-      --   noremap = true,
-      --   silent = true,
-      --   desc = "File Browser",
-      -- }
       {
         "<leader>v",
         function()
           require("telescope").extensions.file_browser.file_browser({
-            path = vim.fn.expand("%:p:h"), -- Use the current file's directory as path
-            select_buffer = true,          -- Set select_buffer to true
-            hidden = true,                 -- Show hidden files and folders
-            respect_gitignore = false,     -- Do not respect .gitignore (show ignored files)
+            path = vim.fn.expand("%:p:h"),
+            select_buffer = true,
+            hidden = true,
+            respect_gitignore = false,
             layout_strategy = "vertical",
             layout_config = {
               vertical = {
@@ -211,10 +216,10 @@ return {
         "<leader>dt",
         function()
           require("telescope").extensions.file_browser.file_browser({
-            path = vim.fn.expand("%:p:h"), -- Start in current file's directory
-            select_buffer = true,          -- Pre-select current buffer
-            hidden = true,                 -- Show hidden files
-            respect_gitignore = false,     -- Ignore .gitignore
+            path = vim.fn.expand("%:p:h"),
+            select_buffer = true,
+            hidden = true,
+            respect_gitignore = false,
             layout_strategy = "vertical",
             layout_config = {
               vertical = {
@@ -227,7 +232,6 @@ return {
               }
             },
             attach_mappings = function(_, map)
-              -- Override default action to run :vert diffsplit on selected file
               map('i', '<CR>', function(prompt_bufnr)
                 local selection = require("telescope.actions.state").get_selected_entry()
                 require("telescope.actions").close(prompt_bufnr)
@@ -248,9 +252,8 @@ return {
         end,
         noremap = true,
         silent = true,
-        desc = "[D]iff [T]elescope",
+        desc = "[T]elescope [D]iff",
       }
-
     },
   }
 }

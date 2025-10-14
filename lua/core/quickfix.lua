@@ -17,7 +17,7 @@ vim.keymap.set("n", "<leader>ql", ":clast<CR>", { noremap = true, silent = true,
 -- vim.keymap.set("n", "<leader>qn", ":cnewer<CR>", { noremap = true, silent = true, desc = "cnewer" }) -- Newer quickfix list
 vim.keymap.set("n", "<leader>qc", ":cexpr []<CR>", { noremap = true, silent = true, desc = "Clear quickfix list" }) -- Clear quickfix list
 vim.keymap.set("n", "<leader>qi", ":cfile ", { noremap = true, silent = true, desc = "cfile" }) -- Load from file
-vim.keymap.set("n", "<leader>qb", ":cbuffer<CR>", { noremap = true, silent = true, desc = "cbuffer" }) -- Load from buffer
+-- vim.keymap.set("n", "<leader>qb", ":cbuffer<CR>", { noremap = true, silent = true, desc = "cbuffer" }) -- Load from buffer
 vim.keymap.set("n", "<leader>qc", ":cc ", { noremap = true, silent = true, desc = "Go to specific item" }) -- Go to specific item
 vim.keymap.set("n", "<leader>qd", ":cfdo ", { noremap = true, silent = true, desc = "Batch command" }) -- Batch command
 vim.keymap.set("n", "<leader>qC", ":cdo ", { noremap = true, silent = true, desc = "cdo" }) -- Batch command -- conflict with search fzf(leader>qs)

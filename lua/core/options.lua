@@ -3,6 +3,8 @@
 vim.opt.guicursor = "a:block-Cursor/lCursor"
 vim.opt.cursorline = true
 
+-- vim.opt.hidden = true --allow quitting with unsaved changes in hidden buffers
+
 vim.opt.clipboard = "unnamedplus"
 vim.opt.fileencoding = "utf-8"
 vim.opt.isfname:append("@-@")

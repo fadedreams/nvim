@@ -37,7 +37,7 @@ return {
         on_highlights = function(highlights, colors)
           if selected_theme == "tokyonight-night" then
             highlights.StatusLine = { fg = "#7aa2f7", bg = "#000000", bold = true }
-            highlights.StatusLineNC = { fg = "#7aa2f7", bg = "#444444" }
+            highlights.StatusLineNC = { fg = "#7aa2f7", bg = "#000000" }
           elseif selected_theme == "tokyonight-day" then
             highlights.StatusLine = { fg = "#677dc5", bg = "#e1e2e7", bold = true }
           end

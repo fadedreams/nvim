@@ -235,7 +235,7 @@ return {
           },
         })
       end,
-      desc = "[D]iff [S]plit",
+      desc = "fzf [D]iff [S]plit",
     },
 		-- {
 		--   "<leader>fs",

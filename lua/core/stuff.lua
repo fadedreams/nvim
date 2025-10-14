@@ -1,3 +1,4 @@
+vim.keymap.set('n', '<leader>gv', ':Git commit -v<CR>', { noremap = true, silent = true })
 -- Function to toggle LSP with messages
 local function toggle_lsp()
   local bufnr = vim.api.nvim_get_current_buf()
@@ -17,7 +18,7 @@ vim.keymap.set("n", "<leader>ll", toggle_lsp, { noremap = true, silent = false, 
 
 -- vim.keymap.set('n', '<leader>ut', '<cmd>silent !tmux neww tmux-sessionizer<CR>', { noremap = true, silent = true })
 -- vim.keymap.set('n', '<leader>ut', ':silent !tmux -b ~/.local/bin/tmux-sessionizer<CR>', { noremap = true, silent = true })
-vim.keymap.set("n", "<c-c>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+vim.keymap.set("n", "<c-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 -- vim.keymap.set("n", "<leader>9", "<cmd>silent !tmux neww tmux-sessionizer -s 0<CR>")
 -- vim.keymap.set("n", "<leader>8", "<cmd>silent !tmux neww tmux-sessionizer -s 1<CR>")
 -- vim.keymap.set("n", "<leader>7", "<cmd>silent !tmux neww tmux-sessionizer -s 2<CR>")
