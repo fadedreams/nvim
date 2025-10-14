@@ -156,7 +156,8 @@ end, { noremap = true, silent = true, desc = "Find files" })
 vim.keymap.set("n", "<leader>fg", function()
 	local input = vim.fn.input("Glob pattern (e.g., *c.lua): ")
 	if input == "" then
-		print("No glob pattern provided")
+		-- print("No glob pattern provided")
+    vim.notify("No glob pattern provided")
 		return
 	end
 	fzf.files({
@@ -177,7 +178,8 @@ end, { noremap = true, silent = true, desc = "Search for Directories" })
 vim.keymap.set("n", "<leader>fg", function()
 	local input = vim.fn.input("Search query: ")
 	if input == "" then
-		print("No search query provided")
+		-- print("No search query provided")
+    vim.notify("No search query provided")
 		return
 	end
 	fzf.grep({
@@ -287,7 +289,8 @@ vim.keymap.set("n", "<leader>4", function()
 		local match = line:sub(match_start, match_end)
 		fzf.grep({ search = match })
 	else
-		print("No matching pattern found at cursor position")
+		-- print("No matching pattern found at cursor position")
+    vim.notify("No matching pattern found at cursor position")
 	end
 end, { noremap = true, silent = true, desc = "Search text under cursor" })
 
@@ -313,9 +316,11 @@ vim.keymap.set("v", "<leader>1", fzf.grep_visual, { desc = "fzf selection" })
 
 vim.keymap.set("v", "<leader>2", function()
 	local search_term = get_visual_selection()
-	print("search_term: '" .. search_term .. "'")
+	-- print("search_term: '" .. search_term .. "'")
+  vim.notify("search_term: '" .. search_term .. "'")
 	if search_term == "" then
-		print("no text selected.")
+		-- print("no text selected.")
+    vim.notify("no text selected.")
 		return
 	end
 	local cwd = vim.loop.cwd()
@@ -329,9 +334,11 @@ end, { desc = "FZF Directory Search", noremap = true, silent = true })
 
 vim.keymap.set("v", "<leader>3", function()
 	local search_term = get_visual_selection()
-	print("search_term: '" .. search_term .. "'")
+	-- print("search_term: '" .. search_term .. "'")
+  vim.notify("search_term: '" .. search_term .. "'")
 	if search_term == "" then
-		print("no text selected.")
+		-- print("no text selected.")
+    vim.notify("no text selected.")
 		return
 	end
 	local cwd = vim.loop.cwd()
@@ -410,7 +417,8 @@ end, { noremap = true, silent = true, desc = "Search files by user-specified ext
 vim.keymap.set("n", "<leader>xn", function()
 	local input = vim.fn.input("Search extensions (space separated, e.g. js yaml): ")
 	if input == "" then
-		print("No extensions provided, defaulting to all files.")
+		-- print("No extensions provided, defaulting to all files.")
+    vim.notify("No extensions provided, defaulting to all files.")
 		fzf.files({
 			cmd = "fd --type f --hidden " .. exclude_opts_fd,
 			cwd = vim.loop.cwd(),
@@ -436,7 +444,8 @@ end, { noremap = true, silent = true, desc = "Live grep by user-specified extens
 vim.keymap.set("n", "<leader>en", function()
 	local input = vim.fn.input("Exclude extensions (space separated, e.g. js yaml): ")
 	if input == "" then
-		print("No extensions provided, defaulting to all files.")
+		-- print("No extensions provided, defaulting to all files.")
+    vim.notify("No extensions provided, defaulting to all files.")
 		fzf.files({
 			cmd = "fd --type f --hidden " .. exclude_opts_fd,
 			cwd = vim.loop.cwd(),

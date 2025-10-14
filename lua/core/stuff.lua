@@ -1,3 +1,19 @@
+-- Function to toggle LSP with messages
+local function toggle_lsp()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local clients = vim.lsp.get_active_clients({ bufnr = bufnr })
+
+  if #clients > 0 then
+    vim.cmd("LspStop")
+    vim.notify("LSP stopped", vim.log.levels.INFO)
+  else
+    vim.cmd("LspStart")
+    vim.notify("LSP started", vim.log.levels.INFO)
+  end
+end
+
+-- Map leader+ll to toggle LSP
+vim.keymap.set("n", "<leader>ll", toggle_lsp, { noremap = true, silent = false, desc = "Toggle LSP" })
 
 -- vim.keymap.set('n', '<leader>ut', '<cmd>silent !tmux neww tmux-sessionizer<CR>', { noremap = true, silent = true })
 -- vim.keymap.set('n', '<leader>ut', ':silent !tmux -b ~/.local/bin/tmux-sessionizer<CR>', { noremap = true, silent = true })
@@ -58,7 +74,8 @@ vim.keymap.set(
 local function delete_swap_files()
 	local cmd = "rm -rf ~/.local/state/nvim/swap/*"
 	vim.fn.system(cmd)
-	print("Swap files deleted.")
+	-- print("Swap files deleted.")
+  vim.notify("Swap files deleted.")
 end
 
 -- Uses normal mode (n), is non-recursive (noremap), and silent

@@ -24,7 +24,8 @@ function yank_file_path()
 	local file_path = vim.fn.expand("%:p")
 	vim.fn.setreg("+", file_path)
 	vim.fn.setreg("*", file_path)
-	print("File path copied to clipboard: " .. file_path)
+	-- print("File path copied to clipboard: " .. file_path)
+  vim.notify("File path copied to clipboard: " .. file_path)
 end
 
 -- Map the function to a key combination (e.g., <Leader>y in normal mode)
@@ -35,7 +36,8 @@ function yank_directory_path()
 	local file_path = vim.fn.expand("%:p:h")
 	vim.fn.setreg("+", file_path)
 	vim.fn.setreg("*", file_path)
-	print("Directory path copied to clipboard: " .. file_path)
+	-- print("Directory path copied to clipboard: " .. file_path)
+  vim.notify("Directory path copied to clipboard: " .. file_path)
 end
 
 -- Map the function to a key combination (e.g., <Leader>yd in normal mode)
@@ -54,7 +56,8 @@ function yank_relative_file_path()
 	local relative_path = vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.")
 	vim.fn.setreg("+", relative_path)
 	vim.fn.setreg("*", relative_path)
-	print("Relative file path copied to clipboard: " .. relative_path)
+	-- print("Relative file path copied to clipboard: " .. relative_path)
+  vim.notify("Relative file path copied to clipboard: " .. relative_path)
 end
 
 vim.keymap.set(
@@ -72,14 +75,16 @@ vim.keymap.set(
 local function yank_relative_file_path_and_all()
 	local relative_path = vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.")
 	if relative_path == "" then
-		print("Error: No file associated with the current buffer")
+		-- print("Error: No file associated with the current buffer")
+    vim.notify("Error: No file associated with the current buffer")
 		return
 	end
 	local file_content = table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n")
 	local combined = relative_path .. ":    " .. file_content
 	vim.fn.setreg("+", combined)
 	vim.fn.setreg("*", combined)
-	print("Copied to clipboard: " .. relative_path)
+	-- print("Copied to clipboard: " .. relative_path)
+  vim.notify("Copied to clipboard: " .. relative_path)
 end
 
 -- Use a Lua function call directly in the key mapping
@@ -203,7 +208,8 @@ function yank_relative_file_path_without_ex()
 	vim.fn.setreg("+", path_without_extension)
 	vim.fn.setreg("*", path_without_extension)
 	-- Print confirmation message
-	print("Relative file path (without extension) copied to clipboard: " .. path_without_extension)
+	-- print("Relative file path (without extension) copied to clipboard: " .. path_without_extension)
+  vim.notify("Relative file path (without extension) copied to clipboard: " .. path_without_extension)
 end
 
 -- vim.keymap.set("n", "<Leader>yt", ":cd %:p:h<CR>:!tree -I 'node_modules|venv|.git|.idea|vendor|__pycache__|.pytest_cache|target|dist|bin|obj|.next' -L 4 > tree.txt<CR>", { noremap = true, silent = false })
@@ -230,12 +236,14 @@ vim.keymap.set(
 function yank_buffer_name()
     local buffer_name = vim.fn.fnamemodify(vim.fn.expand("%"), ":t")
     if buffer_name == "" then
-        print("Error: No file associated with the current buffer")
+        -- print("Error: No file associated with the current buffer")
+        vim.notify("Error: No file associated with the current buffer")
         return
     end
     vim.fn.setreg("+", buffer_name)
     vim.fn.setreg("*", buffer_name)
-    print("Buffer name copied to clipboard: " .. buffer_name)
+    -- print("Buffer name copied to clipboard: " .. buffer_name)
+    vim.notify("Buffer name copied to clipboard: " .. buffer_name)
 end
 
 vim.keymap.set(

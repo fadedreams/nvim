@@ -1,8 +1,13 @@
 -- vim.keymap.set("n", "<Leader>bb", "<C-^>", { noremap = true, silent = true, desc = "Toggle last buffer" })
 -- vim.keymap.set("n", "<leader>bdo", ":%bd|e#|bd#<CR>", { noremap = true, silent = true, desc = "delete other buffers" })
 -- vim.keymap.set("n", "<leader>bda", ":%bd<CR>", { noremap = true, silent = true, desc = "delete all buffers" })
-vim.keymap.set('n', "<c-\\>", '<cmd>bd<CR>', { desc = 'kill' })
-vim.keymap.set("i", "<c-\\>", "<Esc>:bdelete<CR>", { desc = 'kill' })
+-- vim.keymap.set('n', "<c-\\>", '<cmd>bd<CR>', { desc = 'kill' })
+-- vim.keymap.set("i", "<c-\\>", "<Esc>:bdelete<CR>", { desc = 'kill' })
+
+-- Map Ctrl+Backspace to close the current buffer
+vim.keymap.set('n', '<C-\\>', ':bdelete<CR>', { noremap = true, silent = true })-- Map Ctrl+Backspace to close the current buffer
+vim.keymap.set('i', '<C-\\>', ':bdelete<CR>', { noremap = true, silent = true })
+
 vim.keymap.set('n', "<c-m>", '<cmd>bd<CR>', { desc = 'kill' })
 vim.keymap.set("i", "<c-m>", "<Esc>:bdelete<CR>", { desc = 'kill' })
 
@@ -40,11 +45,13 @@ function ReopenLastBuffer()
         vim.cmd("badd " .. vim.fn.fnameescape(vim.g.last_closed_buffer))
         vim.cmd("b " .. vim.fn.fnameescape(vim.g.last_closed_buffer))
     else
-        print("No recently closed buffer or file does not exist")
+        -- print("No recently closed buffer or file does not exist")
+        vim.notify("No recently closed buffer or file does not exist")
     end
 end
 -- vim.keymap.set("n", "<c-'>", ":lua ReopenLastBuffer()<CR>", { noremap = true, silent = true, desc = '[L]ast [B]uffer' })
 vim.keymap.set("n", "<leader>bl", ":lua ReopenLastBuffer()<CR>", { noremap = true, silent = true, desc = '[L]ast [B]uffer' })
+vim.keymap.set("n", "<c-r>", ":lua ReopenLastBuffer()<CR>", { noremap = true, silent = true, desc = '[L]ast [B]uffer' })
 vim.keymap.set("n", "<c-r>", ":lua ReopenLastBuffer()<CR>", { noremap = true, silent = true, desc = '[L]ast [B]uffer' })
 vim.keymap.set("n", "<leader>bx", ":!chmod +x %<CR>", {desc = "chmod +x"})
 -- keyset('n', '-', function()
