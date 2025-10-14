@@ -57,6 +57,7 @@ vim.opt.undofile = true
 vim.opt.undofile = true
 vim.opt.undolevels = 1000
 
+
 vim.opt.wrap = false
 vim.opt.textwidth = 120
 vim.opt.formatexpr = "v:lua.require'conform'.formatexpr()"
@@ -74,6 +75,8 @@ vim.opt.conceallevel = 0
 vim.g.markdown_recommended_style = 0 -- see https://www.reddit.com/r/neovim/comments/z2lhyz/comment/ixjb7je
 vim.opt.updatetime = 300
 vim.opt.mouse = "a"
+-----------------------
+
 vim.opt.wildignore:append({
   -- "*/node_modules/*",        -- Node.js dependencies
   "*.pyc",                  -- Python compiled files
@@ -99,6 +102,8 @@ vim.opt.wildignore:append({
   "*.bak",                  -- Backup files
   "*.tmp",                  -- Temporary files
 })
+
+
 vim.opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 -- vim.opt.showtabline = 0
 vim.opt.tabline = "%!v:lua.require('tabline').setup()"

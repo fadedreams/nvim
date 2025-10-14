@@ -18,14 +18,13 @@ return {
     vim.keymap.set("n", "<leader>gm", ":silent G merge<CR>", { desc = "Git merge" })
     vim.keymap.set("n", "<leader>gre", ":silent G rebase -i<CR>", { desc = "Git interactive rebase" })
     vim.keymap.set("n", "<leader>gh", ":silent Gclog %<CR>", { desc = "Git history" })
-    vim.keymap.set("n", "<leader>gv", ":silent Gvdiffsplit<CR>", { desc = "Git diff vertical split" })
-    vim.keymap.set("n", "<leader>gs", ":silent Gdiffsplit<CR>", { desc = "Git diff horizontal split" })
     local function pre_commit_check()
       local cmd = "pre-commit"
       vim.cmd "belowright vsplit"
       vim.cmd("terminal " .. cmd)
     end
     vim.keymap.set("n", "<leader>gp", pre_commit_check, { desc = "Git verify" })
+    vim.keymap.set("n", "<leader>gd", ":silent G diff<CR>", { desc = "Git diff" })
     -- vim.keymap.set("n", "<leader>gl", ":G log<CR>", { desc = "Git log" })
     -- vim.keymap.set("n", "<leader>gp", ":G push origin HEAD<CR>", { desc = "Git push" })
     -- vim.keymap.set("n", "<leader>gF", ":G pull<CR>", { desc = "Git pull" })

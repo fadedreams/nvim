@@ -1,4 +1,4 @@
-vim.keymap.set('n', '<leader>gv', ':Git commit -v<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>gv', ':Git commit -v<CR>', { noremap = true, silent = true }) --TODO: 
 -- Function to toggle LSP with messages
 local function toggle_lsp()
   local bufnr = vim.api.nvim_get_current_buf()
