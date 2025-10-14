@@ -45,6 +45,7 @@ function ReopenLastBuffer()
 end
 -- vim.keymap.set("n", "<c-'>", ":lua ReopenLastBuffer()<CR>", { noremap = true, silent = true, desc = '[L]ast [B]uffer' })
 vim.keymap.set("n", "<leader>bl", ":lua ReopenLastBuffer()<CR>", { noremap = true, silent = true, desc = '[L]ast [B]uffer' })
+vim.keymap.set("n", "<c-r>", ":lua ReopenLastBuffer()<CR>", { noremap = true, silent = true, desc = '[L]ast [B]uffer' })
 vim.keymap.set("n", "<leader>bx", ":!chmod +x %<CR>", {desc = "chmod +x"})
 -- keyset('n', '-', function()
 --   local cur_file = vim.fn.expand('%:t')

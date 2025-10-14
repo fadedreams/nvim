@@ -50,7 +50,7 @@ function search_under_visual()
 	vim.api.nvim_command("/\\V" .. escaped_word)
 end
 
-vim.api.nvim_set_keymap("v", "<C-f>", ":lua search_under_visual()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<C-/>", ":lua search_under_visual()<CR>", { noremap = true, silent = true })
 
 -- Function to search word under cursor in the current file using a custom pattern
 function search_text_under_cursor()
@@ -79,12 +79,12 @@ function search_text_under_cursor()
 end
 
 -- Keymap to trigger the search
-vim.keymap.set(
-	"n",
-	"<C-f>",
-	":lua search_text_under_cursor()<CR>",
-	{ noremap = true, silent = true, desc = "Search text under cursor in current file" }
-)
+-- vim.keymap.set(
+-- 	"n",
+-- 	"<C-f>",
+-- 	":lua search_text_under_cursor()<CR>",
+-- 	{ noremap = true, silent = true, desc = "Search text under cursor in current file" }
+-- )
 
 --- Searches for text under the cursor in a simple manner.
 -- @return nil
