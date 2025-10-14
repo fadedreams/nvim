@@ -119,7 +119,7 @@ return {
             --     snacks.picker.explorer,
             --     desc = desc("[U]til [T]ree"),
             -- },
-            { "<leader>.", function() snacks.scratch() end, desc = "[N]ew [S]cratch" },
+            { "<a-.>", function() snacks.scratch() end, desc = "[N]ew [S]cratch" },
         }
     end,
 }

@@ -21,7 +21,9 @@ return {
     keymaps = {
       ["<C-h>"] = false, -- Split
       ["<C-l>"] = false, -- refresh
-      ["<C-s>"] = "actions.select_split",
+      -- ["<C-s>"] = "actions.select_split",
+      ["<c-c>"] = "<cmd>silent !tmux neww tmux-sessionizer<CR>",
+-- vim.keymap.set("n", "<C-s>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
       ["<C-v>"] = "actions.select_vsplit",
       ["<C-g>"] = "actions.refresh",
 

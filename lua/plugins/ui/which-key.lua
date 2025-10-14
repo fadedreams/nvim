@@ -40,7 +40,7 @@ return {
 		icons = {
 			mappings = true, -- Enable icons for keybindings (requires nvim-web-devicons)
 		},
-		triggers = { "<leader>", "<localleader>" }, -- Explicitly define triggers
+		triggers = { "<leader>", "<localleader>"}, -- Explicitly define triggers
 		delay = 500, -- 500ms delay before showing popup
 		disable = {
 			filetypes = { "TelescopePrompt", "terminal" }, -- Disable for specific filetypes

@@ -10,7 +10,7 @@ return {
         bindings = {
           ["q"] = "<Cmd>OverseerClose<CR>",
           ["<CR>"] = "<Cmd>OverseerRun<CR>",
-          ["<C-c>"] = "<Cmd>OverseerTaskAction<CR>",
+          ["<C-a>"] = "<Cmd>OverseerTaskAction<CR>",
         },
       },
     },

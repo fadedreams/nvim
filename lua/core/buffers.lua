@@ -1,8 +1,11 @@
 -- vim.keymap.set("n", "<Leader>bb", "<C-^>", { noremap = true, silent = true, desc = "Toggle last buffer" })
 -- vim.keymap.set("n", "<leader>bdo", ":%bd|e#|bd#<CR>", { noremap = true, silent = true, desc = "delete other buffers" })
 -- vim.keymap.set("n", "<leader>bda", ":%bd<CR>", { noremap = true, silent = true, desc = "delete all buffers" })
-vim.keymap.set('n', '<c-;>', '<cmd>bd<CR>', { desc = 'kill' })
-vim.keymap.set("i", "<c-;>", "<Esc>:bdelete<CR>", { desc = 'kill' })
+vim.keymap.set('n', "<c-\\>", '<cmd>bd<CR>', { desc = 'kill' })
+vim.keymap.set("i", "<c-\\>", "<Esc>:bdelete<CR>", { desc = 'kill' })
+vim.keymap.set('n', "<c-m>", '<cmd>bd<CR>', { desc = 'kill' })
+vim.keymap.set("i", "<c-m>", "<Esc>:bdelete<CR>", { desc = 'kill' })
+
 vim.keymap.set('n', '<leader>bb', '<cmd>bd<CR>', { desc = '[D]elete Buffer' })
 vim.keymap.set('n', '<leader>bn', '<cmd>ene<CR>', { desc = '[N]ew [B]uffer' })
 vim.keymap.set('n', '<leader>bv', '<cmd>vnew<CR>', { desc = '[N]ew [B]uffer [V]split' })
@@ -40,7 +43,7 @@ function ReopenLastBuffer()
         print("No recently closed buffer or file does not exist")
     end
 end
-vim.keymap.set("n", "<c-'>", ":lua ReopenLastBuffer()<CR>", { noremap = true, silent = true, desc = '[L]ast [B]uffer' })
+-- vim.keymap.set("n", "<c-'>", ":lua ReopenLastBuffer()<CR>", { noremap = true, silent = true, desc = '[L]ast [B]uffer' })
 vim.keymap.set("n", "<leader>bl", ":lua ReopenLastBuffer()<CR>", { noremap = true, silent = true, desc = '[L]ast [B]uffer' })
 vim.keymap.set("n", "<leader>bx", ":!chmod +x %<CR>", {desc = "chmod +x"})
 -- keyset('n', '-', function()

@@ -1,7 +1,7 @@
 
 -- vim.keymap.set('n', '<leader>ut', '<cmd>silent !tmux neww tmux-sessionizer<CR>', { noremap = true, silent = true })
 -- vim.keymap.set('n', '<leader>ut', ':silent !tmux -b ~/.local/bin/tmux-sessionizer<CR>', { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>uu", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+vim.keymap.set("n", "<c-c>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 -- vim.keymap.set("n", "<leader>9", "<cmd>silent !tmux neww tmux-sessionizer -s 0<CR>")
 -- vim.keymap.set("n", "<leader>8", "<cmd>silent !tmux neww tmux-sessionizer -s 1<CR>")
 -- vim.keymap.set("n", "<leader>7", "<cmd>silent !tmux neww tmux-sessionizer -s 2<CR>")
