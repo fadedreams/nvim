@@ -208,7 +208,7 @@ autocmd({ "BufReadPost", "BufNewFile" }, {
 			-- basedpyright = {},
 			basedpyright = require("lsp.servers.basedpyright"),
 			tailwindcss = {},
-			copilot_ls = {},
+			-- copilot_ls = {},
 			css_variables = {},
 			cssmodules_ls = {},
 			jsonls = require("lsp.servers.jsonls"),
