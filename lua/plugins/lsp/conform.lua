@@ -109,7 +109,7 @@ return {
 
 	init = function()
 		-- Set keymap for manual formatting
-		vim.keymap.set({ "n", "v" }, "<leader>wf", function()
+		vim.keymap.set({ "n", "v" }, "<leader>bc", function()
 			require("conform").format({ async = true, lsp_fallback = true })
 		end, { desc = "[C]onform [F]ormat" })
 	end,

@@ -156,6 +156,25 @@ return {
         desc = "Find Buffers",
       },
       {
+        "<c-f>",
+        function()
+          require("telescope.builtin").buffers({
+            sort_mru = true,
+            layout_strategy = "horizontal",
+            layout_config = {
+              horizontal = {
+                height = 0.6,
+                width = 0.6,
+                preview_cutoff = 120,
+                prompt_position = "top",
+                preview_width = 0.6
+              }
+            },
+          })
+        end,
+        desc = "Find Buffers",
+      },
+      {
         "<leader>j",
         function()
           require("telescope.builtin").buffers({

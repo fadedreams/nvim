@@ -4,20 +4,20 @@ return {
   event = { "BufReadPost", "BufNewFile" },
   config = function()
     -- Existing Git remaps
-    -- vim.keymap.set("n", "<leader>gs", ":G<CR>", { desc = "Git status" })
+    vim.keymap.set("n", "<leader>gs", ":G<CR>", { desc = "Git status" })
     vim.keymap.set("n", "<leader>gf", ":top Git<CR>", { desc = "Fugitive: Open git console" })
+    vim.keymap.set("n", "<leader>gl", ":silent G log --oneline --graph --all<CR>", { desc = "Git history graph" })
+    vim.keymap.set("n", "<leader>gb", ":silent Gclog %<CR>", { desc = "Git history current buffer" })
     vim.keymap.set("n", "<leader>ga", ":silent G add %<CR>", { desc = "Git add current file" })
     vim.keymap.set("n", "<leader>gA", ":silent G add .<CR>", { desc = "Git add all files" })
     vim.keymap.set("n", "<leader>gc", ":silent G commit --no-verify<CR>", { desc = "Git commit" })
     vim.keymap.set("n", "<leader>grb", ":silent G checkout HEAD -- %<CR>", { desc = "Git reset current buffer to HEAD" })
-    vim.keymap.set("n", "<leader>gl", ":silent G log --oneline --graph --all<CR>", { desc = "Git history graph" })
     vim.keymap.set("n", "<leader>gF", ":silent G fetch<CR>", { desc = "Git fetch" })
-    vim.keymap.set("n", "<leader>gbb", ":silent G blame<CR>", { desc = "Git blame" })
+    -- vim.keymap.set("n", "<leader>gbb", ":silent G blame<CR>", { desc = "Git blame" })
     vim.keymap.set("n", "<leader>grh", ":silent G reset --hard<CR>", { desc = "Git reset hard" })
     vim.keymap.set("n", "<leader>grs", ":silent G reset --soft HEAD^<CR>", { desc = "Git undo last commit (soft)" })
     vim.keymap.set("n", "<leader>gm", ":silent G merge<CR>", { desc = "Git merge" })
     vim.keymap.set("n", "<leader>gre", ":silent G rebase -i<CR>", { desc = "Git interactive rebase" })
-    vim.keymap.set("n", "<leader>gh", ":silent Gclog %<CR>", { desc = "Git history" })
     local function pre_commit_check()
       local cmd = "pre-commit"
       vim.cmd "belowright vsplit"
@@ -25,6 +25,7 @@ return {
     end
     vim.keymap.set("n", "<leader>gp", pre_commit_check, { desc = "Git verify" })
     vim.keymap.set("n", "<leader>gd", ":silent G diff<CR>", { desc = "Git diff" })
+    -- vim.keymap.set("n", "<leader>gs", ":silent G diff --cached<CR>", { desc = "Git diff (staged vs HEAD)" })
     -- vim.keymap.set("n", "<leader>gl", ":G log<CR>", { desc = "Git log" })
     -- vim.keymap.set("n", "<leader>gp", ":G push origin HEAD<CR>", { desc = "Git push" })
     -- vim.keymap.set("n", "<leader>gF", ":G pull<CR>", { desc = "Git pull" })

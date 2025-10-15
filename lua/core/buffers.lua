@@ -8,8 +8,8 @@
 vim.keymap.set('n', '<C-\\>', ':bdelete<CR>', { noremap = true, silent = true })-- Map Ctrl+Backspace to close the current buffer
 vim.keymap.set('i', '<C-\\>', ':bdelete<CR>', { noremap = true, silent = true })
 
-vim.keymap.set('n', "<c-m>", '<cmd>bd<CR>', { desc = 'kill' })
-vim.keymap.set("i", "<c-m>", "<Esc>:bdelete<CR>", { desc = 'kill' })
+vim.keymap.set('n', "<c-c>", '<cmd>bd<CR>', { desc = 'kill' })
+vim.keymap.set("i", "<c-c>", "<Esc>:bdelete<CR>", { desc = 'kill' })
 
 vim.keymap.set('n', '<leader>bb', '<cmd>bd<CR>', { desc = '[D]elete Buffer' })
 vim.keymap.set('n', '<leader>bn', '<cmd>ene<CR>', { desc = '[N]ew [B]uffer' })
