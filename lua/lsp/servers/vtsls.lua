@@ -39,7 +39,7 @@ return {
     },
     keys = {
         {
-            "<leader>to",
+            "<leader>lto",
             function()
                 vim.lsp.buf.code_action({
                     apply = true,
@@ -52,7 +52,7 @@ return {
             desc = desc("Organize imports"),
         },
         {
-            "<leader>ta",
+            "<leader>lta",
             function()
                 vim.lsp.buf.code_action({
                     apply = true,
@@ -65,7 +65,7 @@ return {
             desc = desc("Add missing imports"),
         },
         {
-            "<leader>tr",
+            "<leader>ltr",
             function()
                 vim.lsp.buf.code_action({
                     apply = true,
@@ -78,7 +78,7 @@ return {
             desc = desc("Remove unused imports"),
         },
         {
-            "<leader>tf",
+            "<leader>ltf",
             function()
                 vim.lsp.buf.code_action({
                     apply = true,
@@ -91,7 +91,7 @@ return {
             desc = desc("Fix all"),
         },
         {
-            "<leader>tt",
+            "<leader>ltt",
             function()
                 Utils.lsp.execute({command = "typescript.selectTypeScriptVersion"})
             end,
