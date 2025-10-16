@@ -104,6 +104,7 @@ local function select_theme()
     "cyberdream-light",
     "kanagawa-lotus",
     "sunset_cloud", --boo
+    "nanode", --boo
     -- "radioactive_waste", --boo
   }
   require("telescope.pickers").new({}, {
