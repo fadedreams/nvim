@@ -208,7 +208,7 @@ autocmd({ "BufReadPost", "BufNewFile" }, {
 			-- basedpyright = {},
 			basedpyright = require("lsp.servers.basedpyright"),
 			tailwindcss = {},
-			-- copilot_ls = {},
+      -- copilot = {}, -- copilot.lua comes with its own copilot lsp config
 			css_variables = {},
 			cssmodules_ls = {},
 			jsonls = require("lsp.servers.jsonls"),

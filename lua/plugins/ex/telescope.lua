@@ -272,7 +272,8 @@ return {
         noremap = true,
         silent = true,
         desc = "[T]elescope [D]iff",
-      }
+      },
+
     },
   }
 }

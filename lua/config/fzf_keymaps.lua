@@ -190,9 +190,9 @@ vim.keymap.set("n", "<leader>fg", function()
 	})
 end, { noremap = true, silent = true, desc = "Grep with query" })
 
-vim.keymap.set("n", "<leader>qs", function()
+vim.keymap.set("n", "<leader>qf", function()
 	fzf.grep_quickfix({ rg_opts = "--hidden --no-ignore --ignore-case " .. combined_opts }) -- Use combined_opts
-end, { noremap = true, silent = true, desc = "Quickfix" })
+end, { noremap = true, silent = true, desc = "find text in Quickfix fzf" })
 
 -- vim.keymap.set("n", "<leader>qS", function()
 -- 	fzf.grep_quickfix({ rg_opts = "--hidden --no-ignore " .. combined_opts }) -- Use combined_opts
@@ -350,7 +350,7 @@ vim.keymap.set("v", "<leader>3", function()
 	fzf.files(fzf_opts)
 end, { desc = "FZF Directory Search", noremap = true, silent = true })
 
-vim.keymap.set({ "n", "v", "i" }, "<leader>fp", function()
+vim.keymap.set({ "n", "v", "i" }, "<C-q><C-x>", function()
 	require("fzf-lua").complete_path()
 end, { silent = true, desc = "Fuzzy complete path" })
 

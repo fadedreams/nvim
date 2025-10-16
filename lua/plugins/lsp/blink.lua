@@ -1,16 +1,25 @@
 return {
     "saghen/blink.cmp",
-    build = "cargo build --release",
-    event = "InsertEnter",
+    version = "1.*",
+    event = {"InsertEnter", "CmdlineEnter"},
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
     opts = {
         keymap = {
             preset = "enter",
-            ["<CR>"] = {"accept", "fallback"}, -- Explicitly map <CR> to accept completion
-            ["<C-y>"] = {"accept", "fallback"}, -- Map <C-y> to accept completion
+            ["<C-y>"] = {"show", "show_documentation", "hide_documentation"},
             ["<C-u>"] = {"scroll_documentation_up", "fallback"},
             ["<C-d>"] = {"scroll_documentation_down", "fallback"},
-            ["<C-n>"] = {"select_next", "fallback"}, -- Explicitly map for navigation
-            ["<C-p>"] = {"select_prev", "fallback"}, -- Explicitly map for navigation
+            ["<Tab>"] = {
+                "snippet_forward",
+                function() -- sidekick next edit suggestion
+                    return require("sidekick").nes_jump_or_apply()
+                end,
+                function() -- if you are using Neovim's native inline completions
+                    return vim.lsp.inline_completion.get()
+                end,
+                "fallback",
+            },
         },
         cmdline = {
             enabled = true,
@@ -29,8 +38,13 @@ return {
             },
         },
         sources = {
-            default = {"lsp", "path", "snippets", "buffer"},
+            default = {"lsp", "path", "snippets", "buffer", "lazydev"},
             providers = {
+                lazydev = {
+                    name = "LazyDev",
+                    module = "lazydev.integrations.blink",
+                    score_offset = 100, -- show at a higher priority than lsp
+                },
                 lsp = {
                     fallbacks = {"buffer", "path"},
                 },

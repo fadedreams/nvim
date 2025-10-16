@@ -1,3 +1,72 @@
+vim.api.nvim_set_keymap('n', '<leader>gp', '', {
+  noremap = true,
+  silent = true,
+  callback = function()
+    local folder = vim.fn.input('Enter folder path for git files: ')
+    if folder == '' then return end
+
+    -- Get unique changed files from git log
+    local handle = io.popen('git log --name-only --pretty=format: -- ' .. folder .. ' | sort -u')
+    local result = handle:read("*a")
+    handle:close()
+
+    local files = {}
+    for line in result:gmatch("[^\r\n]+") do
+      if line ~= "" then
+        table.insert(files, line)
+      end
+    end
+
+    if #files == 0 then
+      print("No changed files found in folder: " .. folder)
+      return
+    end
+
+    -- Populate quickfix list with just the basename as text
+    local qf_list = {}
+    for _, f in ipairs(files) do
+      table.insert(qf_list, {
+        filename = f,           -- full path for opening
+        lnum = 1,
+        col = 1,
+        text = vim.fn.fnamemodify(f, ':t')  -- only filename
+      })
+    end
+
+    vim.fn.setqflist(qf_list, 'r')
+    vim.cmd('copen')
+  end,
+  desc = "Git changed files for folder in quickfix (basename only)"
+})
+
+vim.api.nvim_set_keymap('n', '<leader>gl', '', {
+  noremap = true,
+  silent = true,
+  callback = function()
+    -- Prompt the user for a folder path
+    local folder = vim.fn.input('Enter folder path for git log: ')
+    if folder == '' then return end
+
+    -- Run git log and capture output
+    local handle = io.popen('git log -- ' .. folder)
+    local result = handle:read("*a")
+    handle:close()
+
+    -- Open a new buffer
+    vim.cmd('new')
+    local buf = vim.api.nvim_get_current_buf()
+
+    -- Set buffer options
+    vim.api.nvim_buf_set_option(buf, 'buftype', 'nofile')
+    vim.api.nvim_buf_set_option(buf, 'bufhidden', 'wipe')
+    vim.api.nvim_buf_set_option(buf, 'swapfile', false)
+
+    -- Put git log output in buffer
+    vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.split(result, '\n'))
+  end,
+  desc = "Git log for a folder in new buffer"
+})
+
 vim.keymap.set('n', '<leader>gv', ':silent Git commit -v<CR>', { noremap = true, silent = true }) --TODO: 
 -- Function to toggle LSP with messages
 local function toggle_lsp()
@@ -23,10 +92,6 @@ vim.keymap.set("n", "<c-q><c-s>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 -- vim.keymap.set("n", "<leader>8", "<cmd>silent !tmux neww tmux-sessionizer -s 1<CR>")
 -- vim.keymap.set("n", "<leader>7", "<cmd>silent !tmux neww tmux-sessionizer -s 2<CR>")
 -- vim.keymap.set("n", "<leader>6", "<cmd>silent !tmux neww tmux-sessionizer -s 3<CR>")
---fzf
-vim.keymap.set({"n", "v", "i"}, "<C-q><C-x>", function()
-    require("fzf-lua").complete_path()
-end, {silent = true, desc = "Fuzzy complete path"})
 
 -- vim.keymap.set('n', '<leader>df', function()
 --   local file = vim.fn.input('Enter file to diff: ', 'file2.txt')
