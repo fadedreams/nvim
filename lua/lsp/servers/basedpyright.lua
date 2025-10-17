@@ -5,7 +5,8 @@ return {
 			analysis = {
 				autoImportCompletions = true, -- Automatically offer import completions
 				autoSearchPaths = true, -- Automatically search for Python files
-				diagnosticMode = "workspace", -- Analyze the entire workspace
+				-- diagnosticMode = "workspace", -- Analyze the entire workspace
+        diagnosticMode = "openFilesOnly",
 				typeCheckingMode = "strict", -- Enable strict mode to flag undefined names
 				useLibraryCodeForTypes = true, -- Use library code for type information
 			},
