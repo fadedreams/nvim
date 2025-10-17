@@ -83,11 +83,11 @@ local function toggle_lsp()
 end
 
 -- Map leader+ll to toggle LSP
-vim.keymap.set("n", "<leader>ll", toggle_lsp, { noremap = true, silent = false, desc = "Toggle LSP" })
+vim.keymap.set("n", "<leader>tl", toggle_lsp, { noremap = true, silent = false, desc = "Toggle LSP" })
 
 -- vim.keymap.set('n', '<leader>ut', '<cmd>silent !tmux neww tmux-sessionizer<CR>', { noremap = true, silent = true })
 -- vim.keymap.set('n', '<leader>ut', ':silent !tmux -b ~/.local/bin/tmux-sessionizer<CR>', { noremap = true, silent = true })
-vim.keymap.set("n", "<c-q><c-s>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+vim.keymap.set("n", "<c-q><c-u>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 -- vim.keymap.set("n", "<leader>9", "<cmd>silent !tmux neww tmux-sessionizer -s 0<CR>")
 -- vim.keymap.set("n", "<leader>8", "<cmd>silent !tmux neww tmux-sessionizer -s 1<CR>")
 -- vim.keymap.set("n", "<leader>7", "<cmd>silent !tmux neww tmux-sessionizer -s 2<CR>")

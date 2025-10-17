@@ -69,14 +69,14 @@ return {
     },
     keys = {
       {
-        '<leader>K',
+        '<leader>L',
         function()
           require('mini.files').open(vim.api.nvim_buf_get_name(0), true)
         end,
         desc = '[e]xplorer (directory of open file)',
       },
       {
-        '<leader>k',
+        '<leader>l',
         function()
           require('mini.files').open(vim.loop.cwd(), true)
         end,

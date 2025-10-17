@@ -64,7 +64,7 @@ vim.opt.formatexpr = "v:lua.require'conform'.formatexpr()"
 
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
-vim.opt.ignorecase = true
+vim.opt.ignorecase = false
 vim.opt.smartcase = true
 vim.opt.inccommand = "split"
 

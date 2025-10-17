@@ -14,5 +14,8 @@ return{
       vim.keymap.set("i", "<c-k>", function()
         require("treesitter-context").go_to_context(vim.v.count1)
       end, { silent = true, desc = "Go to parent context" })
+      vim.keymap.set("n", "<leader>k", function()
+        require("treesitter-context").go_to_context(vim.v.count1)
+      end, { silent = true, desc = "Go to parent context" })
   end,
 }

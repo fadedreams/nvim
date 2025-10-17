@@ -11,14 +11,20 @@ return {
             ["<C-u>"] = {"scroll_documentation_up", "fallback"},
             ["<C-d>"] = {"scroll_documentation_down", "fallback"},
             ["<Tab>"] = {
-                "snippet_forward",
-                function() -- sidekick next edit suggestion
-                    return require("sidekick").nes_jump_or_apply()
-                end,
-                function() -- if you are using Neovim's native inline completions
-                    return vim.lsp.inline_completion.get()
-                end,
-                "fallback",
+                -- "snippet_forward",
+                -- function() -- sidekick next edit suggestion
+                --     return require("sidekick").nes_jump_or_apply()
+                -- end,
+              function()  -- if you are using Neovim's native inline completions
+                local inline = vim.lsp.inline_completion.get()
+                if inline and inline.items and #inline.items > 0 then
+                  return { "native_inline"}  -- Use native completion if available
+                else
+                  return { "select_next" }   -- Otherwise, select next blink item
+                end
+              end,
+              "fallback",
+
             },
         },
         cmdline = {
