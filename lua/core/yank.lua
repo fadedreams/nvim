@@ -125,6 +125,8 @@ function YankWithCustomExclusions()
 	local default_exclude_files = {
 		"file_dir_to_txt_exclude.sh",
 		"file_dir_to_txt_exclude2.sh",
+		".css",
+		".svg",
 		".gitignore",
 		"serverall.js",
 		".env",

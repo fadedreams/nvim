@@ -120,7 +120,7 @@ return {
             --     desc = desc("[U]til [T]ree"),
             -- },
             { "<a-.>", function() snacks.scratch() end, desc = "[N]ew [S]cratch" },
-            { "<c-.>", function() snacks.scratch() end, desc = "[N]ew [S]cratch" },
+            -- { "<c-.>", function() snacks.scratch() end, desc = "[N]ew [S]cratch" },
             { "<leader>.", function() snacks.scratch() end, desc = "[N]ew [S]cratch" },
         }
     end,

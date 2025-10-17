@@ -3,6 +3,7 @@ local desc = Utils.plugin_keymap_desc("harpoon")
 local keys = {
     open_menu = "<localleader><localleader>",
     add_to_list = "<localleader>.",
+    add_to_list = "<c-.>",
     prev_file = "<localleader>m",
     next_file = "<localleader>n",
     sel_f1 = "<localleader>l",

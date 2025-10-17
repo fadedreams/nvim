@@ -232,3 +232,65 @@ end
 -- Map the function to <leader>/ in visual mode
 vim.api.nvim_set_keymap("v", "<leader>/", ":lua visual_search()<CR>", { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap("n", "<leader>t", ":nohlsearch<CR>", { noremap = true, silent = true, desc="Clear Highlight, V <leader>/" }) --c-l do it
+
+-- visual_replace_in_selection
+function visual_replace_in_selection()
+	-- Get the visual selection range
+	local start_pos = vim.fn.getpos("'<")
+	local end_pos = vim.fn.getpos("'>")
+	local start_line = start_pos[2]
+	local end_line = end_pos[2]
+	local start_col = start_pos[3]
+	local end_col = end_pos[3]
+
+	-- Get the lines in the selection
+	local lines = vim.fn.getline(start_line, end_line)
+
+	-- Extract the selected text (your existing logic)
+	local selected_text
+	if #lines == 1 then
+		selected_text = lines[1]:sub(start_col, end_col)
+	else
+		selected_text = lines[1]:sub(start_col)
+		for i = 2, #lines - 1 do
+			selected_text = selected_text .. "\n" .. lines[i]
+		end
+		selected_text = selected_text .. "\n" .. lines[#lines]:sub(1, end_col)
+	end
+
+	-- PROMPT 1: Word to replace
+	local search_word = vim.fn.input("Replace word: ")
+	if search_word == "" then return end
+
+	-- PROMPT 2: Replacement word
+	local replace_word = vim.fn.input("With: ")
+	if replace_word == "" then return end
+
+	-- Escape for regex
+	local escaped_search = vim.fn.escape(search_word, "\\/.*$^~[]")
+	local escaped_replace = vim.fn.escape(replace_word, "\\/.*$^~[]")
+
+	-- **FIXED**: Use simple exact match for single chars, word boundaries for words
+	local pattern
+	if #search_word == 1 and search_word:match("[^%w]") then
+		-- Single non-word char: exact match only
+		pattern = "\\V" .. escaped_search
+	else
+		-- Words: use word boundaries
+		pattern = "\\V\\<" .. escaped_search .. "\\>"
+	end
+
+	-- Replace ONLY in visual selection range
+	vim.cmd(string.format(
+		"'<,'>s/%s/%s/g",
+		pattern,
+		escaped_replace
+	))
+end
+
+-- Map to leader+rv in visual mode
+vim.api.nvim_set_keymap("v", "<leader>rv", ":lua visual_replace_in_selection()<CR>", { 
+	noremap = true, 
+	silent = true,
+	desc = "Replace word in visual selection" 
+})
