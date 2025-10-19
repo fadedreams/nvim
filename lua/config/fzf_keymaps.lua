@@ -202,7 +202,6 @@ vim.keymap.set("n", "<leader>n", function()
 	fzf.live_grep({ rg_opts = "--hidden --no-ignore --ignore-case " .. combined_opts }) -- Use combined_opts
 end, { noremap = true, silent = true, desc = "Live grep" })
 
-
 vim.keymap.set("n", "<leader>fn", function()
 	fzf.live_grep({ rg_opts = "--hidden --no-ignore " .. combined_opts }) -- Use combined_opts
 end, { noremap = true, silent = true, desc = "Live grep Case sensitive" })
@@ -260,6 +259,7 @@ vim.keymap.set("n", "<leader>f1", function()
 		rg_opts = "--line-number --hidden " .. combined_opts, -- Use combined_opts
 		cwd = vim.loop.cwd(),
 		prompt = "",
+    silent = true,
 	})
 end, { noremap = true, silent = true, desc = "Case sensitive" })
 
@@ -270,6 +270,7 @@ vim.keymap.set("n", "<leader>1", function()
 		rg_opts = "--line-number --hidden --ignore-case " .. combined_opts, -- Use combined_opts
 		cwd = vim.loop.cwd(),
 		prompt = "Ignore case",
+    silent = true,
 	})
 end, { noremap = true, silent = true, desc = "Search text" })
 
@@ -301,7 +302,7 @@ vim.keymap.set("n", "<leader>2", function()
 		cmd = "fd --type f --type d --hidden " .. exclude_opts_fd,
 		cwd = vim.loop.cwd(),
 	})
-end, { noremap = true, silent = true, desc = "Search files under cursor" })
+end, { noremap = true, silent = true, desc = "Search files/dirs under cursor" })
 
 vim.keymap.set("n", "<leader>3", function()
 	local word = vim.fn.expand("<cword>")

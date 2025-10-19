@@ -43,8 +43,8 @@ return {
       ui_select = { enable = false }, -- Disable ui_select for simplicity
     },
     keys = {
-      { "<leader>ss", ":Namu symbols<cr>", desc = "[N]amu Jump to LSP symbol", silent = true },
-      { "<leader>sw", ":Namu workspace<cr>", desc = "[N]amu LSP Symbols - Workspace", silent = true },
+      { "<leader>sw", ":Namu symbols<cr>", desc = "[N]amu Jump to LSP symbol", silent = true },
+      { "<leader>ss", ":Namu workspace<cr>", desc = "[N]amu LSP Symbols - Workspace", silent = true },
     },
   },
 }

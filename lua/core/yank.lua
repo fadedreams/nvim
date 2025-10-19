@@ -62,7 +62,7 @@ end
 
 vim.keymap.set(
 	"n",
-	"<Leader>yr",
+	"<Leader>yy",
 	":lua yank_relative_file_path()<CR>",
 	{ noremap = true, silent = true, desc = "yank relative" }
 )

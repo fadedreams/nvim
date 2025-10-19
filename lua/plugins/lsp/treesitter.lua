@@ -48,6 +48,7 @@ return {
 				"cpp",
 				"c",
 				"java",
+				"svelte",
 			},
 			highlight = { enable = true },
 			indent = { enable = true },

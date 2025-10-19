@@ -217,12 +217,12 @@ return {
             layout_strategy = "vertical",
             layout_config = {
               vertical = {
-                height = 0.9,
+                height = 0.95,
                 width = 0.6,
                 preview_cutoff = 40,
                 prompt_position = "top",
                 mirror = true,
-                preview_height = 0.6
+                preview_height = 0.4
               }
             }
           })

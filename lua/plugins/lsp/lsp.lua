@@ -75,6 +75,7 @@ return {
 				"stylelint_lsp",
 				"rust_analyzer",
 				"phpactor",
+        "svelte",
 				"solargraph",
 				"clangd",
 				"jdtls",
