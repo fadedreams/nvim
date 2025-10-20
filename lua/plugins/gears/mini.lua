@@ -123,22 +123,22 @@ return {
   --     end,
   --   },
   -- },
-  -- {
-  --   "nvim-mini/mini.notify",
-  --   event = "VeryLazy", -- Load lazily on most events
-  --   config = function()
-  --     require("mini.notify").setup({
-  --       -- Customize notification options
-  --       lsp_progress = {
-  --         enable = true, -- Show LSP progress notifications
-  --         duration_last = 5000, -- Duration of last message in ms
-  --       },
-  --       window = {
-  --         max_width_share = 0.6, -- Max width as a share of Nvim window
-  --       },
-  --     })
-  --     -- Optional: Set mini.notify as the default notification handler
-  --     vim.notify = require("mini.notify").make_notify()
-  --   end,
-  -- },
+  {
+    "nvim-mini/mini.notify",
+    event = "VeryLazy", -- Load lazily on most events
+    config = function()
+      require("mini.notify").setup({
+        -- Customize notification options
+        lsp_progress = {
+          enable = true, -- Show LSP progress notifications
+          duration_last = 7000, -- Duration of last message in ms
+        },
+        window = {
+          max_width_share = 0.6, -- Max width as a share of Nvim window
+        },
+      })
+      -- Optional: Set mini.notify as the default notification handler
+      vim.notify = require("mini.notify").make_notify()
+    end,
+  },
 }

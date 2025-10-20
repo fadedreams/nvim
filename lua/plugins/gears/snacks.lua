@@ -35,7 +35,7 @@ return {
         quickfile = {enabled = true},
         gitbrowse = {enabled = true},
         dashboard = {enabled = false},
-        notifier = {enabled = false, timeout = 7000},
+        -- notifier = {enabled = false, timeout = 7000},
         statuscolumn = {enabled = false},
         words = {enabled = false},
         lazygit = {enabled = false},
