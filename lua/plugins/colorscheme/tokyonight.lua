@@ -29,6 +29,9 @@ return {
           if selected_theme == "tokyonight-night" then
             colors.bg = "#000000"
             colors.bg_dark = "#000000"
+          elseif selected_theme == "tokyonight-moon" then
+            colors.bg = "#282828"
+            colors.bg_dark = "#282828"
           elseif selected_theme == "tokyonight-day" then
             colors.bg = "#e1e2e7"
             colors.bg_dark = "#e1e2e7"
@@ -38,6 +41,8 @@ return {
           if selected_theme == "tokyonight-night" then
             highlights.StatusLine = { fg = "#7aa2f7", bg = "#000000", bold = true }
             highlights.StatusLineNC = { fg = "#7aa2f7", bg = "#000000" }
+          elseif selected_theme == "tokyonight-moon" then
+            highlights.StatusLine = { fg = "#7aa2f7", bg = "#282828", bold = true }
           elseif selected_theme == "tokyonight-day" then
             highlights.StatusLine = { fg = "#677dc5", bg = "#e1e2e7", bold = true }
           end
