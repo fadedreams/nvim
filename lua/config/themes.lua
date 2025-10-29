@@ -34,8 +34,8 @@ if vim.fn.filereadable(theme_file) == 1 then
               colors.bg = "#151617"
               colors.bg_dark = "#151617"
             elseif saved_theme == "tokyonight-day" then
-              colors.bg = "#e1e2e7"
-              colors.bg_dark = "#e1e2e7"
+              -- colors.bg = "#e1e2e7"
+              -- colors.bg_dark = "#e1e2e7"
             end
           end,
           on_highlights = function(highlights, colors)
@@ -72,52 +72,51 @@ end
 
 -- === Theme Selector with LIVE PREVIEW ===
 local function select_theme()
-local themes = {
-  "tokyonight-night",
-  "gruvbox-material",
-  "rose-pine-main",
-    --gruv
-  "nvcode",
-  "melange",
-  "miasma",
-  "forest_stream",
-  "sunset_cloud",
-  "rusty",
-  "bamboo",
-  "bamboo-vulgaris",
-  "bamboo-multiplex",
+  local themes = {
+    "tokyonight-night",
+    "gruvbox-material",
+    "nanode",
+    "nvcode",
+    "rose-pine-main",
+    "rose-pine-moon",
+    "carbonfox",
+    "catppuccin",
+    "cyberdream",
+    --gray
+    "melange",
+    "miasma",
+    "rusty",
+    "bamboo",
+    "bamboo-vulgaris",
+    "bamboo-multiplex",
+    "forest_stream",
+    "sunset_cloud",
     --dark
-  "tokyonight-moon",
-  "rose-pine-moon",
-  "cyberdream",
-  "jellybeans",
-  "oldworld",
-  "ayu-dark",
-  "catppuccin",
-  "carbonfox",
-  "terafox",
-  "kanagawa-dragon",
-  "vscode",
-  "vague",
-  "zenbones",
-  "zenwritten",
+    "vague",
+    "vscode",
+    "jellybeans",
+    "oldworld",
+    "kanagawa-dragon",
+    "zenbones",
+    "zenwritten",
+    "ayu-dark",
     --blue
-  "catppuccin-macchiato",
-  "catppuccin-mocha",
-  "nanode",
-  "tokyonight-storm",
-  "ayu-mirage",
-  "nightfly",
-  "polar",
-  "bluloco",
+    "tokyonight-storm",
+    "catppuccin-macchiato",
+    "catppuccin-mocha",
+    "terafox",
+    "nightfly",
+    "polar",
+    "bluloco",
+    "ayu-mirage",
     --light
-  "rose-pine-dawn",
-  "cyberdream-light",
-  "tokyonight-day",
-  "dawnfox",
-  "kanagawa-lotus",
-  "catppuccin-latte",
-}
+    "rose-pine-dawn",
+    "cyberdream-light",
+    "tokyonight-day",
+    "dawnfox",
+    "kanagawa-lotus",
+    "catppuccin-latte",
+  }
 
   require("telescope.pickers").new({}, {
     prompt_title = "Select Theme (Live Preview)",
