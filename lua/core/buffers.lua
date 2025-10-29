@@ -17,12 +17,16 @@ vim.keymap.set('n', '<leader>bv', '<cmd>vnew<CR>', { desc = '[N]ew [B]uffer [V]s
 vim.keymap.set('n', '<leader>bs', '<cmd>new<CR>', { desc = '[N]ew [B]uffer [H]orizontal' })
 -- vim.keymap.set('n', '<C-[>', '<cmd>:bprevious<CR>', { desc = 'Previous buffer' })
 -- vim.keymap.set('n', '<C-]>', '<cmd>:bnext<CR>', { desc = 'Next buffer' })
+
 vim.keymap.set('n', '<C-h>', ':bprevious<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-l>', ':bnext<CR>', { noremap = true, silent = true })
+
 vim.keymap.set("i", "<C-h>", "<Esc>:bnext<CR>", { noremap = true, silent = true })
 vim.keymap.set("i", "<C-l>", "<Esc>:bprevious<CR>", { noremap = true, silent = true })
+
 vim.keymap.set('n', '\\[', ':bprevious<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '\\]', ':bnext<CR>', { noremap = true, silent = true })
+
 -- vim.keymap.set('n', '<C-\\>', ':bd<CR>', { noremap = true, silent = true })
 -- vim.keymap.set("n", "<c-k>", ":bnext<CR>", { noremap = true, silent = true })
 -- vim.keymap.set("n", "<c-j>", ":bprevious<CR>", { noremap = true, silent = true })
@@ -32,6 +36,7 @@ vim.keymap.set('n', '\\]', ':bnext<CR>', { noremap = true, silent = true })
 -- vim.keymap.set("n", "<leader>bn", ":enew<CR>", { noremap = true, silent = true })
 -- vim.keymap.set("i", "<c-k>", "<Esc>:bnext<CR>", { noremap = true, silent = true })
 -- vim.keymap.set("i", "<c-j>", "<Esc>:bprevious<CR>", { noremap = true, silent = true })
+
 -- Store the last closed buffer's file path
 vim.api.nvim_create_autocmd("BufDelete", {
     callback = function(event)
@@ -51,11 +56,13 @@ function ReopenLastBuffer()
         vim.notify("No recently closed buffer or file does not exist")
     end
 end
+-- ReopenLastBuffer
 -- vim.keymap.set("n", "<c-'>", ":lua ReopenLastBuffer()<CR>", { noremap = true, silent = true, desc = '[L]ast [B]uffer' })
 vim.keymap.set("n", "<leader>bl", ":lua ReopenLastBuffer()<CR>", { noremap = true, silent = true, desc = '[L]ast [B]uffer' })
 vim.keymap.set("n", "<c-t>", ":lua ReopenLastBuffer()<CR>", { noremap = true, silent = true, desc = '[L]ast [B]uffer' })
 vim.keymap.set("n", "<c-t>", ":lua ReopenLastBuffer()<CR>", { noremap = true, silent = true, desc = '[L]ast [B]uffer' })
 vim.keymap.set("n", "<leader>bx", ":!chmod +x %<CR>", {desc = "chmod +x"})
+
 -- keyset('n', '-', function()
 --   local cur_file = vim.fn.expand('%:t')
 --   vim.cmd.Ex()
