@@ -199,11 +199,16 @@ end, { noremap = true, silent = true, desc = "find text in Quickfix fzf" })
 -- end, { noremap = true, silent = true, desc = "Quickfix Case sensitive" })
 
 vim.keymap.set("n", "<leader>n", function()
-	fzf.live_grep({ rg_opts = "--hidden --no-ignore --ignore-case " .. combined_opts }) -- Use combined_opts
+  fzf.live_grep({
+    rg_opts = "--hidden --no-ignore --ignore-case " .. combined_opts,
+    silent = true,
+  }) -- Use combined_opts
 end, { noremap = true, silent = true, desc = "Live grep" })
 
 vim.keymap.set("n", "<leader>fn", function()
-	fzf.live_grep({ rg_opts = "--hidden --no-ignore " .. combined_opts }) -- Use combined_opts
+  fzf.live_grep({ rg_opts = "--hidden --no-ignore " .. combined_opts,
+    silent = true,
+  }) -- Use combined_opts
 end, { noremap = true, silent = true, desc = "Live grep Case sensitive" })
 
 vim.keymap.set("n", "<leader>N", function()
