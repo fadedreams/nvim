@@ -9,13 +9,15 @@ vim.keymap.set("n", "]q", ":cnext<CR>", { noremap = true, silent = true })
 -- vim.keymap.set('n', ']l', ':lnext<CR>', { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>qq", ":copen<CR>", { noremap = true, silent = true, desc = "copen" }) -- Open quickfix window
 vim.keymap.set("n", "q", ":cclose<CR>", { noremap = true, silent = true, desc = "cclose" }) -- Close quickfix window
--- vim.keymap.set("n", "<leader>qf", ":cfirst<CR>", { noremap = true, silent = true, desc = "cfirst" }) -- First item
--- vim.keymap.set("n", "<leader>ql", ":clast<CR>", { noremap = true, silent = true, desc = "clast" }) -- Last item
+
+vim.keymap.set("n", "<leader>q0", ":cfirst<CR>", { noremap = true, silent = true, desc = "cfirst" }) -- First item
+vim.keymap.set("n", "<leader>q-", ":clast<CR>", { noremap = true, silent = true, desc = "clast" }) -- Last item
+
 -- vim.keymap.set('n', '<leader>qr', ':crewind<CR>', { noremap = true, silent = true, desc="crewind"  }) -- Rewind to first item
 -- vim.keymap.set("n", "<leader>qo", ":colder<CR>", { noremap = true, silent = true, desc = "colder" }) -- Older quickfix list
 -- vim.keymap.set("n", "<leader>qn", ":cnewer<CR>", { noremap = true, silent = true, desc = "cnewer" }) -- Newer quickfix list
 vim.keymap.set("n", "<leader>qc", ":cexpr []<CR>", { noremap = true, silent = true, desc = "Clear quickfix list" }) -- Clear quickfix list
-vim.keymap.set("n", "<leader>qi", ":cfile ", { noremap = true, silent = true, desc = "Load from file" }) -- Load from file
+-- vim.keymap.set("n", "<leader>qo", ":cfile ", { noremap = true, silent = true, desc = "Load from file" }) -- Load from file
 -- vim.keymap.set("n", "<leader>qb", ":cbuffer<CR>", { noremap = true, silent = true, desc = "cbuffer" }) -- Load from buffer
 -- vim.keymap.set("n", "<leader>qc", ":cc ", { noremap = true, silent = true, desc = "Go to specific item" }) -- Go to specific item
 -- vim.keymap.set("n", "<leader>qd", ":cfdo ", { noremap = true, silent = true, desc = "Batch command" }) -- Batch command
@@ -79,118 +81,18 @@ local function quickfix_replace()
 		vim.notify("Error during replacement: " .. error_msg, vim.log.levels.ERROR)
 	end
 end
+
 -- Create a user command :QuickFixReplace to call the function
 vim.api.nvim_create_user_command("QuickFixReplace", quickfix_replace, {
 	desc = "Replace text in all files in the quickfix list",
 })
+
 -- Optional: Map the function to a keybinding (e.g., <leader>qr)
 vim.keymap.set("n", "<leader>qr", quickfix_replace, {
 	noremap = true,
 	silent = true,
 	desc = "Prompt and replace in quickfix list",
 })
--- Dump quickfix list to file or clipboard
-local function dump_quickfix(opts)
-  local qf = vim.fn.getqflist()
-  if vim.tbl_isempty(qf) then
-    print("Quickfix list is empty")
-    return
-  end
-  -- Format lines: filename:lnum:col:text (escape colons in filename)
-  local lines = {}
-  for _, item in ipairs(qf) do
-    local fname = (item.filename or ""):gsub(":", "\\:") -- Escape colons in filename
-    table.insert(lines, string.format("%s:%d:%d:%s",
-      fname, item.lnum or 0, item.col or 0, item.text or ""))
-  end
-  if opts == "clipboard" then
-    vim.fn.setreg("+", table.concat(lines, "\n"))
-    print("✅ Quickfix list copied to clipboard (" .. #lines .. " items)")
-  else
-    local file = opts or "quickfix_dump.txt"
-    vim.fn.writefile(lines, file)
-    print("💾 Quickfix list saved to " .. file .. " (" .. #lines .. " items)")
-  end
-end
--- Load quickfix list from a saved file
-local function load_quickfix(file)
-  file = file or "quickfix_dump.txt"
-  if vim.fn.filereadable(file) == 0 then
-    print("❌ File not found: " .. file)
-    return
-  end
-  local lines = vim.fn.readfile(file)
-  local qf = {}
-  for i, line in ipairs(lines) do
-    if line == "" then goto continue end -- Skip empty lines
-    -- Robust parsing: split by LAST two colons (handles colons in filename)
-    local parts = {}
-    for part in line:gmatch("[^:]+") do
-      table.insert(parts, part)
-    end
-    if #parts >= 3 then
-      local fname = table.concat(vim.list_slice(parts, 1, #parts-3), ":"):gsub("\\:", ":") -- Unescape & join
-      local lnum = tonumber(parts[#parts-2])
-      local col = tonumber(parts[#parts-1])
-      local text = table.concat(vim.list_slice(parts, #parts-2+1), ":")
-      if lnum and col then
-        table.insert(qf, {
-          filename = fname,
-          lnum = lnum,
-          col = col,
-          text = text,
-        })
-      else
-        print("⚠️  Warning: Invalid line " .. i .. " - skipped")
-      end
-    else
-      print("⚠️  Warning: Invalid format line " .. i .. " - skipped")
-    end
-    ::continue::
-  end
-  -- Replace quickfix list
-  vim.fn.setqflist(qf, "r")
-  print("📜 Quickfix list loaded from " .. file .. " (" .. #qf .. " items)")
-  -- Open quickfix window automatically
-  if not vim.tbl_isempty(qf) then
-    vim.cmd("copen")
-  end
-end
--- 🔥 KEYMAPS (Enhanced with descriptions)
-vim.keymap.set("n", "<leader>qs", function()
-  dump_quickfix("quickfix_dump.txt")
-end, { desc = "💾 Save quickfix list to file" })
-vim.keymap.set("n", "<leader>qc", function()
-  dump_quickfix("clipboard")
-end, { desc = "📋 Copy quickfix list to clipboard" })
-vim.keymap.set("n", "<leader>ql", function()
-  load_quickfix("quickfix_dump.txt")
-end, { desc = "📂 Load quickfix list from file" })
--- 🎁 BONUS: Paste from clipboard directly
-vim.keymap.set("n", "<leader>qp", function()
-  local lines = vim.fn.split(vim.fn.getreg("+"), "\n")
-  local qf = {}
-  for i, line in ipairs(lines) do
-    if line == "" then goto continue end
-    local parts = {}
-    for part in line:gmatch("[^:]+") do
-      table.insert(parts, part)
-    end
-    if #parts >= 3 then
-      local fname = table.concat(vim.list_slice(parts, 1, #parts-3), ":"):gsub("\\:", ":")
-      local lnum = tonumber(parts[#parts-2])
-      local col = tonumber(parts[#parts-1])
-      local text = table.concat(vim.list_slice(parts, #parts-2+1), ":")
-      if lnum and col then
-        table.insert(qf, {filename = fname, lnum = lnum, col = col, text = text})
-      end
-    end
-    ::continue::
-  end
-  vim.fn.setqflist(qf, "r")
-  print("📋 Quickfix list pasted from clipboard (" .. #qf .. " items)")
-  if not vim.tbl_isempty(qf) then vim.cmd("copen") end
-end, { desc = "📋 Paste quickfix list from clipboard" })
 
 -- ----------------------------------------------------------------------
 --  QUICKFIX: SHOW ALL CONFLICTS (merge, rebase, cherry-pick, etc.)
@@ -273,3 +175,110 @@ vim.keymap.set("n", "<leader>gc", populate_git_conflicts, {
   silent = true,
   desc = "Show Git conflicts",
 })
+
+
+-- Dump quickfix list to file or clipboard
+-- local function dump_quickfix(opts)
+--   local qf = vim.fn.getqflist()
+--   if vim.tbl_isempty(qf) then
+--     print("Quickfix list is empty")
+--     return
+--   end
+--   -- Format lines: filename:lnum:col:text (escape colons in filename)
+--   local lines = {}
+--   for _, item in ipairs(qf) do
+--     local fname = (item.filename or ""):gsub(":", "\\:") -- Escape colons in filename
+--     table.insert(lines, string.format("%s:%d:%d:%s",
+--       fname, item.lnum or 0, item.col or 0, item.text or ""))
+--   end
+--   if opts == "clipboard" then
+--     vim.fn.setreg("+", table.concat(lines, "\n"))
+--     print("✅ Quickfix list copied to clipboard (" .. #lines .. " items)")
+--   else
+--     local file = opts or "quickfix_dump.txt"
+--     vim.fn.writefile(lines, file)
+--     print("💾 Quickfix list saved to " .. file .. " (" .. #lines .. " items)")
+--   end
+-- end
+-- -- Load quickfix list from a saved file
+-- local function load_quickfix(file)
+--   file = file or "quickfix_dump.txt"
+--   if vim.fn.filereadable(file) == 0 then
+--     print("❌ File not found: " .. file)
+--     return
+--   end
+--   local lines = vim.fn.readfile(file)
+--   local qf = {}
+--   for i, line in ipairs(lines) do
+--     if line == "" then goto continue end -- Skip empty lines
+--     -- Robust parsing: split by LAST two colons (handles colons in filename)
+--     local parts = {}
+--     for part in line:gmatch("[^:]+") do
+--       table.insert(parts, part)
+--     end
+--     if #parts >= 3 then
+--       local fname = table.concat(vim.list_slice(parts, 1, #parts-3), ":"):gsub("\\:", ":") -- Unescape & join
+--       local lnum = tonumber(parts[#parts-2])
+--       local col = tonumber(parts[#parts-1])
+--       local text = table.concat(vim.list_slice(parts, #parts-2+1), ":")
+--       if lnum and col then
+--         table.insert(qf, {
+--           filename = fname,
+--           lnum = lnum,
+--           col = col,
+--           text = text,
+--         })
+--       else
+--         print("⚠️  Warning: Invalid line " .. i .. " - skipped")
+--       end
+--     else
+--       print("⚠️  Warning: Invalid format line " .. i .. " - skipped")
+--     end
+--     ::continue::
+--   end
+--   -- Replace quickfix list
+--   vim.fn.setqflist(qf, "r")
+--   print("📜 Quickfix list loaded from " .. file .. " (" .. #qf .. " items)")
+--   -- Open quickfix window automatically
+--   if not vim.tbl_isempty(qf) then
+--     vim.cmd("copen")
+--   end
+-- end
+-- -- 🔥 KEYMAPS (Enhanced with descriptions)
+-- vim.keymap.set("n", "<leader>qs", function()
+--   dump_quickfix("quickfix_dump.txt")
+-- end, { desc = "💾 Save quickfix list to file" })
+--
+-- vim.keymap.set("n", "<leader>qO", function()
+--   dump_quickfix("clipboard")
+-- end, { desc = "📋 Copy quickfix list to clipboard" })
+--
+-- vim.keymap.set("n", "<leader>qL", function()
+--   load_quickfix("quickfix_dump.txt")
+-- end, { desc = "📂 Load quickfix list from file" })
+
+-- 🎁 BONUS: Paste from clipboard directly
+-- vim.keymap.set("n", "<leader>qp", function()
+--   local lines = vim.fn.split(vim.fn.getreg("+"), "\n")
+--   local qf = {}
+--   for i, line in ipairs(lines) do
+--     if line == "" then goto continue end
+--     local parts = {}
+--     for part in line:gmatch("[^:]+") do
+--       table.insert(parts, part)
+--     end
+--     if #parts >= 3 then
+--       local fname = table.concat(vim.list_slice(parts, 1, #parts-3), ":"):gsub("\\:", ":")
+--       local lnum = tonumber(parts[#parts-2])
+--       local col = tonumber(parts[#parts-1])
+--       local text = table.concat(vim.list_slice(parts, #parts-2+1), ":")
+--       if lnum and col then
+--         table.insert(qf, {filename = fname, lnum = lnum, col = col, text = text})
+--       end
+--     end
+--     ::continue::
+--   end
+--   vim.fn.setqflist(qf, "r")
+--   print("📋 Quickfix list pasted from clipboard (" .. #qf .. " items)")
+--   if not vim.tbl_isempty(qf) then vim.cmd("copen") end
+-- end, { desc = "📋 Paste quickfix list from clipboard" })
