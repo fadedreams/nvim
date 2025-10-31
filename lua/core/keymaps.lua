@@ -107,7 +107,7 @@ vim.keymap.set("n", "<leader>wc", function()
 	if vim.opt.list:get() then
 		vim.opt.list = false
 	else
-		vim.opt.listchars = { tab = "»·", trail = "·", nbsp = "_", eol = "¬" }
+		vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣", eol = "¬" }
 		vim.opt.list = true
 	end
 end, { desc = "Toggle custom listchars" })
@@ -115,7 +115,7 @@ vim.keymap.set("n", "<leader>wl", function()
 	vim.opt.list = not vim.opt.list:get()
 end, { desc = "Show List" })
 
-vim.opt.listchars = { trail = "·", nbsp = "␣" } --^I:tabs
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣", eol = "¬" }
 vim.keymap.set(
 	"n",
 	"<leader>ww",

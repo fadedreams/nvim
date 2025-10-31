@@ -1,31 +1,37 @@
+-- lua/plugins/rainbow_parentheses.lua
 return {
-    'HiPhish/rainbow-delimiters.nvim',
-    enabled = true,
-    event = 'BufReadPre',
+  {
+    "kien/rainbow_parentheses.vim",
+    event = { "BufReadPost", "BufNewFile" },
     config = function()
-        local rainbow_delimiters = require('rainbow-delimiters')
-        local christmas = require('rainbow-delimiters.strategy.christmas')
-        local christmas_lights = christmas.lights(rainbow_delimiters.strategy['global'])
+      -- Optional: customizing color pairs
+      vim.g.rbpt_colorpairs = {
+        { "brown",       "RoyalBlue3" },
+        { "Darkblue",    "SeaGreen3" },
+        { "darkgray",    "DarkOrchid3" },
+        { "darkgreen",   "firebrick3" },
+        { "darkcyan",    "RoyalBlue3" },
+        { "darkred",     "SeaGreen3" },
+        { "darkmagenta", "DarkOrchid3" },
+        { "brown",       "firebrick3" },
+        { "gray",        "RoyalBlue3" },
+        { "black",       "SeaGreen3" },
+        { "darkmagenta", "DarkOrchid3" },
+        { "Darkblue",    "firebrick3" },
+        { "darkgreen",   "RoyalBlue3" },
+        { "darkcyan",    "SeaGreen3" },
+        { "darkred",     "DarkOrchid3" },
+        { "red",         "firebrick3" },
+      }
 
-        vim.g.rainbow_delimiters = {
-            strategy = {
-                -- [''] = christmas_lights,
-                [''] = rainbow_delimiters.strategy['global'],
-                vim = rainbow_delimiters.strategy['local'],
-            },
-            query = {
-                [''] = 'rainbow-delimiters',
-                lua = 'rainbow-blocks',
-            },
-            highlight = {
-                'RainbowDelimiterRed',
-                'RainbowDelimiterYellow',
-                'RainbowDelimiterBlue',
-                'RainbowDelimiterOrange',
-                'RainbowDelimiterGreen',
-                'RainbowDelimiterViolet',
-                'RainbowDelimiterCyan',
-            },
-        }
+      vim.g.rbpt_max = 16
+      vim.g.rbpt_loadcmd_toggle = 0
+
+      -- Automatically enable on syntax events
+      vim.cmd([[au VimEnter * RainbowParenthesesToggle]])
+      vim.cmd([[au Syntax * RainbowParenthesesLoadRound]])
+      vim.cmd([[au Syntax * RainbowParenthesesLoadSquare]])
+      vim.cmd([[au Syntax * RainbowParenthesesLoadBraces]])
     end,
+  },
 }
