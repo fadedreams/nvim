@@ -36,7 +36,7 @@ vim.api.nvim_set_keymap('n', '<leader>gp', '', {
     vim.fn.setqflist(qf_list, 'r')
     vim.cmd('copen')
   end,
-  desc = "Git changed files for folder in quickfix (basename only)"
+  desc = "Git changed files → Quickfix (basename)"
 })
 
 vim.api.nvim_set_keymap('n', '<leader>gl', '', {
@@ -64,7 +64,7 @@ vim.api.nvim_set_keymap('n', '<leader>gl', '', {
     -- Put git log output in buffer
     vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.split(result, '\n'))
   end,
-  desc = "Git log for a folder in new buffer"
+  desc = "Git log for folder → new buffer"
 })
 
 vim.keymap.set('n', '<leader>gv', ':silent Git commit -v<CR>', { noremap = true, silent = true }) --TODO: 

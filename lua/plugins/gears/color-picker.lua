@@ -21,7 +21,7 @@ return {
     end,
     cmd = { "PickColor", "PickColorInsert" }, -- Load when using these commands
     keys = {
-      { "<leader>up", "<cmd>PickColor<cr>", mode = "n", noremap = true, silent = true, desc="[U]tils [P]aint" },
+      { "<leader>up", "<cmd>PickColor<cr>", mode = "n", noremap = true, silent = true, desc="[U]til [P]aint" },
       -- { "<leader>fci", "<cmd>PickColorInsert<cr>", mode = "i", noremap = true, silent = true }, -- Insert mode keymap for PickColorInsert
       -- { "<leader>tc", "<cmd>PickColorInsert<cr>", mode = "i", noremap = true, silent = true },
     },
