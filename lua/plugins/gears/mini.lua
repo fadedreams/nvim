@@ -81,17 +81,17 @@ return {
       require("mini.indentscope").setup(opts) -- Set up the plugin with options
     end,
   },
-  {
-    "nvim-mini/mini.cursorword",
-    event = "VeryLazy",  -- Optional: Lazy-load on events to improve startup time
-    version = false, -- Use main branch
-    config = function()
-      require("mini.cursorword").setup({
-        -- Optional: Customize delay (in milliseconds)
-        delay = 100,
-      })
-    end,
-  },
+  -- {
+  --   "nvim-mini/mini.cursorword",
+  --   event = "VeryLazy",  -- Optional: Lazy-load on events to improve startup time
+  --   version = false, -- Use main branch
+  --   config = function()
+  --     require("mini.cursorword").setup({
+  --       -- Optional: Customize delay (in milliseconds)
+  --       delay = 100,
+  --     })
+  --   end,
+  -- },
   {
     "nvim-mini/mini.diff", -- Inline and better diff over the default
     config = function()
