@@ -1,3 +1,4 @@
+vim.keymap.del("t", "<esc>")
 -- Editing
 vim.api.nvim_set_keymap("v", "$", "g_", { noremap = true, silent = true })
 vim.keymap.set("x", "p", "pgvy") -- yanked back into the register.

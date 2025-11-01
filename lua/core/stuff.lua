@@ -1,3 +1,4 @@
+vim.keymap.del("t", "<esc>") --for lazygit
 vim.api.nvim_set_keymap('n', '<leader>gp', '', {
   noremap = true,
   silent = true,
