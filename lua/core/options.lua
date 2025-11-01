@@ -1,7 +1,18 @@
+
 --vim.cmd("colorscheme rose-pine")
 
 vim.opt.guicursor = "a:block-Cursor/lCursor"
 vim.opt.cursorline = true
+
+vim.opt.list = false
+vim.opt.listchars = {
+  tab = "» ",      -- vertical line + space (less flashy)
+  trail = "·",     -- small dot for trailing spaces
+  extends = ">",   -- when line extends beyond screen
+  precedes = "<",  -- when line precedes screen
+  nbsp = "␣",      -- non-breaking space
+  eol = "↴",     -- uncomment if you want EOL marker
+}
 
 -- vim.opt.hidden = true --allow quitting with unsaved changes in hidden buffers
 

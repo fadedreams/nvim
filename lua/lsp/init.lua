@@ -62,7 +62,7 @@ local function on_attach(client, bufnr)
 		end
 	end, "Toggle virtual lines")
 
-	keyset("n", "<leader>il", function()
+	keyset("n", "<leader>ti", function()
 		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }))
 	end, "Toggle inlay hints")
 
@@ -140,7 +140,7 @@ local function on_attach(client, bufnr)
 				enable_document_highlight()
 			end
 		end
-		keyset("n", "<leader>ih", toggle_document_highlight, "Toggle document highlights")
+		keyset("n", "<leader>th", toggle_document_highlight, "Toggle document highlights")
 	end
 end
 
