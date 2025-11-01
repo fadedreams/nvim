@@ -1,3 +1,5 @@
+-- :MasonInstall --force eslint-lsp
+-- :MasonInstall --force vtsls
 return {
 	{ "neovim/nvim-lspconfig" },
 
@@ -22,11 +24,11 @@ return {
 				"rust-analyzer",
 				"phpcbf",
 				"phpactor",
-				"solargraph",
+				-- "solargraph",
 				"rubocop",
-				"clangd",
-				"jdtls",
-				"google-java-format",
+				-- "clangd",
+				-- "jdtls",
+				-- "google-java-format",
 			},
 			-- PATH = "prepend", -- Use system-installed clangd if available
 		},
@@ -76,9 +78,9 @@ return {
 				"rust_analyzer",
 				"phpactor",
         "svelte",
-				"solargraph",
-				"clangd",
-				"jdtls",
+				-- "solargraph",
+				-- "clangd",
+				-- "jdtls",
 			},
 			automatic_installation = true,
 			automatic_enable = true,
